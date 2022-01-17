@@ -37,11 +37,10 @@ namespace LoadDistribution.WebAPI.Middlewarese
             }
             catch(Exception ex)
             {
-                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-
                 _logger.LogError(ex, nameof(ExceptionHandler));
                 await loggerService.LogExceptionAsync(ex, nameof(InvokeAsync));
 
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 if (_webHostEnvironment.IsDevelopment())
                 {
                     await context.Response.WriteAsync(ex.ToString());

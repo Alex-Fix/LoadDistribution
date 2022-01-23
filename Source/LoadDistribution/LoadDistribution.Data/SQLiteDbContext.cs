@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.Data
 {
-    public class MySqlDbContext : DbContext, IDbContext
+    public class SQLiteDbContext : DbContext, IDbContext
     {
         #region Private Fields
-        private readonly MySqlDbOptions _dbOptions;
+        private readonly SQLiteDbOptions _dbOptions;
         #endregion
 
-        #region Constructors
-        public MySqlDbContext(IOptions<MySqlDbOptions> dbOptions)
+        #region Constructor
+        public SQLiteDbContext(IOptions<SQLiteDbOptions> dbOptions)
         {
-            _dbOptions = dbOptions.Value;
+            _dbOptions = dbOptions?.Value ?? throw new ArgumentNullException(nameof(dbOptions));
         }
         #endregion
 
@@ -31,14 +31,21 @@ namespace LoadDistribution.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseMySql(_dbOptions.ConnectionString, new MySqlServerVersion(_dbOptions.ServerVersion))
-                .EnableSensitiveDataLogging()
-                .EnableDetailedErrors();
+                .UseSqlite(_dbOptions.ConnectionString)
+                .EnableDetailedErrors()
+                .EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new LogConfiguration());
+        }
+        #endregion
+
+        #region Public Methods
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return await base.SaveChangesAsync(cancellationToken);
         }
         #endregion
     }

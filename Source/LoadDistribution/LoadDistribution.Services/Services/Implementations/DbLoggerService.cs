@@ -8,14 +8,14 @@ namespace LoadDistribution.Services.Services.Implementations
 {
     public class DbLoggerService : ILoggerService
     {
-        #region Private Properties
+        #region Private Fields
         private readonly IDbContext _dbContext;
         #endregion
 
-        #region Constructors
+        #region Constructor
         public DbLoggerService(IDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
         #endregion
 

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace LoadDistribution.WebAPI.Middlewarese
+namespace LoadDistribution.WebAPI.Middlewares
 {
     public class ExceptionHandler
     {
@@ -16,15 +16,15 @@ namespace LoadDistribution.WebAPI.Middlewarese
         private readonly ILogger<ExceptionHandler> _logger;
         #endregion
 
-        #region Constructors
+        #region Constructor
         public ExceptionHandler(
             RequestDelegate next,
             IWebHostEnvironment webHostEnvironment,
             ILogger<ExceptionHandler> logger)
         {
-            _next = next;
-            _webHostEnvironment = webHostEnvironment;
-            _logger = logger;
+            _next = next ?? throw new ArgumentNullException(nameof(next));
+            _webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         #endregion
 

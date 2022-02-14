@@ -5,6 +5,6 @@ namespace LoadDistribution.Services.Services
 {
     public interface ILoggerService
     {
-        Task LogExceptionAsync(Exception exception, string message);
+        Task Exception(Exception ex, string message);
     }
 }

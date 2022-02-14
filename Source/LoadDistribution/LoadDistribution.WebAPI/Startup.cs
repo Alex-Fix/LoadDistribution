@@ -1,13 +1,17 @@
+using LoadDistribution.Core.AutoMapperProfiles;
 using LoadDistribution.Core.Domain;
 using LoadDistribution.Core.Options;
 using LoadDistribution.Data;
+using LoadDistribution.Services.Facades;
+using LoadDistribution.Services.Facades.Implementations;
+using LoadDistribution.Services.Repositories;
+using LoadDistribution.Services.Repositories.Implementations;
 using LoadDistribution.Services.Services;
 using LoadDistribution.Services.Services.Implementations;
 using LoadDistribution.WebAPI.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,12 +37,29 @@ namespace LoadDistribution.WebAPI
 
             services.Configure<SQLiteDbOptions>(_configuration.GetSection(nameof(SQLiteDbOptions)));
 
-            services.AddDbContext<IDbContext, SQLiteDbContext>();
+            services.AddAutoMapper(typeof(DomainToDTOProfile), typeof(HelperProfile));
+
+            services.AddDbContext<SQLiteDbContext>();
+
+            services.AddScoped<IActivityRepository, SQLiteActivityRepository>();
+            services.AddScoped<IDisciplineActivityMapRepository, SQLiteDisciplineActivityMapRepository>();
+            services.AddScoped<IDisciplineRepository, SQLiteDisciplineRepository>();
+            services.AddScoped<ILecturerDisciplineActivityMapRepository, SQLiteLecturerDisciplineActivityMapRepository>();
+            services.AddScoped<ILecturerRepository, SQLiteLecturerRepository>();
+            services.AddScoped<ILogRepository, SQLiteLogRepository>();
+            services.AddScoped<IProjectRepository, SQLiteProjectRepository>();
+            services.AddScoped<IUniversityLecturerMapRepository, SQLiteUniversityLecturerMapRepository>();
+            services.AddScoped<IUniversityRepository, SQLiteUniversityRepository>();
 
             services.AddScoped<ILoggerService, DbLoggerService>();
 
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddScoped<IActivityFacade, ActivityFacade>();
+            services.AddScoped<IDisciplineFacade, DisciplineFacade>();
+            services.AddScoped<ILecturerFacade, LecturerFacade>();
+            services.AddScoped<IProjectFacade, ProjectFacade>();
+            services.AddScoped<IUniversityFacade, UniversityFacade>();
 
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSpaStaticFiles(cfg =>
             {
                 cfg.RootPath = Path.Combine("ClientApp", "dist");
@@ -65,15 +86,11 @@ namespace LoadDistribution.WebAPI
             }
 
             app.UseRouting();
+            app.UseCors(opt => opt.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseEndpoints(cfg => cfg.MapControllers());
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
             });
         }
     }

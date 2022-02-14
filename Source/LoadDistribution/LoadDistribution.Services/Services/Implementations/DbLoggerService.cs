@@ -1,6 +1,6 @@
-﻿using LoadDistribution.Core.Domain;
-using LoadDistribution.Core.Domain.Enums;
+﻿using LoadDistribution.Core.Domain.Enums;
 using LoadDistribution.Core.Domain.Models;
+using LoadDistribution.Services.Repositories;
 using System;
 using System.Threading.Tasks;
 
@@ -8,36 +8,39 @@ namespace LoadDistribution.Services.Services.Implementations
 {
     public class DbLoggerService : ILoggerService
     {
-        #region Private Fields
-        private readonly IDbContext _dbContext;
+        #region Fields
+        private readonly ILogRepository _logRepository;
         #endregion
 
-        #region Constructor
-        public DbLoggerService(IDbContext dbContext)
+        #region Constructors
+        public DbLoggerService(ILogRepository logRepository)
         {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _logRepository = logRepository ?? throw new ArgumentException(nameof(logRepository));
         }
         #endregion
 
-        #region Public Methods
-        public async Task LogExceptionAsync(Exception exception, string message)
+        #region Methods
+        public async Task Exception(Exception ex, string message)
         {
-            if(exception is null)
+            if(ex is null)
             {
-                throw new ArgumentNullException(nameof(exception));
+                throw new ArgumentNullException(nameof(ex));
+            }
+            if (string.IsNullOrEmpty(message))
+            {
+                throw new ArgumentNullException(nameof(message));
             }
 
             var log = new Log
             {
                 CreatedUtc = DateTime.UtcNow,
-                Message = message ?? string.Empty,
-                Details = exception.ToString(),
                 Type = LogType.Exception,
-                ExceptionType = exception.GetType().ToString()
+                ExceptionType = ex.GetType().FullName,
+                Message = message,
+                Details = ex.ToString()
             };
 
-            await _dbContext.Logs.AddAsync(log);
-            await _dbContext.SaveChangesAsync();
+            await _logRepository.Insert(log);
         }
         #endregion
     }

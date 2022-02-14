@@ -1,5 +1,13 @@
 {
+  "common": {
+    "snackBar": {
+      "close": "Закрити"
+    }
+  },
   "app": {
-    "helloWorld": "Привіт світ"
+    "toolbar": {
+      "loadDistribution": "Розподіл навантаження",
+      "lecturers": "Лектори"
+    }
   }
 }

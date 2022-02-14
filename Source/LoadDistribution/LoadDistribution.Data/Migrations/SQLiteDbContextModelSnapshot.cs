@@ -16,6 +16,203 @@ namespace LoadDistribution.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.13");
 
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Activity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Discipline", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BudgetStudentCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ComercialStudentCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Course")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EducationForm")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EducationLevel")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GroupAbbreviation")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("GroupCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Institute")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PlanIndex")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Speciality")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Specialization")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StudentCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SubgroupCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Term")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ThreadCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("Disciplines");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DisciplineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("DisciplineId");
+
+                    b.ToTable("DisciplineActivityMaps");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Lecturer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Lecturers");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.LecturerDisciplineActivityMap", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DisciplineActivityMapId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LecturerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DisciplineActivityMapId");
+
+                    b.HasIndex("LecturerId");
+
+                    b.ToTable("LecturerDisciplineActivityMaps");
+                });
+
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Log", b =>
                 {
                     b.Property<int>("Id")
@@ -35,20 +232,208 @@ namespace LoadDistribution.Data.Migrations
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasMaxLength(128)
+                        .HasMaxLength(512)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("TypeStr")
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(128)
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedUtc")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Logs");
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.University", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Universities");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.UniversityLecturerMap", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LectureId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("UniversityLecturerMaps");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Discipline", b =>
+                {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.University", "University")
+                        .WithMany("Disciplines")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("University");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", b =>
+                {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Activity", "Activity")
+                        .WithMany("DisciplineActivityMaps")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Discipline", "Discipline")
+                        .WithMany("DisciplineActivityMaps")
+                        .HasForeignKey("DisciplineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("Discipline");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.LecturerDisciplineActivityMap", b =>
+                {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", "DisciplineActivityMap")
+                        .WithMany("LecturerDisciplineActivityMaps")
+                        .HasForeignKey("DisciplineActivityMapId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Lecturer", "Lecturer")
+                        .WithMany("LecturerDisciplineActivityMaps")
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DisciplineActivityMap");
+
+                    b.Navigation("Lecturer");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.University", b =>
+                {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
+                        .WithMany("Universities")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.UniversityLecturerMap", b =>
+                {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Lecturer", "Lecturer")
+                        .WithMany("UniversityLectureMaps")
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LoadDistribution.Core.Domain.Models.University", "University")
+                        .WithMany("UniversityLectureMaps")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lecturer");
+
+                    b.Navigation("University");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Activity", b =>
+                {
+                    b.Navigation("DisciplineActivityMaps");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Discipline", b =>
+                {
+                    b.Navigation("DisciplineActivityMaps");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", b =>
+                {
+                    b.Navigation("LecturerDisciplineActivityMaps");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Lecturer", b =>
+                {
+                    b.Navigation("LecturerDisciplineActivityMaps");
+
+                    b.Navigation("UniversityLectureMaps");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Project", b =>
+                {
+                    b.Navigation("Universities");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.University", b =>
+                {
+                    b.Navigation("Disciplines");
+
+                    b.Navigation("UniversityLectureMaps");
                 });
 #pragma warning restore 612, 618
         }

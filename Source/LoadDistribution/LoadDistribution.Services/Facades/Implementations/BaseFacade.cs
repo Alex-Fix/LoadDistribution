@@ -27,9 +27,9 @@ namespace LoadDistribution.Services.Facades.Implementations
         #endregion
 
         #region Methods
-        public async virtual Task<IList<TDTO>> Get()
+        public async virtual Task<IList<TDTO>> GetAll()
         {
-            IList<TEntity> entities = await _repository.Get();
+            IList<TEntity> entities = await _repository.GetAll();
             return _mapper.Map<IList<TDTO>>(entities);
         }
 
@@ -37,6 +37,12 @@ namespace LoadDistribution.Services.Facades.Implementations
         {
             TEntity entity = await _repository.Get(id);
             return _mapper.Map<TDTO>(entity);
+        }
+
+        public async virtual Task<Paged<TDTO>> GetPaged(int pageNumber, int pageSize)
+        {
+            Paged<TEntity> entities = await _repository.GetPaged(pageNumber, pageSize);
+            return _mapper.Map<Paged<TDTO>>(entities);
         }
 
         public async virtual Task<TDTO> Insert(TDTO entity)
@@ -57,12 +63,6 @@ namespace LoadDistribution.Services.Facades.Implementations
         {
             TEntity entity = await _repository.Delete(id);
             return _mapper.Map<TDTO>(entity);
-        }
-
-        public async virtual Task<Paged<TDTO>> Paged(int pageNumber, int pageSize)
-        {
-            Paged<TEntity> entities = await _repository.Paged(pageNumber, pageSize);
-            return _mapper.Map<Paged<TDTO>>(entities);
         }
         #endregion
     }

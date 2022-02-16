@@ -27,7 +27,7 @@ namespace LoadDistribution.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IList<TDTO> entity = await _facade.Get();
+            IList<TDTO> entity = await _facade.GetAll();
             return Ok(entity);
         }
 
@@ -41,6 +41,13 @@ namespace LoadDistribution.WebAPI.Controllers
             }
 
             return Ok(entity);
+        }
+
+        [HttpGet("Paged")]
+        public async Task<IActionResult> Get(int pageNumber, int pageSize)
+        {
+            Paged<TDTO> entities = await _facade.GetPaged(pageNumber, pageSize);
+            return Ok(entities);
         }
 
         [HttpPost]
@@ -77,13 +84,6 @@ namespace LoadDistribution.WebAPI.Controllers
             }
 
             return Ok(entity);
-        }
-
-        [HttpGet("Paged")]
-        public async Task<IActionResult> Get(int pageNumber, int pageSize)
-        {
-            Paged<TDTO> entities = await _facade.Paged(pageNumber, pageSize);
-            return Ok(entities);
         }
         #endregion
     }

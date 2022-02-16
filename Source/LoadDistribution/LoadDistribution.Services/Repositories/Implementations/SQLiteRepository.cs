@@ -24,7 +24,7 @@ namespace LoadDistribution.Services.Repositories.Implementations
         #endregion
 
         #region Methods
-        public async virtual Task<IList<TEntity>> Get()
+        public async virtual Task<IList<TEntity>> GetAll()
         {
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
@@ -32,6 +32,11 @@ namespace LoadDistribution.Services.Repositories.Implementations
         public async virtual Task<TEntity> Get(int id)
         {
             return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async virtual Task<Paged<TEntity>> GetPaged(int pageNumber, int pageSize)
+        {
+            return await Paged<TEntity>.Build(_dbContext.Set<TEntity>(), pageNumber, pageSize);
         }
 
         public async virtual Task<TEntity> Insert(TEntity entity)
@@ -81,11 +86,6 @@ namespace LoadDistribution.Services.Repositories.Implementations
             await _dbContext.SaveChangesAsync();
 
             return entity;
-        }
-
-        public async virtual Task<Paged<TEntity>> Paged(int pageNumber, int pageSize)
-        {
-            return await Paged<TEntity>.Build(_dbContext.Set<TEntity>(), pageNumber, pageSize);
         }
         #endregion
     }

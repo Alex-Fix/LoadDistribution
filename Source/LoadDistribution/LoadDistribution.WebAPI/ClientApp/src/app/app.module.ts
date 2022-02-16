@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
-import { LecturersComponent } from './components/lecturers/lecturers.component';
 import { LanguageInterceptor } from './interceptors/language.interceptor';
 import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LecturersComponent
   ],
   imports: [
     BrowserModule,

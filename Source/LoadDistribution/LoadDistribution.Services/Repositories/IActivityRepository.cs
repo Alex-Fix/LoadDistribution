@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Services.Repositories
 {
-    public interface IActivityRepository : IRepository<Activity>
+    public interface IActivityRepository : IProjectRelatedCollectionRepository<Activity>
     {
     }
 }

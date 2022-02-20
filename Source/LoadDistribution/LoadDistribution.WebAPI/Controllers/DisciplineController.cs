@@ -4,7 +4,7 @@ using System;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
-    public class DisciplineController : BaseController<DisciplineDTO>
+    public class DisciplineController : ProjectRelatedCollectionController<DisciplineDTO>
     {
         #region Fields
         private readonly IDisciplineFacade _disciplineFacade;

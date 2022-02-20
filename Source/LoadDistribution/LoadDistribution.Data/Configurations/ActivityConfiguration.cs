@@ -12,6 +12,12 @@ namespace LoadDistribution.Data.Configurations
             builder.HasKey(k => k.Id);
 
             builder.Property(k => k.Name).IsRequired().HasMaxLength(128);
+
+            builder
+                .HasOne(p => p.Project)
+                .WithMany(p => p.Activities)
+                .HasForeignKey(fk => fk.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

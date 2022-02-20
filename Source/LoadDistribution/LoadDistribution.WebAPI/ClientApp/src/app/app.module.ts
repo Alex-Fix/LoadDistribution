@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -12,10 +13,14 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { LanguageInterceptor } from './interceptors/language.interceptor';
 import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
+import { ProjectComponent } from './components/project/project.component';
+import { ProjectAutocompleteComponent } from './components/project/project-autocomplete/project-autocomplete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProjectComponent,
+    ProjectAutocompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,8 @@ import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
         deps: [HttpClient]
       }
     }),
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

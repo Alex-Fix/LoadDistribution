@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Services.Repositories
 {
-    public interface IProjectRepository : IRepository<Project>
+    public interface IProjectRepository : ICollectionRepository<Project>
     {
     }
 }

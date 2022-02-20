@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Core.Domain.Models
 {
-    public class DisciplineActivityMap : BaseEntity
+    public class DisciplineActivityMap : BaseProjectRelatedEntity
     {
         public int DisciplineId { get; set; }
         public int ActivityId { get; set; }

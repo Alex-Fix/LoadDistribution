@@ -1,6 +1,7 @@
-import BaseDTO from './baseDTO.model';
+import BaseProjectRelatedDTO from "./baseProjectRelatedDTO.model";
 
-export default interface ProjectDTO extends BaseDTO {
-    title: string;
-    description: string;
+export default interface LecturerDTO extends BaseProjectRelatedDTO {
+    firstName: string;
+    middleName: string;
+    lastName: string;
 }

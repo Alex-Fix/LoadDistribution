@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories.Implementations
 {
-    public abstract class SQLiteRepository<TEntity, TContext> : IRepository<TEntity> 
+    public abstract class SQLiteRepository<TEntity, TContext> : IRepository<TEntity>
         where TEntity : class, IEntity
         where TContext : DbContext
     {
         #region Fields
-        private readonly TContext _dbContext;
+        protected readonly TContext _dbContext;
         #endregion
 
         #region Constructors
@@ -24,19 +24,9 @@ namespace LoadDistribution.Services.Repositories.Implementations
         #endregion
 
         #region Methods
-        public async virtual Task<IList<TEntity>> GetAll()
-        {
-            return await _dbContext.Set<TEntity>().ToListAsync();
-        }
-
         public async virtual Task<TEntity> Get(int id)
         {
             return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
-        }
-
-        public async virtual Task<Paged<TEntity>> GetPaged(int pageNumber, int pageSize)
-        {
-            return await Paged<TEntity>.Build(_dbContext.Set<TEntity>(), pageNumber, pageSize);
         }
 
         public async virtual Task<TEntity> Insert(TEntity entity)

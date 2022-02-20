@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LoadDistribution.Core.Domain.Models
 {
-    public class Discipline : BaseEntity
+    public class Discipline : BaseProjectRelatedEntity
     {
         public string Name { get; set; }
         public string Type { get; set; }
@@ -22,7 +22,6 @@ namespace LoadDistribution.Core.Domain.Models
         public int GroupCount { get; set; }
         public int SubgroupCount { get; set; }
         public int ThreadCount { get; set; }
-
         public int UniversityId { get; set; }
 
         // navigation properties

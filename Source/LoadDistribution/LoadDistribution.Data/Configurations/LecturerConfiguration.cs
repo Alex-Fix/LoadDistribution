@@ -14,6 +14,12 @@ namespace LoadDistribution.Data.Configurations
             builder.Property(p => p.FirstName).IsRequired().HasMaxLength(256);
             builder.Property(p => p.MiddleName).IsRequired().HasMaxLength(256);
             builder.Property(p => p.LastName).IsRequired().HasMaxLength(256);
+
+            builder
+                .HasOne(p => p.Project)
+                .WithMany(p => p.Lecturers)
+                .HasForeignKey(fk => fk.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

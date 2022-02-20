@@ -4,7 +4,7 @@ using System;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
-    public class ActivityController : BaseController<ActivityDTO>
+    public class ActivityController : ProjectRelatedCollectionController<ActivityDTO>
     {
         #region Fields
         private readonly IActivityFacade _activityFacade;

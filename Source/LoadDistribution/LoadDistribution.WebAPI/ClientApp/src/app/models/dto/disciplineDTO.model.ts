@@ -1,6 +1,6 @@
-import BaseDTO from './baseDTO.model';
+import BaseProjectRelatedDTO from './baseProjectRelatedDTO.model';
 
-export default interface DisciplineDTO extends BaseDTO {
+export default interface DisciplineDTO extends BaseProjectRelatedDTO {
     name: string;
     type: string;
     term: number;

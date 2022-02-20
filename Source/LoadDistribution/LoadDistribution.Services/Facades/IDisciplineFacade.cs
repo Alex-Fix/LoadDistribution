@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Services.Facades
 {
-    public interface IDisciplineFacade : IFacade<DisciplineDTO>
+    public interface IDisciplineFacade : IProjectRelatedCollectionFacade<DisciplineDTO>
     {
     }
 }

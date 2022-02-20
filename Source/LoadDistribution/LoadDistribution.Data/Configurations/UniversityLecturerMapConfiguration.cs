@@ -12,6 +12,11 @@ namespace LoadDistribution.Data.Configurations
             builder.HasKey(k => k.Id);
 
             builder
+                .HasOne(p => p.Project)
+                .WithMany(p => p.UniversityLecturerMaps)
+                .HasForeignKey(fk => fk.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder
                 .HasOne(p => p.University)
                 .WithMany(p => p.UniversityLectureMaps)
                 .HasForeignKey(fk => fk.UniversityId)

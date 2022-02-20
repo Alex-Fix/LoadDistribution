@@ -4,7 +4,7 @@ import { environment } from "src/environments/environment";
 import BaseDTO from "../models/dto/baseDTO.model";
 import Paged from "../models/helpers/paged.model";
 
-export default abstract class BaseClient<TDTO extends BaseDTO> {
+export default abstract class Client<TDTO extends BaseDTO> {
     constructor(
         protected readonly _controller: string,
         protected readonly _client: HttpClient
@@ -14,16 +14,8 @@ export default abstract class BaseClient<TDTO extends BaseDTO> {
         return `${environment.apiUrl}/${this._controller}/`;
     }
 
-    getAll(): Observable<TDTO[]> {
-        return this._client.get<TDTO[]>(this.url);
-    }
-
     get(id: number): Observable<TDTO> {
         return this._client.get<TDTO>(this.url + id);
-    }
-
-    getPaged(pageNumber: number, pageSize: number): Observable<Paged<TDTO>> {
-        return this._client.get<Paged<TDTO>>(this.url + `paged?pageNumber=${pageNumber}&pageSize=${pageSize}`);
     }
 
     insert(entity: TDTO): Observable<TDTO> {

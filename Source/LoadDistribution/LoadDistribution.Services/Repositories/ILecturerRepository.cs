@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Services.Repositories
 {
-    public interface ILecturerRepository : IRepository<Lecturer>
+    public interface ILecturerRepository : IProjectRelatedCollectionRepository<Lecturer>
     {
     }
 }

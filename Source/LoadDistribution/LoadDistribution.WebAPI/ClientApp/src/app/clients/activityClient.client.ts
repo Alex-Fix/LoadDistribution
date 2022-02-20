@@ -1,13 +1,12 @@
 import ActivityDTO from "../models/dto/activityDTO.model";
-import BaseClient from "./baseClient.client";
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import ProjectRelatedCollectionClient from "./projectRelatedCollectionClient.client";
 
 @Injectable({
     providedIn: 'root'
 })
-export default class ActivityClient extends BaseClient<ActivityDTO> {
+export default class ActivityClient extends ProjectRelatedCollectionClient<ActivityDTO> {
     constructor(
         client: HttpClient 
     ) {

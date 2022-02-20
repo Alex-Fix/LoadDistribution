@@ -20,6 +20,11 @@ namespace LoadDistribution.Data.Configurations
             builder.Property(p => p.Specialization).IsRequired().HasMaxLength(64);
 
             builder
+                .HasOne(p => p.Project)
+                .WithMany(p => p.Disciplines)
+                .HasForeignKey(fk => fk.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder
                 .HasOne(p => p.University)
                 .WithMany(p => p.Disciplines)
                 .HasForeignKey(p => p.UniversityId)

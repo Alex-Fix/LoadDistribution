@@ -9,5 +9,10 @@
       "loadDistribution": "Розподіл навантаження",
       "lecturers": "Лектори"
     }
+  },
+  "project": {
+    "autocomplete": {
+      "projects": "Проекти"
+    }
   }
 }

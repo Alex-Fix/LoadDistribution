@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Core.Domain.Models
 {
-    public class Activity : BaseEntity
+    public class Activity : BaseProjectRelatedEntity
     {
         public string Name { get; set; }
 

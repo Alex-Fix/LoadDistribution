@@ -30,10 +30,15 @@ namespace LoadDistribution.Data.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("UpdatedUtc")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Activities");
                 });
@@ -85,6 +90,9 @@ namespace LoadDistribution.Data.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Speciality")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -119,6 +127,8 @@ namespace LoadDistribution.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProjectId");
+
                     b.HasIndex("UniversityId");
 
                     b.ToTable("Disciplines");
@@ -139,6 +149,9 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("DisciplineId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("UpdatedUtc")
                         .HasColumnType("TEXT");
 
@@ -147,6 +160,8 @@ namespace LoadDistribution.Data.Migrations
                     b.HasIndex("ActivityId");
 
                     b.HasIndex("DisciplineId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("DisciplineActivityMaps");
                 });
@@ -175,10 +190,15 @@ namespace LoadDistribution.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("UpdatedUtc")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Lecturers");
                 });
@@ -198,6 +218,9 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("LecturerId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal>("Rate")
                         .HasColumnType("TEXT");
 
@@ -209,6 +232,8 @@ namespace LoadDistribution.Data.Migrations
                     b.HasIndex("DisciplineActivityMapId");
 
                     b.HasIndex("LecturerId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("LecturerDisciplineActivityMaps");
                 });
@@ -308,6 +333,9 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("LectureId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("UniversityId")
                         .HasColumnType("INTEGER");
 
@@ -318,18 +346,39 @@ namespace LoadDistribution.Data.Migrations
 
                     b.HasIndex("LectureId");
 
+                    b.HasIndex("ProjectId");
+
                     b.HasIndex("UniversityId");
 
                     b.ToTable("UniversityLecturerMaps");
                 });
 
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Activity", b =>
+                {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
+                        .WithMany("Activities")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Discipline", b =>
                 {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
+                        .WithMany("Disciplines")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LoadDistribution.Core.Domain.Models.University", "University")
                         .WithMany("Disciplines")
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Project");
 
                     b.Navigation("University");
                 });
@@ -348,9 +397,28 @@ namespace LoadDistribution.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
+                        .WithMany("DisciplineActivityMaps")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Activity");
 
                     b.Navigation("Discipline");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Lecturer", b =>
+                {
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
+                        .WithMany("Lecturers")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.LecturerDisciplineActivityMap", b =>
@@ -367,9 +435,17 @@ namespace LoadDistribution.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
+                        .WithMany("LecturerDisciplineActivityMaps")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("DisciplineActivityMap");
 
                     b.Navigation("Lecturer");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.University", b =>
@@ -391,6 +467,12 @@ namespace LoadDistribution.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
+                        .WithMany("UniversityLecturerMaps")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LoadDistribution.Core.Domain.Models.University", "University")
                         .WithMany("UniversityLectureMaps")
                         .HasForeignKey("UniversityId")
@@ -398,6 +480,8 @@ namespace LoadDistribution.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Lecturer");
+
+                    b.Navigation("Project");
 
                     b.Navigation("University");
                 });
@@ -426,7 +510,19 @@ namespace LoadDistribution.Data.Migrations
 
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Project", b =>
                 {
+                    b.Navigation("Activities");
+
+                    b.Navigation("DisciplineActivityMaps");
+
+                    b.Navigation("Disciplines");
+
+                    b.Navigation("LecturerDisciplineActivityMaps");
+
+                    b.Navigation("Lecturers");
+
                     b.Navigation("Universities");
+
+                    b.Navigation("UniversityLecturerMaps");
                 });
 
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.University", b =>

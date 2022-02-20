@@ -4,7 +4,7 @@ using System;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
-    public class LecturerController : BaseController<LecturerDTO>
+    public class LecturerController : ProjectRelatedCollectionController<LecturerDTO>
     {
         #region Fields
         private readonly ILecturerFacade _lecturerFacade;

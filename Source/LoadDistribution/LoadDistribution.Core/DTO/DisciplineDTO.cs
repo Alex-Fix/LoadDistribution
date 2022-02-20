@@ -1,6 +1,6 @@
 ﻿namespace LoadDistribution.Core.DTO
 {
-    public class DisciplineDTO : BaseDTO
+    public class DisciplineDTO : BaseProjectRelatedDTO
     {
         public string Name { get; set; }
         public string Type { get; set; }

@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Services.Facades
 {
-    public interface ILecturerFacade : IFacade<LecturerDTO>
+    public interface ILecturerFacade : IProjectRelatedCollectionFacade<LecturerDTO>
     {
     }
 }

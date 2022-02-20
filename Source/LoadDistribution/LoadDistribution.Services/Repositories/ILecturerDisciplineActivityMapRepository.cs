@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Services.Repositories
 {
-    public interface ILecturerDisciplineActivityMapRepository : IRepository<LecturerDisciplineActivityMap>
+    public interface ILecturerDisciplineActivityMapRepository : IProjectRelatedCollectionRepository<LecturerDisciplineActivityMap>
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace LoadDistribution.Services.Repositories
 {
-    public interface ILogRepository : IRepository<Log>
+    public interface ILogRepository : ICollectionRepository<Log>
     {
     }
 }

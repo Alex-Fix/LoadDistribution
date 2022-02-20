@@ -4,7 +4,7 @@ using System;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
-    public class ProjectController : BaseController<ProjectDTO>
+    public class ProjectController : CollectionController<ProjectDTO>
     {
         #region Fields
         private readonly IProjectFacade _projectFacade;

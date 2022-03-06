@@ -22,7 +22,7 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -33,7 +33,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("ProjectId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -58,7 +58,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("Course")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EducationForm")
@@ -122,7 +122,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("UniversityId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -143,7 +143,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("ActivityId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DisciplineId")
@@ -152,7 +152,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("ProjectId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -172,7 +172,7 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -193,7 +193,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("ProjectId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -209,7 +209,7 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DisciplineActivityMapId")
@@ -224,7 +224,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<decimal>("Rate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -244,7 +244,7 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Details")
@@ -274,7 +274,7 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -286,7 +286,7 @@ namespace LoadDistribution.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -300,7 +300,7 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -311,7 +311,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("ProjectId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -327,7 +327,7 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedUtc")
+                    b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LectureId")
@@ -339,7 +339,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<int>("UniversityId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("UpdatedUtc")
+                    b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

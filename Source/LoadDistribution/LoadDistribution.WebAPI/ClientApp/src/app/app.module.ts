@@ -13,14 +13,16 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { LanguageInterceptor } from './interceptors/language.interceptor';
 import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
-import { ProjectComponent } from './components/project/project.component';
-import { ProjectAutocompleteComponent } from './components/project/project-autocomplete/project-autocomplete.component';
+import { ProjectListComponent } from './components/project/project-list/project-list.component';
+import { ProjectComponent } from './components/project/project/project.component';
+import { BaseComponent } from './components/common/base/base.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProjectListComponent,
     ProjectComponent,
-    ProjectAutocompleteComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,

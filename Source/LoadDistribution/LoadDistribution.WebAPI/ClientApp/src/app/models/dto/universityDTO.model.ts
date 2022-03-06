@@ -1,5 +1,5 @@
 import BaseProjectRelatedDTO from './baseProjectRelatedDTO.model';
 
-export default interface UniversityDTO extends BaseProjectRelatedDTO {
+export default class UniversityDTO extends BaseProjectRelatedDTO {
     name: string;
 }

@@ -8,10 +8,15 @@ import ActivityClient from './clients/activityClient.client';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  isDrawerOpened: boolean = false;
+
   constructor(
-    private readonly _languageService: LanguageService, private readonly _activityClient: ActivityClient
+    languageService: LanguageService
   ) {
-      _languageService.setSavedOrDefault();
-      _activityClient.getPaged(1, 30).subscribe(res => console.log(res));
+      languageService.setSavedOrDefault();
+  }
+
+  onMenuButtonClick(): void {
+    this.isDrawerOpened = !this.isDrawerOpened;
   }
 }

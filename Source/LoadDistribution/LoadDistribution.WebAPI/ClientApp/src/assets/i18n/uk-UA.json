@@ -1,7 +1,16 @@
 {
   "common": {
     "snackBar": {
-      "close": "Закрити"
+      "close": "Закрити",
+      "successfullyInserted": "Успішно додано",
+      "successfullyUpdated": "Успішно оновлено",
+      "successfullyDeleted": "Успішно видалено"
+    },
+    "button": {
+      "create": "Створити",
+      "createAndReturn": "Створити і повернутись",
+      "update": "Оновити",
+      "updateAndReturn": "Оновити і повернутись"
     }
   },
   "app": {
@@ -10,9 +19,16 @@
       "lecturers": "Лектори"
     }
   },
+  "base": {
+    "id": "Ід",
+    "created": "Створено",
+    "updated": "Оновлено",
+    "actions": "Дії"
+  },
   "project": {
-    "autocomplete": {
-      "projects": "Проекти"
-    }
+    "project": "Проект",
+    "projects": "Проекти",
+    "title": "Заголовок",
+    "description": "Опис"
   }
 }

@@ -33,7 +33,7 @@ namespace LoadDistribution.Services.Services.Implementations
 
             var log = new Log
             {
-                CreatedUtc = DateTime.UtcNow,
+                Created = DateTimeOffset.UtcNow,
                 Type = LogType.Exception,
                 ExceptionType = ex.GetType().FullName,
                 Message = message,

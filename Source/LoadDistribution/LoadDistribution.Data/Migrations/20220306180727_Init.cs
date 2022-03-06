@@ -8,44 +8,12 @@ namespace LoadDistribution.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Activities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Activities", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Lecturers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    MiddleName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lecturers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Logs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Message = table.Column<string>(type: "TEXT", maxLength: 512, nullable: false),
                     Details = table.Column<string>(type: "TEXT", maxLength: 4096, nullable: true),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
@@ -64,12 +32,58 @@ namespace LoadDistribution.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: true),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Activities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Activities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Activities_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lecturers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FirstName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    MiddleName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lecturers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lecturers_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,9 +93,9 @@ namespace LoadDistribution.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,12 +132,19 @@ namespace LoadDistribution.Data.Migrations
                     SubgroupCount = table.Column<int>(type: "INTEGER", nullable: false),
                     ThreadCount = table.Column<int>(type: "INTEGER", nullable: false),
                     UniversityId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Disciplines", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Disciplines_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Disciplines_Universities_UniversityId",
                         column: x => x.UniversityId,
@@ -140,8 +161,9 @@ namespace LoadDistribution.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     UniversityId = table.Column<int>(type: "INTEGER", nullable: false),
                     LectureId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,6 +172,12 @@ namespace LoadDistribution.Data.Migrations
                         name: "FK_UniversityLecturerMaps_Lecturers_LectureId",
                         column: x => x.LectureId,
                         principalTable: "Lecturers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UniversityLecturerMaps_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -168,8 +196,9 @@ namespace LoadDistribution.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     DisciplineId = table.Column<int>(type: "INTEGER", nullable: false),
                     ActivityId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -186,6 +215,12 @@ namespace LoadDistribution.Data.Migrations
                         principalTable: "Disciplines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DisciplineActivityMaps_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,8 +232,9 @@ namespace LoadDistribution.Data.Migrations
                     LecturerId = table.Column<int>(type: "INTEGER", nullable: false),
                     DisciplineActivityMapId = table.Column<int>(type: "INTEGER", nullable: false),
                     Rate = table.Column<decimal>(type: "TEXT", nullable: false),
-                    CreatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedUtc = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,7 +251,18 @@ namespace LoadDistribution.Data.Migrations
                         principalTable: "Lecturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LecturerDisciplineActivityMaps_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Activities_ProjectId",
+                table: "Activities",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DisciplineActivityMaps_ActivityId",
@@ -226,6 +273,16 @@ namespace LoadDistribution.Data.Migrations
                 name: "IX_DisciplineActivityMaps_DisciplineId",
                 table: "DisciplineActivityMaps",
                 column: "DisciplineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DisciplineActivityMaps_ProjectId",
+                table: "DisciplineActivityMaps",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Disciplines_ProjectId",
+                table: "Disciplines",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Disciplines_UniversityId",
@@ -243,6 +300,16 @@ namespace LoadDistribution.Data.Migrations
                 column: "LecturerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LecturerDisciplineActivityMaps_ProjectId",
+                table: "LecturerDisciplineActivityMaps",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lecturers_ProjectId",
+                table: "Lecturers",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Universities_ProjectId",
                 table: "Universities",
                 column: "ProjectId");
@@ -251,6 +318,11 @@ namespace LoadDistribution.Data.Migrations
                 name: "IX_UniversityLecturerMaps_LectureId",
                 table: "UniversityLecturerMaps",
                 column: "LectureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UniversityLecturerMaps_ProjectId",
+                table: "UniversityLecturerMaps",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UniversityLecturerMaps_UniversityId",

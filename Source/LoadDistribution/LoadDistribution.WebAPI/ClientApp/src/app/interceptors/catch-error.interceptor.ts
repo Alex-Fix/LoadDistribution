@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry, tap } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -22,10 +22,11 @@ export class CatchErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(3),
       catchError(error => {
+        // TODO: fix error formatting
         this._translateService
           .get('common.snackBar.close')
           .subscribe(literal => {
-            this._snackBar.open(error?.error, literal, { duration: 3000, panelClass: 'errorSnack' })
+            this._snackBar.open(error?.errors, literal, { duration: 3000, panelClass: 'errorSnack' })
           });
 
         return throwError(error);

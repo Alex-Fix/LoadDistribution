@@ -1,0 +1,5 @@
+<div class="base-wrapper" *ngIf="base">
+    <h4 class="mr-3"><span class="base-title">{{ 'base.id' | translate }}:</span> {{ base.id }}</h4>
+    <h4 class="mr-3"><span class="base-title">{{ 'base.created' | translate }}:</span> {{ base.created | date: 'short' }}</h4>
+    <h4><span class="base-title">{{ 'base.updated' | translate }}:</span> {{ base.updated | date: 'short' }}</h4>
+</div>

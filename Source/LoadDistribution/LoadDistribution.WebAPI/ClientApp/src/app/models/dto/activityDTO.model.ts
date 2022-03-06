@@ -1,5 +1,5 @@
 import BaseProjectRelatedDTO from './baseProjectRelatedDTO.model';
 
-export default interface ActivityDTO extends BaseProjectRelatedDTO {
+export default class ActivityDTO extends BaseProjectRelatedDTO {
     name: string;
 }

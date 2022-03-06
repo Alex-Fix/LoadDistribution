@@ -38,8 +38,8 @@ namespace LoadDistribution.Services.Repositories.Implementations
 
             if(entity is BaseEntity baseEntity)
             {
-                baseEntity.CreatedUtc = DateTime.UtcNow;
-                baseEntity.UpdatedUtc = DateTime.UtcNow;
+                baseEntity.Created = DateTimeOffset.UtcNow;
+                baseEntity.Updated = DateTimeOffset.UtcNow;
             }
 
             EntityEntry<TEntity> entry = await _dbContext.AddAsync(entity);
@@ -56,7 +56,7 @@ namespace LoadDistribution.Services.Repositories.Implementations
 
             if (entity is BaseEntity baseEntity)
             {
-                baseEntity.UpdatedUtc = DateTime.UtcNow;
+                baseEntity.Updated = DateTimeOffset.UtcNow;
             }
 
             EntityEntry<TEntity> entry = _dbContext.Update(entity);

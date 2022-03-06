@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-title align="center">{{ 'project.project' | translate }}</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="projectForm" class="centred-form">
+            <app-base [base]="base" *ngIf="componentMode == componentModes.edit"></app-base>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'project.title' | translate }}</mat-label>
+                    <input matInput formControlName="title" required />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'project.description' | translate }}</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <div class="actions-center" [ngSwitch]="componentMode">
+            <ng-template [ngSwitchCase]="componentModes.create">
+                <button [disabled]="!projectForm.valid" mat-raised-button color="primary" (click)="onCreateButtonClick()">{{ 'common.button.create' | translate }}</button>
+                <button [disabled]="!projectForm.valid" mat-raised-button color="accent" (click)="onCreateAndReturnButtonClick()">{{ 'common.button.createAndReturn' | translate }}</button>
+            </ng-template>
+            <ng-template [ngSwitchCase]="componentModes.edit">
+                <button [disabled]="!projectForm.valid" mat-raised-button color="primary" (click)="onUpdateButtonClick()">{{ 'common.button.update' | translate }}</button>
+                <button [disabled]="!projectForm.valid" mat-raised-button color="accent" (click)="onUpdateAndReturnButtonClick()">{{ 'common.button.updateAndReturn' | translate }}</button>
+            </ng-template>
+        </div>
+    </mat-card-actions>
+</mat-card>

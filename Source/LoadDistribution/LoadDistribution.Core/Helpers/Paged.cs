@@ -9,17 +9,18 @@ namespace LoadDistribution.Core.Helpers
     public class Paged<TEntity>
     {
         #region Constants
-        public const int MIN_PAGE_NUMBER = 1;
-        public const int DEFAULT_PAGE_SIZE = 20;
+        public const int MIN_PAGE_NUMBER = 0;
+        public const int DEFAULT_PAGE_SIZE = 10 ;
         public const int MIN_PAGE_SIZE = 1;
         #endregion
 
         #region Constructors
-        private Paged(int pageSize, int pageNumber, int pageCount, IList<TEntity> list)
+        private Paged(int pageSize, int pageNumber, int pageCount, int totalCount, IList<TEntity> list)
         {
             PageSize = pageSize;
             PageNumber = pageNumber;
             PageCount = pageCount;
+            TotalCount = totalCount;
             List = list;
         }
         #endregion
@@ -28,6 +29,7 @@ namespace LoadDistribution.Core.Helpers
         public int PageNumber { get; private set; }
         public int PageSize { get; private set; }
         public int PageCount { get; private set; }
+        public int TotalCount { get; private set; }
         public IList<TEntity> List { get; private set; }
         #endregion
 
@@ -47,11 +49,11 @@ namespace LoadDistribution.Core.Helpers
                 pageSize = DEFAULT_PAGE_SIZE;
             }
 
-            int entitiesCount = await collection.CountAsync();
-            int pageCount = (int)Math.Ceiling((decimal)entitiesCount / pageSize);
+            int totalCount = await collection.CountAsync();
+            int pageCount = (int)Math.Ceiling((decimal)totalCount / pageSize);
             List<TEntity> list = await collection.Skip((pageNumber - MIN_PAGE_NUMBER) * pageSize).Take(pageSize).ToListAsync();
 
-            return new Paged<TEntity>(pageSize, pageNumber, pageCount, list);
+            return new Paged<TEntity>(pageSize, pageNumber, pageCount, totalCount, list);
         }
         #endregion
     }

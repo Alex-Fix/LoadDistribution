@@ -1,5 +1,5 @@
 import BaseDTO from "./baseDTO.model";
 
-export default interface BaseProjectRelatedDTO extends BaseDTO {
+export default class BaseProjectRelatedDTO extends BaseDTO {
     projectId: number;
 }

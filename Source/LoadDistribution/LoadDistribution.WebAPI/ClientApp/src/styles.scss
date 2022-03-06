@@ -1,4 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.success-snack {
+    background-color: #008000;
+}
+
+// variables
+$spacer: 10px;
+// /variables
+
+// spacing
+.mr-1 { margin-right: $spacer !important; }
+.mr-2 { margin-right: $spacer * 2 !important; }
+.mr-3 { margin-right: $spacer * 3 !important; }
+.mr-4 { margin-right: $spacer * 4 !important; }
+.mr-5 { margin-right: $spacer * 5 !important; }
+.mr-6 { margin-right: $spacer * 6 !important; }
+// /spacing
+
+// mat card 
+.title-with-btn {
+    display: flex;
+    align-items: center;
+}
+
+.actions-center {
+    display: flex;
+    justify-content: center;
+}
+// /mat card
+
+// table 
+.self-width-cell {
+    white-space: nowrap;
+    width: 1%;
+}
+// /table
+
+// mat drawer
+.mat-drawer-container {
+    height: calc(100vh - 64px);
+}
+// /mat drower
+
+// form
+.centred-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+// /form

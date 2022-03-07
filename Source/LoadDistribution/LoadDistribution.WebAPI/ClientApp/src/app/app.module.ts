@@ -16,13 +16,15 @@ import { CatchErrorInterceptor } from './interceptors/catch-error.interceptor';
 import { ProjectListComponent } from './components/project/project-list/project-list.component';
 import { ProjectComponent } from './components/project/project/project.component';
 import { BaseComponent } from './components/common/base/base.component';
+import { FormActionsComponent } from './components/common/form-actions/form-actions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectListComponent,
     ProjectComponent,
-    BaseComponent
+    BaseComponent,
+    FormActionsComponent
   ],
   imports: [
     BrowserModule,

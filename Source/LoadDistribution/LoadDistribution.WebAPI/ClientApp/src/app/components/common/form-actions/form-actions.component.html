@@ -1,0 +1,10 @@
+<div class="actions-center" *ngIf="component" [ngSwitch]="component.componentMode">
+    <ng-template [ngSwitchCase]="component.componentModes.create">
+        <button [disabled]="!component.form.valid" mat-raised-button color="primary" (click)="component.onCreateButtonClick()">{{ 'common.button.create' | translate }}</button>
+        <button [disabled]="!component.form.valid" mat-raised-button color="accent" (click)="component.onCreateAndReturnButtonClick()">{{ 'common.button.createAndReturn' | translate }}</button>
+    </ng-template>
+    <ng-template [ngSwitchCase]="component.componentModes.edit">
+        <button [disabled]="!component.form.valid" mat-raised-button color="primary" (click)="component.onUpdateButtonClick()">{{ 'common.button.update' | translate }}</button>
+        <button [disabled]="!component.form.valid" mat-raised-button color="accent" (click)="component.onUpdateAndReturnButtonClick()">{{ 'common.button.updateAndReturn' | translate }}</button>
+    </ng-template>
+</div>

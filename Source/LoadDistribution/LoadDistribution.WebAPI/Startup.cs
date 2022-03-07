@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Microsoft.OpenApi.Models;
 
 namespace LoadDistribution.WebAPI
 {
@@ -64,6 +65,7 @@ namespace LoadDistribution.WebAPI
             {
                 cfg.RootPath = Path.Combine("ClientApp", "dist");
             });
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -88,6 +90,8 @@ namespace LoadDistribution.WebAPI
             app.UseRouting();
             app.UseCors(opt => opt.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseEndpoints(cfg => cfg.MapControllers());
+            app.UseSwagger();
+            app.UseSwaggerUI();
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";

@@ -19,12 +19,14 @@ namespace LoadDistribution.Services.Repositories.Implementations
         #region Methods
         public async virtual Task<IList<TEntity>> GetAll()
         {
-            return await _dbContext.Set<TEntity>().ToListAsync();
+            var query = _dbContext.Set<TEntity>();
+            return await Sort(query).ToListAsync();
         }
 
         public async virtual Task<Paged<TEntity>> GetPaged(int pageNumber, int pageSize)
         {
-            return await Paged<TEntity>.Build(_dbContext.Set<TEntity>(), pageNumber, pageSize);
+            var query = _dbContext.Set<TEntity>();
+            return await Paged<TEntity>.Build(Sort(query), pageNumber, pageSize);
         }
         #endregion
     }

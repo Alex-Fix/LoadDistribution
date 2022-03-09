@@ -17,6 +17,7 @@ import { ProjectListComponent } from './components/project/project-list/project-
 import { ProjectComponent } from './components/project/project/project.component';
 import { BaseComponent } from './components/common/base/base.component';
 import { FormActionsComponent } from './components/common/form-actions/form-actions.component';
+import { ProjectAutocompleteComponent } from './components/project/project-autocomplete/project-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormActionsComponent } from './components/common/form-actions/form-acti
     ProjectListComponent,
     ProjectComponent,
     BaseComponent,
-    FormActionsComponent
+    FormActionsComponent,
+    ProjectAutocompleteComponent
   ],
   imports: [
     BrowserModule,

@@ -4,16 +4,18 @@ import { HttpClient } from "@angular/common/http";
 import ProjectRelatedCollectionClient from "./projectRelatedCollectionClient.client";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
+import { ProjectHandler } from "../helpers/projectHandler.helper";
 
 @Injectable({
     providedIn: 'root'
 })
 export default class UniversityClient extends ProjectRelatedCollectionClient<UniversityDTO> {
     constructor(
+        projectHandler: ProjectHandler,
         client: HttpClient,
         snackBar: MatSnackBar,
         translateService: TranslateService
     ) {
-        super('university', client, snackBar, translateService);
+        super(projectHandler, 'university', client, snackBar, translateService);
     }
 }

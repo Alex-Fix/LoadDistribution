@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LoadDistribution.Data.Migrations
 {
@@ -13,7 +12,7 @@ namespace LoadDistribution.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
                     Message = table.Column<string>(type: "TEXT", maxLength: 512, nullable: false),
                     Details = table.Column<string>(type: "TEXT", maxLength: 4096, nullable: true),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
@@ -32,8 +31,8 @@ namespace LoadDistribution.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: true),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,8 +46,8 @@ namespace LoadDistribution.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -71,8 +70,8 @@ namespace LoadDistribution.Data.Migrations
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     MiddleName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -93,8 +92,8 @@ namespace LoadDistribution.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -132,8 +131,8 @@ namespace LoadDistribution.Data.Migrations
                     SubgroupCount = table.Column<int>(type: "INTEGER", nullable: false),
                     ThreadCount = table.Column<int>(type: "INTEGER", nullable: false),
                     UniversityId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -161,8 +160,8 @@ namespace LoadDistribution.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     UniversityId = table.Column<int>(type: "INTEGER", nullable: false),
                     LectureId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -196,8 +195,8 @@ namespace LoadDistribution.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     DisciplineId = table.Column<int>(type: "INTEGER", nullable: false),
                     ActivityId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -232,8 +231,8 @@ namespace LoadDistribution.Data.Migrations
                     LecturerId = table.Column<int>(type: "INTEGER", nullable: false),
                     DisciplineActivityMapId = table.Column<int>(type: "INTEGER", nullable: false),
                     Rate = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Created = table.Column<long>(type: "INTEGER", nullable: false),
+                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

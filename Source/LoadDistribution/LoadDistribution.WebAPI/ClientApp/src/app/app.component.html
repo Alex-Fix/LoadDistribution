@@ -3,6 +3,8 @@
         <mat-icon>menu</mat-icon>
     </button>
     <span>{{ 'app.toolbar.loadDistribution' | translate }}</span>
+    <span class="spacer"></span>
+    <app-project-autocomplete></app-project-autocomplete>
 </mat-toolbar>
 <mat-drawer-container>
     <mat-drawer mode="side" [opened]="isDrawerOpened" class="mat-elevation-z8">

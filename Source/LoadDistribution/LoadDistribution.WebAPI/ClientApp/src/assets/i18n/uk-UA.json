@@ -4,7 +4,8 @@
       "close": "Закрити",
       "successfullyInserted": "Успішно додано",
       "successfullyUpdated": "Успішно оновлено",
-      "successfullyDeleted": "Успішно видалено"
+      "successfullyDeleted": "Успішно видалено",
+      "projectIsNotSelected": "Проект не вибрано"
     },
     "button": {
       "create": "Створити",

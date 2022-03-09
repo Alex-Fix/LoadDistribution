@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories.Implementations
@@ -76,6 +77,16 @@ namespace LoadDistribution.Services.Repositories.Implementations
             await _dbContext.SaveChangesAsync();
 
             return entity;
+        }
+
+        protected IQueryable<TEntity> Sort(IQueryable<TEntity> query)
+        {
+            if(query is IQueryable<BaseEntity>)
+            {
+                return query.OrderByDescending(e => (e as BaseEntity).Created);
+            }
+
+            return query;
         }
         #endregion
     }

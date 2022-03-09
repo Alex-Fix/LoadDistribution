@@ -1,6 +1,7 @@
 ﻿using LoadDistribution.Core.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LoadDistribution.Data.Configurations
 {
@@ -14,6 +15,7 @@ namespace LoadDistribution.Data.Configurations
             builder.Property(p => p.Message).IsRequired().HasMaxLength(512);
             builder.Property(p => p.Details).HasMaxLength(4096);
             builder.Property(p => p.ExceptionType).HasMaxLength(256);
+            builder.Property(p => p.Created).HasConversion(new DateTimeOffsetToBinaryConverter());
         }
     }
 }

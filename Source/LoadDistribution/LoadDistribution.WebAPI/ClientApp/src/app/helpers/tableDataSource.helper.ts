@@ -2,11 +2,11 @@ import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { catchError, finalize, map, tap } from "rxjs/operators";
-import CollectionClient from "../clients/collectionClient.client";
+import Client from "../clients/client.client";
 import BaseDTO from "../models/dto/baseDTO.model";
 import Paged from "../models/helpers/paged.model";
 
-export default class CollectionDataSource<TDTO extends BaseDTO> implements DataSource<TDTO> {
+export default class TableDataSource<TDTO extends BaseDTO> implements DataSource<TDTO> {
     private readonly _pageSizeOptions: number[] = [10, 15, 20, 50, 100, 200, 500];
     private readonly _defaultPaged: Paged<TDTO> = { list: [], pageCount: 0, totalCount: 0, pageSize: 0, pageNumber: 0 };
     private readonly _pageSubject: BehaviorSubject<Paged<TDTO>> = new BehaviorSubject<Paged<TDTO>>(this._defaultPaged);
@@ -15,7 +15,7 @@ export default class CollectionDataSource<TDTO extends BaseDTO> implements DataS
     isLoading: Observable<boolean> = this._loadingSubject.asObservable();
     
     constructor(
-        private readonly _collectionClient: CollectionClient<TDTO>
+        private readonly _client: Client<TDTO>
     ) {}
 
     connect(collectionViewer: CollectionViewer): Observable<TDTO[]> {
@@ -30,7 +30,7 @@ export default class CollectionDataSource<TDTO extends BaseDTO> implements DataS
     loadPage(pageNumber: number = 0, pageSize: number = 0): void {
         this._loadingSubject.next(true);
 
-        this._collectionClient.getPaged(pageNumber, pageSize)
+        this._client.getPaged(pageNumber, pageSize)
             .pipe(
                 catchError(() => of(this._defaultPaged)),
                 finalize(() => this._loadingSubject.next(false))

@@ -49,4 +49,7 @@ export default abstract class Client<TDTO extends BaseDTO> {
             })
         );
     }
+
+    abstract getAll(): Observable<TDTO[]>;
+    abstract getPaged(pageNumber: number, pageSize: number): Observable<Paged<TDTO>>;
 }

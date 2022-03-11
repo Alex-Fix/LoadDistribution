@@ -31,5 +31,9 @@
     "projects": "Проекти",
     "title": "Заголовок",
     "description": "Опис"
+  },
+  "university": {
+    "universities": "Університети",
+    "name": "Назва"
   }
 }

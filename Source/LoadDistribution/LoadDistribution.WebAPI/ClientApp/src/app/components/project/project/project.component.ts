@@ -13,11 +13,11 @@ import ProjectDTO from 'src/app/models/dto/projectDTO';
 export class ProjectComponent extends CUComponent<ProjectDTO> {
   constructor(
     private readonly _formBuilder: FormBuilder,
-    _projectClient: ProjectClient,
-    _activeRoute: ActivatedRoute,
-    _router: Router
+    projectClient: ProjectClient,
+    activatedRoute: ActivatedRoute,
+    router: Router
   ) {
-    super(_projectClient, _activeRoute, _router, '/projects');
+    super(projectClient, activatedRoute, router, '/projects');
   }
 
   protected _initForm(): void {

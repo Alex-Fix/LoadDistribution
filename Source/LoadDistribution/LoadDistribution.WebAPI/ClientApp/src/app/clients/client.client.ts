@@ -2,9 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
 import { Observable } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
+import { ProjectHandler } from "../helpers/projectHandler.helper";
 import BaseDTO from "../models/dto/baseDTO.model";
+import BaseProjectRelatedDTO from "../models/dto/baseProjectRelatedDTO.model";
 import Paged from "../models/helpers/paged.model";
 
 export default abstract class Client<TDTO extends BaseDTO> {

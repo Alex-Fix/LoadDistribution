@@ -22,11 +22,16 @@ export class CatchErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(3),
       catchError(error => {
-        // TODO: fix error formatting
+        const message: string | null = typeof error?.error == 'string' ? error.error : null;
+
+        // detailed error
+        console.error (error);
+
+        // error message
         this._translateService
-          .get('common.snackBar.close')
-          .subscribe(literal => {
-            this._snackBar.open(error?.errors, literal, { duration: 3000, panelClass: 'errorSnack' })
+          .get(['common.snackBar.error', 'common.snackBar.close'])
+          .subscribe(literals => {
+            this._snackBar.open(message ?? literals['common.snackBar.error'], literals['common.snackBar.close'], { duration: 3000, panelClass: 'errorSnack' })
           });
 
         return throwError(error);

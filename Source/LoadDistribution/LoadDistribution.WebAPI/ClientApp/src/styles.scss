@@ -1,22 +1,24 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.success-snack {
-    background-color: #008000;
-}
+// margins
+$margin: 10px;
 
-// variables
-$spacer: 10px;
-// /variables
+.mr-1 { margin-right: $margin !important; }
+.mr-2 { margin-right: $margin * 2 !important; }
+.mr-3 { margin-right: $margin * 3 !important; }
+.mr-4 { margin-right: $margin * 4 !important; }
+.mr-5 { margin-right: $margin * 5 !important; }
+.mr-6 { margin-right: $margin * 6 !important; }
+// /margins
 
-// spacing
-.mr-1 { margin-right: $spacer !important; }
-.mr-2 { margin-right: $spacer * 2 !important; }
-.mr-3 { margin-right: $spacer * 3 !important; }
-.mr-4 { margin-right: $spacer * 4 !important; }
-.mr-5 { margin-right: $spacer * 5 !important; }
-.mr-6 { margin-right: $spacer * 6 !important; }
-// /spacing
+// widths
+.w-max { width: 100%; }
+// /widths
+
+// mat snackbar
+.success-snack { background-color: #008000; }
+// /mat snackbar
 
 // mat card 
 .title-with-btn {
@@ -33,9 +35,7 @@ $spacer: 10px;
 // /table
 
 // mat drawer
-.mat-drawer-container {
-    height: calc(100vh - 64px);
-}
+.mat-drawer-container { height: calc(100vh - 64px); }
 // /mat drower
 
 // form

@@ -18,6 +18,8 @@ import { ProjectComponent } from './components/project/project/project.component
 import { BaseComponent } from './components/common/base/base.component';
 import { FormActionsComponent } from './components/common/form-actions/form-actions.component';
 import { ProjectAutocompleteComponent } from './components/project/project-autocomplete/project-autocomplete.component';
+import { UniversityListComponent } from './components/university/university-list/university-list.component';
+import { UniversityComponent } from './components/university/university/university.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ProjectAutocompleteComponent } from './components/project/project-autoc
     ProjectComponent,
     BaseComponent,
     FormActionsComponent,
-    ProjectAutocompleteComponent
+    ProjectAutocompleteComponent,
+    UniversityListComponent,
+    UniversityComponent
   ],
   imports: [
     BrowserModule,

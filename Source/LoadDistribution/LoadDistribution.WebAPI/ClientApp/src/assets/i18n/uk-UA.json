@@ -1,6 +1,7 @@
 {
   "common": {
     "snackBar": {
+      "error": "Помилка",
       "close": "Закрити",
       "successfullyInserted": "Успішно додано",
       "successfullyUpdated": "Успішно оновлено",
@@ -33,6 +34,7 @@
     "description": "Опис"
   },
   "university": {
+    "university": "Університет",
     "universities": "Університети",
     "name": "Назва"
   }

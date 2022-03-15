@@ -20,6 +20,8 @@ import { FormActionsComponent } from './components/common/form-actions/form-acti
 import { ProjectAutocompleteComponent } from './components/project/project-autocomplete/project-autocomplete.component';
 import { UniversityListComponent } from './components/university/university-list/university-list.component';
 import { UniversityComponent } from './components/university/university/university.component';
+import { ActivityListComponent } from './components/activity/activity-list/activity-list.component';
+import { ActivityComponent } from './components/activity/activity/activity.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { UniversityComponent } from './components/university/university/universi
     FormActionsComponent,
     ProjectAutocompleteComponent,
     UniversityListComponent,
-    UniversityComponent
+    UniversityComponent,
+    ActivityListComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule,

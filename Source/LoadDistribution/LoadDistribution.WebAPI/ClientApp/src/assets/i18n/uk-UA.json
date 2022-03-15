@@ -37,5 +37,10 @@
     "university": "Університет",
     "universities": "Університети",
     "name": "Назва"
+  },
+  "activity": {
+    "activity": "Активність",
+    "activities": "Активності",
+    "name": "Назва"
   }
 }

@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import UniversityClient from 'src/app/clients/universityClient.client';
+import ActivityClient from 'src/app/clients/activityClient.client';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
-import UniversityDTO from 'src/app/models/dto/universityDTO.model';
+import ActivityDTO from 'src/app/models/dto/activityDTO.model';
 
 @Component({
-  selector: 'app-university',
-  templateUrl: './university.component.html',
-  styleUrls: ['./university.component.scss']
+  selector: 'app-activity',
+  templateUrl: './activity.component.html',
+  styleUrls: ['./activity.component.scss']
 })
-export class UniversityComponent extends CUComponent<UniversityDTO> {
+export class ActivityComponent extends CUComponent<ActivityDTO> {
   constructor(
     private readonly _formBuilder: FormBuilder,
-    universityClient: UniversityClient,
+    activityClient: ActivityClient,
     activatedRoute: ActivatedRoute,
     router: Router
   ) {
-    super(universityClient, activatedRoute, router, '/universities');
+    super(activityClient, activatedRoute, router, '/activities');
   }
 
   protected _initForm(): void {

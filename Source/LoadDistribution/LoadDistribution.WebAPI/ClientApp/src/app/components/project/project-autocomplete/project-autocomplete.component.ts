@@ -15,8 +15,6 @@ export class ProjectAutocompleteComponent implements OnInit {
   projects: ProjectDTO[];
   filteredProjects$: Observable<ProjectDTO[]>;
   projectControl: FormControl = new FormControl();
-
-  // TODO: imporove autocomplete, add ability to clear autocomplete
   constructor(
     private readonly _projectClient: ProjectClient,
     private readonly _projectHandler: ProjectHandler
@@ -63,5 +61,11 @@ export class ProjectAutocompleteComponent implements OnInit {
 
   onOptionSelected(): void {
     this._projectHandler.selected = this.projectControl.value;
+  }
+
+  onClosed(): void {
+    if(!this.projectControl.value) {
+      this._projectHandler.selected = null;
+    }
   }
 }

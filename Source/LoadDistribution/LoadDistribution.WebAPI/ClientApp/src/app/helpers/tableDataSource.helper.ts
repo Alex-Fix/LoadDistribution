@@ -5,6 +5,7 @@ import { catchError, finalize, map, tap } from "rxjs/operators";
 import Client from "../clients/client.client";
 import BaseDTO from "../models/dto/baseDTO.model";
 import Paged from "../models/helpers/paged.model";
+import { ProjectHandler } from "./projectHandler.helper";
 
 export default class TableDataSource<TDTO extends BaseDTO> implements DataSource<TDTO> {
     private readonly _pageSizeOptions: number[] = [10, 15, 20, 50, 100, 200, 500];
@@ -58,5 +59,9 @@ export default class TableDataSource<TDTO extends BaseDTO> implements DataSource
                 ))
             ).subscribe();
         });
+    }
+
+    addProjectHandler(projectHanlder: ProjectHandler): void {
+        projectHanlder.selected$.subscribe(_ => this.loadPage());
     }
 }

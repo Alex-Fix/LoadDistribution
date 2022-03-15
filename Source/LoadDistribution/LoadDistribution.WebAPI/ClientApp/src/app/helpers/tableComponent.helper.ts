@@ -2,25 +2,27 @@ import { AfterViewInit, Component, Inject, OnInit, ViewChild } from "@angular/co
 import { MatPaginator } from "@angular/material/paginator";
 import Client from "../clients/client.client";
 import BaseDTO from "../models/dto/baseDTO.model";
-import CollectionDataSource from "./tableDataSource.helper";
+import { ProjectHandler } from "./projectHandler.helper";
+import TableDataSource from "./tableDataSource.helper";
 
 @Component({ template: '' })
 export default abstract class TableComponent<TDTO extends BaseDTO> implements OnInit, AfterViewInit {
     // table
-  dataSource: CollectionDataSource<TDTO> = new CollectionDataSource<TDTO>(this._client);
+  dataSource: TableDataSource<TDTO> = new TableDataSource<TDTO>(this._client);
   displayedColumns: string[] = ['id', 'created', 'updated', ...this._columns, 'actions'];
 
   // paginator
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  // TODO: add ability to reload page on project change
   constructor(
     private readonly _client: Client<TDTO>,
-    @Inject(String) private readonly _columns: string[]
+    @Inject(String) private readonly _columns: string[],
+    private readonly _projectHandler: ProjectHandler | null = null
   ) { }
 
   ngOnInit(): void {
     this.dataSource.loadPage();
+    this._projectHandler && this.dataSource.addProjectHandler(this._projectHandler);
   }
 
   ngAfterViewInit(): void {

@@ -17,8 +17,7 @@
   },
   "app": {
     "toolbar": {
-      "loadDistribution": "Розподіл навантаження",
-      "lecturers": "Лектори"
+      "loadDistribution": "Розподіл навантаження"
     }
   },
   "base": {
@@ -42,5 +41,12 @@
     "activity": "Активність",
     "activities": "Активності",
     "name": "Назва"
+  },
+  "lecturer": {
+    "lecturer": "Лектор",
+    "lecturers": "Лектори",
+    "firstName": "Ім'я",
+    "middleName": "По батькові",
+    "lastName": "Прізвище"
   }
 }

@@ -1,0 +1,68 @@
+<mat-card>
+    <mat-card-title>
+        <div class="title-with-btn">
+            <a mat-mini-fab color="primary" routerLink="/lecturer" class="mr-2">
+                <mat-icon>add</mat-icon>
+            </a>
+            <span>{{ 'lecturer.lecturers' | translate }}</span>
+        </div>
+    </mat-card-title>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-max">
+             <!-- Id column -->
+             <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>{{ 'base.id' | translate }}</th>
+                <td mat-cell *matCellDef="let lecturer">{{ lecturer.id }}</td>
+            </ng-container>
+
+            <!-- CreatedUtc column -->
+            <ng-container matColumnDef="created">
+                <th mat-header-cell *matHeaderCellDef>{{ 'base.created' | translate }}</th>
+                <td mat-cell *matCellDef="let lecturer">{{ lecturer.created | date: 'short' }}</td>
+            </ng-container>
+
+            <!-- UpdatedUtc column -->
+            <ng-container matColumnDef="updated">
+                <th mat-header-cell *matHeaderCellDef>{{ 'base.updated' | translate }}</th>
+                <td mat-cell *matCellDef="let lecturer">{{ lecturer.updated | date: 'short' }}</td>
+            </ng-container>
+
+            <!-- Last name column -->
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef>{{ 'lecturer.lastName' | translate }}</th>
+                <td mat-cell *matCellDef="let lecturer">{{ lecturer.lastName }}</td>
+            </ng-container>
+
+            <!-- First name column -->
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef>{{ 'lecturer.firstName' | translate }}</th>
+                <td mat-cell *matCellDef="let lecturer">{{ lecturer.firstName }}</td>
+            </ng-container>
+
+            <!-- Middle name column -->
+            <ng-container matColumnDef="middleName">
+                <th mat-header-cell *matHeaderCellDef>{{ 'lecturer.middleName' | translate }}</th>
+                <td mat-cell *matCellDef="let lecturer">{{ lecturer.middleName }}</td>
+            </ng-container>
+            
+            <!-- Actions column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>{{ 'base.actions' | translate }}</th>
+                <td mat-cell *matCellDef="let lecturer" class="self-width-cell">
+                    <button mat-mini-fab color="warn" (click)="onDeleteBtnClick(lecturer.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <span class="mr-1"></span>
+                    <a mat-mini-fab color="primary" [routerLink]="['/lecturer', lecturer.id]">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <!-- Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let lecturer; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator class="mat-elevation-z8"></mat-paginator>
+    </mat-card-content>
+</mat-card>

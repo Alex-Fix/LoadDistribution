@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-title align="center">{{ 'lecturer.lecturer' | translate }}</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="form" class="centred-form">
+            <app-base [base]="base" *ngIf="componentMode == componentModes.edit"></app-base>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'lecturer.lastName' | translate }}</mat-label>
+                    <input matInput formControlName="lastName" required />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'lecturer.firstName' | translate }}</mat-label>
+                    <input matInput formControlName="firstName" required />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'lecturer.middleName' | translate }}</mat-label>
+                    <input matInput formControlName="middleName" required />
+                </mat-form-field>
+            </div>
+            <app-form-actions [component]="this"></app-form-actions>
+        </form>
+    </mat-card-content>
+</mat-card>

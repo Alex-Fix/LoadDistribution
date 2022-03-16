@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
@@ -35,7 +36,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCardModule,
     MatPaginatorModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatBadgeModule
   ]
 })
 export class MaterialModule { }

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivityListComponent } from './components/activity/activity-list/activity-list.component';
 import { ActivityComponent } from './components/activity/activity/activity.component';
+import { DisciplineListComponent } from './components/discipline/discipline-list/discipline-list.component';
+import { DisciplineComponent } from './components/discipline/discipline/discipline.component';
 import { LecturerListComponent } from './components/lecturer/lecturer-list/lecturer-list.component';
 import { LecturerComponent } from './components/lecturer/lecturer/lecturer.component';
 import { ProjectListComponent } from './components/project/project-list/project-list.component';
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'activity', children: [{path: '', component: ActivityComponent}, {path: ':id', component: ActivityComponent}], canActivate: [ProjectRelatedGuard]},
   { path: 'lecturers', component: LecturerListComponent, canActivate: [ProjectRelatedGuard] },
   { path: 'lecturer', children: [{path: '', component: LecturerComponent}, {path: ':id', component: LecturerComponent}], canActivate: [ProjectRelatedGuard]},
+  { path: 'disciplines', component: DisciplineListComponent, canActivate: [ProjectRelatedGuard] },
+  { path: 'discipline', children: [{path: '', component: DisciplineComponent}, {path: ':id', component: DisciplineComponent}], canActivate: [ProjectRelatedGuard]},
   { path: '**', redirectTo: "projects" }
 ];
 

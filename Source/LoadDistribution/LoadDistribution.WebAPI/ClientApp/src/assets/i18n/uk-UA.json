@@ -48,5 +48,56 @@
     "firstName": "Ім'я",
     "middleName": "По батькові",
     "lastName": "Прізвище"
+  },
+  "discipline": {
+    "discipline": "Дисципліна",
+    "disciplines": "Дисципліни",
+    "name": "Назва",
+    "type": "Вид",
+    "term": {
+      "full": "Семестр",
+      "short": "Сем"
+    },
+    "educationLevel": {
+      "full": "Освітній рівень",
+      "short": "ОР"
+    },
+    "educationForm": {
+      "full": "Форма навчання",
+      "short": "ФН"
+    },
+    "planIndex": "Індекс плану",
+    "speciality": "Спеціальність",
+    "groupAbbreviation": {
+      "full": "Абревіатура групи",
+      "short": "АбрГр"
+    },
+    "specialization": "Спеціалізація",
+    "institute": "Інститут",
+    "course": "Курс",
+    "studentCount": {
+      "full": "Кількість студентів",
+      "short": "Студ"
+    },
+    "budgetStudentCount": {
+      "full": "Кількість студентів бюджетників",
+      "short": "Студ Б"
+    },
+    "comercialStudentCount": {
+      "full": "Кількість студентів на комерції",
+      "short": "Студ К"
+    },
+    "groupCount": {
+      "full": "Кількіть груп",
+      "short": "Груп"
+    },
+    "subgroupCount": {
+      "full": "Кількість підгруп",
+      "short": "Підгруп"
+    },
+    "threadCount": {
+      "full": "Кількість потоків",
+      "short": "Потоків"
+    }
   }
 }

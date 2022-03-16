@@ -20,7 +20,6 @@ export class CatchErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      retry(3),
       catchError(error => {
         const message: string | null = typeof error?.error == 'string' ? error.error : null;
 

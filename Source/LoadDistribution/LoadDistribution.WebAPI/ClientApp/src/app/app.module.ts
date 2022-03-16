@@ -24,6 +24,8 @@ import { ActivityListComponent } from './components/activity/activity-list/activ
 import { ActivityComponent } from './components/activity/activity/activity.component';
 import { LecturerComponent } from './components/lecturer/lecturer/lecturer.component';
 import { LecturerListComponent } from './components/lecturer/lecturer-list/lecturer-list.component';
+import { DisciplineComponent } from './components/discipline/discipline/discipline.component';
+import { DisciplineListComponent } from './components/discipline/discipline-list/discipline-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { LecturerListComponent } from './components/lecturer/lecturer-list/lectu
     ActivityListComponent,
     ActivityComponent,
     LecturerComponent,
-    LecturerListComponent
+    LecturerListComponent,
+    DisciplineComponent,
+    DisciplineListComponent
   ],
   imports: [
     BrowserModule,

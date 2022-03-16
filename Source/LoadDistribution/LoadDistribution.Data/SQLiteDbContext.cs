@@ -40,6 +40,8 @@ namespace LoadDistribution.Data
                 .UseSqlite(_dbOptions.ConnectionString)
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging();
+
+            SaveChangesFailed += (_, _) => ChangeTracker.Clear();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

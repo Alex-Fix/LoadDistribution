@@ -13,7 +13,8 @@
       "createAndReturn": "Створити і повернутись",
       "update": "Оновити",
       "updateAndReturn": "Оновити і повернутись"
-    }
+    },
+    "undefined": "Не визначено"
   },
   "app": {
     "toolbar": {
@@ -40,7 +41,8 @@
   "activity": {
     "activity": "Активність",
     "activities": "Активності",
-    "name": "Назва"
+    "name": "Назва",
+    "dependencyType": "Вид залежності"
   },
   "lecturer": {
     "lecturer": "Лектор",
@@ -99,5 +101,14 @@
       "full": "Кількість потоків",
       "short": "Потоків"
     }
+  },
+  "dependencyType": {
+    "absolute": "Абсолютне значення",
+    "studentCount": "Кількість студентів",
+    "budgetStudentCount": "Кількість студентів бюджетників",
+    "comercialStudentCount": "Кількість студентів на комерції",
+    "groupCount": "Кількіть груп",
+    "subgroupCount": "Кількість підгруп",
+    "threadCount": "Кількість потоків"
   }
 }

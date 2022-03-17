@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import Client from "../clients/client.client";
 import BaseDTO from "../models/dto/baseDTO.model";
-import { ComponentMode } from "../models/helpers/componentMode.model";
+import { ComponentMode } from "../models/enums/componentMode.model";
 
 // Create-Update component
 @Injectable()

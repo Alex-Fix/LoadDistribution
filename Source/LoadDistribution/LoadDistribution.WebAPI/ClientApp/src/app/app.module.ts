@@ -26,6 +26,7 @@ import { LecturerComponent } from './components/lecturer/lecturer/lecturer.compo
 import { LecturerListComponent } from './components/lecturer/lecturer-list/lecturer-list.component';
 import { DisciplineComponent } from './components/discipline/discipline/discipline.component';
 import { DisciplineListComponent } from './components/discipline/discipline-list/discipline-list.component';
+import { LocalizablePipe } from './pipes/localizable.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DisciplineListComponent } from './components/discipline/discipline-list
     LecturerComponent,
     LecturerListComponent,
     DisciplineComponent,
-    DisciplineListComponent
+    DisciplineListComponent,
+    LocalizablePipe
   ],
   imports: [
     BrowserModule,

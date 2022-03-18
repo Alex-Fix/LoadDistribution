@@ -12,11 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material/select';
+import { TranslateService } from '@ngx-translate/core';
+import PaginatorI18n from './helpers/paginatorI18n.helper';
 
 @NgModule({
   declarations: [],
@@ -40,6 +42,13 @@ import { MatSelectModule } from '@angular/material/select';
     MatDividerModule,
     MatBadgeModule,
     MatSelectModule
+  ],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      deps: [TranslateService],
+      useFactory: (translate: TranslateService) => new PaginatorI18n(translate)
+    }
   ]
 })
 export class MaterialModule { }

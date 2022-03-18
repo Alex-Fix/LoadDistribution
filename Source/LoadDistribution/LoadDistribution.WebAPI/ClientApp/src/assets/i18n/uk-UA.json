@@ -1,4 +1,5 @@
 {
+  "undefined": "asdf",
   "common": {
     "snackBar": {
       "error": "Помилка",
@@ -13,6 +14,15 @@
       "createAndReturn": "Створити і повернутись",
       "update": "Оновити",
       "updateAndReturn": "Оновити і повернутись"
+    },
+    "paginator": {
+      "itemsPerLabel": "Елементів на сторінку",
+      "nextPageLabel": "Наступна сторінка",
+      "previousPageLabel": "Попередня сторінка",
+      "firstPageLabel": "Перша сторінка",
+      "lastPageLabel": "Остання сторінка",
+      "rangePageLabel1": "0 з {{length}}",
+      "rangePageLabel2": "{{startIndex}} - {{endIndex}} з {{length}}"
     },
     "undefined": "Не визначено"
   },

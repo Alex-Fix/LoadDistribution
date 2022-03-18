@@ -18,4 +18,5 @@ export default class DisciplineDTO extends BaseProjectRelatedDTO {
     groupCount: number;
     subgroupCount: number;
     threadCount: number;
-}
+    universityId: number;
+} 

@@ -38,6 +38,7 @@ namespace LoadDistribution.Data
         {
             optionsBuilder
                 .UseSqlite(_dbOptions.ConnectionString)
+                .UseLazyLoadingProxies()
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging();
 

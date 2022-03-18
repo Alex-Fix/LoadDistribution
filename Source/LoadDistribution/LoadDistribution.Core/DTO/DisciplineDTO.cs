@@ -19,6 +19,6 @@
         public int GroupCount { get; set; }
         public int SubgroupCount { get; set; }
         public int ThreadCount { get; set; }
-        public int UniversityId { get; set; }
+        public UniversityDTO University { get; set; }
     }
 }

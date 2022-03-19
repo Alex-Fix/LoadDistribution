@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline" class="project-select">
+    <mat-label>{{ 'project.project' | translate }}</mat-label>
+    <mat-select [formControl]="projectControl" (selectionChange)="onSelectionChange()" (openedChange)="onOpenedChange($event)" required>
+      <mat-option *ngFor="let project of projects$ | async" [value]="project">
+        {{ project.title }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>

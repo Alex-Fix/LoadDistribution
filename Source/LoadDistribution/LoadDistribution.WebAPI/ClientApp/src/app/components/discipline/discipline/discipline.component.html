@@ -78,9 +78,17 @@
                     <mat-label>{{ 'discipline.subgroupCount.full' | translate }}</mat-label>
                     <input matInput required type="number" formControlName="subgroupCount" />
                 </mat-form-field>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="mr-3">
                     <mat-label>{{ 'discipline.threadCount.full' | translate }}</mat-label>
                     <input matInput required type="number" formControlName="threadCount" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'discipline.university' | translate }}</mat-label>
+                    <mat-select formControlName="university" required [compareWith]="baseComparer">
+                      <mat-option *ngFor="let university of universities$ | async" [value]="university">
+                        {{ university.name }}
+                      </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <app-form-actions [component]="this"></app-form-actions>

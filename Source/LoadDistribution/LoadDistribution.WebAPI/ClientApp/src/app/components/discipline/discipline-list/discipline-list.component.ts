@@ -14,6 +14,6 @@ export class DisciplineListComponent extends TableComponent<DisciplineDTO> {
     disciplineClient: DisciplineClient,
     projectHanlder: ProjectHandler
   ) { 
-    super(disciplineClient, ['term', 'educationLevel', 'educationForm', 'planIndex', 'speciality', 'groupAbbreviation', 'specialization', 'institute', 'course', 'studentCount', 'budgetStudentCount', 'comercialStudentCount', 'groupCount', 'subgroupCount', 'threadCount', 'name', 'type'], projectHanlder);
+    super(disciplineClient, ['term', 'educationLevel', 'educationForm', 'planIndex', 'speciality', 'groupAbbreviation', 'specialization', 'institute', 'course', 'studentCount', 'budgetStudentCount', 'comercialStudentCount', 'groupCount', 'subgroupCount', 'threadCount', 'name', 'type', 'university'], projectHanlder);
   }
 }

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormControlName, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import DisciplineClient from 'src/app/clients/disciplineClient.client';
+import UniversityClient from 'src/app/clients/universityClient.client';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
 import DisciplineDTO from 'src/app/models/dto/disciplineDTO.model';
+import UniversityDTO from 'src/app/models/dto/universityDTO.model';
 
 @Component({
   selector: 'app-discipline',
@@ -11,8 +14,11 @@ import DisciplineDTO from 'src/app/models/dto/disciplineDTO.model';
   styleUrls: ['./discipline.component.scss']
 })
 export class DisciplineComponent extends CUComponent<DisciplineDTO> {
+  universities$: Observable<UniversityDTO[]> = this._universityClient.getAll();
+
   constructor(
     private readonly _formBuilder: FormBuilder,
+    private readonly _universityClient: UniversityClient,
     disciplineClient: DisciplineClient,
     activatedRoute: ActivatedRoute,
     router: Router
@@ -38,7 +44,8 @@ export class DisciplineComponent extends CUComponent<DisciplineDTO> {
       comercialStudentCount: new FormControl(null, [Validators.required]),
       groupCount: new FormControl(null, [Validators.required]),
       subgroupCount: new FormControl(null, [Validators.required]),
-      threadCount: new FormControl(null, [Validators.required])
+      threadCount: new FormControl(null, [Validators.required]),
+      university: new FormControl(null, [Validators.required])
     });
   }
 }

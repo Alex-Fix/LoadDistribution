@@ -110,7 +110,8 @@
     "threadCount": {
       "full": "Кількість потоків",
       "short": "Потоків"
-    }
+    },
+    "university": "Університет"
   },
   "dependencyType": {
     "absolute": "Абсолютне значення",

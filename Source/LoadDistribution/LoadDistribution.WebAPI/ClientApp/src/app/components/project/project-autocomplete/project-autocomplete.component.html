@@ -1,9 +1,0 @@
-<mat-form-field appearance="outline" class="project-autocomplete">
-    <mat-label>{{ 'project.project' | translate }}</mat-label>
-    <input matInput [matAutocomplete]="auto" [formControl]="projectControl" />
-    <mat-autocomplete autoActiveFirstOption  #auto="matAutocomplete" [displayWith]="getTitle" (optionSelected)="onOptionSelected()" (closed)="onClosed()">
-        <mat-option *ngFor="let project of filteredProjects$ | async" [value]="project">
-            {{ project.title }}
-        </mat-option>
-    </mat-autocomplete>
-</mat-form-field>

@@ -1,4 +1,5 @@
 import BaseProjectRelatedDTO from './baseProjectRelatedDTO.model';
+import UniversityDTO from './universityDTO.model';
 
 export default class DisciplineDTO extends BaseProjectRelatedDTO {
     name: string;
@@ -18,5 +19,5 @@ export default class DisciplineDTO extends BaseProjectRelatedDTO {
     groupCount: number;
     subgroupCount: number;
     threadCount: number;
-    universityId: number;
+    university: UniversityDTO
 } 

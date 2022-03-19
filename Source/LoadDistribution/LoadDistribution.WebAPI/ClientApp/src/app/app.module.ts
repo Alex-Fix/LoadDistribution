@@ -17,7 +17,7 @@ import { ProjectListComponent } from './components/project/project-list/project-
 import { ProjectComponent } from './components/project/project/project.component';
 import { BaseComponent } from './components/common/base/base.component';
 import { FormActionsComponent } from './components/common/form-actions/form-actions.component';
-import { ProjectAutocompleteComponent } from './components/project/project-autocomplete/project-autocomplete.component';
+import { ProjectSelectComponent } from './components/project/project-select/project-select.component';
 import { UniversityListComponent } from './components/university/university-list/university-list.component';
 import { UniversityComponent } from './components/university/university/university.component';
 import { ActivityListComponent } from './components/activity/activity-list/activity-list.component';
@@ -35,7 +35,7 @@ import { LocalizablePipe } from './pipes/localizable.pipe';
     ProjectComponent,
     BaseComponent,
     FormActionsComponent,
-    ProjectAutocompleteComponent,
+    ProjectSelectComponent,
     UniversityListComponent,
     UniversityComponent,
     ActivityListComponent,

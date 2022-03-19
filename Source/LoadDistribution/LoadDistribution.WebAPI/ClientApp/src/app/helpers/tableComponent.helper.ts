@@ -21,8 +21,11 @@ export default abstract class TableComponent<TDTO extends BaseDTO> implements On
   ) { }
 
   ngOnInit(): void {
-    this.dataSource.loadPage();
-    this._projectHandler && this.dataSource.addProjectHandler(this._projectHandler);
+    if(this._projectHandler) {
+      this.dataSource.addProjectHandler(this._projectHandler);
+    } else {
+      this.dataSource.loadPage();
+    }
   }
 
   ngAfterViewInit(): void {

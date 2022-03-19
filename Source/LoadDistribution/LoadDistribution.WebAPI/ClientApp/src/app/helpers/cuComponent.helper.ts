@@ -60,4 +60,8 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
             this._router.navigateByUrl(returnUrl ?? this._returnUrl)
         );
     }
+
+    baseComparer(option: BaseDTO, selection: BaseDTO): boolean {
+        return option?.id == selection?.id;
+    }
 }

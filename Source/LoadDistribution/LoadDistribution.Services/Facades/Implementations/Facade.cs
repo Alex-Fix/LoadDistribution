@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LoadDistribution.Core.Domain.Interfaces;  
 using LoadDistribution.Core.DTO.Interfaces;
+using LoadDistribution.Core.Helpers;
 using LoadDistribution.Services.Repositories;
 using System;
 using System.Threading.Tasks;
@@ -31,24 +32,24 @@ namespace LoadDistribution.Services.Facades.Implementations
             return _mapper.Map<TDTO>(entity);
         }
 
-        public async virtual Task<TDTO> Insert(TDTO entity)
+        public async virtual Task<InsertResult> Insert(TDTO entity)
         {
             TEntity dbEntity = _mapper.Map<TEntity>(entity);
-            dbEntity = await _repository.Insert(dbEntity);
-            return _mapper.Map<TDTO>(dbEntity);
+            InsertResult result = await _repository.Insert(dbEntity, excludeNested: true);
+            return result; 
         }
 
-        public async virtual Task<TDTO> Update(TDTO entity)
+        public async virtual Task<bool> Update(TDTO entity)
         {
             TEntity dbEntity = _mapper.Map<TEntity>(entity);
-            dbEntity = await _repository.Update(dbEntity);
-            return _mapper.Map<TDTO>(dbEntity);
+            bool updated = await _repository.Update(dbEntity, excludeNested: true);
+            return updated;
         }
 
-        public async virtual Task<TDTO> Delete(int id)
+        public async virtual Task<bool> Delete(int id)
         {
-            TEntity entity = await _repository.Delete(id);
-            return _mapper.Map<TDTO>(entity);
+            bool deleted = await _repository.Delete(id);
+            return deleted;
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using LoadDistribution.Core.DTO.Interfaces;
+using LoadDistribution.Core.Helpers;
 using LoadDistribution.Services.Facades;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -37,37 +38,37 @@ namespace LoadDistribution.WebAPI.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Post(TDTO entity)
         {
-            TDTO dbEntity = await _facade.Insert(entity);
-            if(dbEntity is null)
+            InsertResult result = await _facade.Insert(entity);
+            if(result.Success)
             {
-                return BadRequest();
+                return Ok(result);
             }
 
-            return Ok(dbEntity);
+            return UnprocessableEntity();
         }
 
         [HttpPut]
         public virtual async Task<IActionResult> Put(TDTO entity)
         {
-            TDTO dbEntity = await _facade.Update(entity);
-            if(dbEntity is null)
+            bool updated = await _facade.Update(entity);
+            if(updated)
             {
-                return BadRequest();
+                return Ok();
             }
 
-            return Ok(dbEntity);
+            return UnprocessableEntity();
         }
 
         [HttpDelete("{id:int}")]
         public virtual async Task<IActionResult> Delete(int id)
         {
-            TDTO entity = await _facade.Delete(id);
-            if(entity is null)
+            bool deleted = await _facade.Delete(id);
+            if (deleted)
             {
-                return BadRequest();
+                return Ok();
             }
 
-            return Ok(entity);
+            return UnprocessableEntity();
         }
         #endregion
     }

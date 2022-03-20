@@ -7,6 +7,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { ProjectHandler } from "../helpers/projectHandler.helper";
 import { tap } from "rxjs/operators";
 import IProjectRelatedDTO from "../models/dto/interfaces/iProjectRelatedDTO.interface";
+import InsertResult from "../models/helpers/insertResult.model";
 
 export default abstract class ProjectRelatedCollectionClient<TDTO extends IProjectRelatedDTO> extends Client<TDTO> {
     constructor(
@@ -19,10 +20,10 @@ export default abstract class ProjectRelatedCollectionClient<TDTO extends IProje
         super(controller, client, snackBar, translateService);
     }
 
-    insert(entity: TDTO): Observable<TDTO> {
+    insert(entity: TDTO): Observable<InsertResult> {
         if(this._projectHandler.selected) {
             entity.projectId = this._projectHandler.selected.id;
-            return this._client.post<TDTO>(this.url, entity).pipe(
+            return this._client.post<InsertResult>(this.url, entity).pipe(
                 tap(() => {
                     this._translateService.get([ 'common.snackBar.successfullyInserted', 'common.snackBar.close' ])
                         .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyInserted'], literals['common.snackBar.close'], { duration: 3000, panelClass: 'success-snack' }));

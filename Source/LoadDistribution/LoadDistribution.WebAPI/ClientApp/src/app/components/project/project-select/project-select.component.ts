@@ -35,10 +35,10 @@ export class ProjectSelectComponent implements OnInit {
 
   private _initSubscriptions(): void {
     merge(
-      this._projectHandler.inserted$,
-      this._projectHandler.updated$,
-      this._projectHandler.deleted$
-    ).subscribe(project => project && this._loadData());
+      this._projectHandler.insertedId$,
+      this._projectHandler.updatedId$,
+      this._projectHandler.deletedId$
+    ).subscribe(id => id && this._loadData());
   }
 
   onSelectionChange(): void {

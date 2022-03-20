@@ -7,6 +7,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ProjectHandler } from '../helpers/projectHandler.helper';
+import InsertResult from '../models/helpers/insertResult.model';
 
 @Injectable({
     providedIn: 'root'
@@ -21,21 +22,21 @@ export default class ProjectClient extends CollectionClient<ProjectDTO> {
         super('project', client, snackBar, translateService);
     }
 
-    insert(entity: ProjectDTO): Observable<ProjectDTO> {
+    insert(entity: ProjectDTO): Observable<InsertResult> {
         return super.insert(entity).pipe(
-            tap(project => this._projectHandler.inserted = project)
+            tap(result => this._projectHandler.insertedId = result.id)
         );
     }
 
-    update(entity: ProjectDTO): Observable<ProjectDTO> {
+    update(entity: ProjectDTO): Observable<void> {
         return super.update(entity).pipe(
-            tap(project => this._projectHandler.updated = project)
+            tap(_ => this._projectHandler.updatedId = entity.id)
         );
     }
 
-    delete(id: number): Observable<ProjectDTO> {
+    delete(id: number): Observable<void> {
         return super.delete(id).pipe(
-            tap(project => this._projectHandler.deleted = project)
+            tap(_ => this._projectHandler.deletedId = id)
         );
     }
 }

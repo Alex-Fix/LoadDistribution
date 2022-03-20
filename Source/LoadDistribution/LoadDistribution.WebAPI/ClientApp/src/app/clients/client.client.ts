@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import IDTO from "../models/dto/interfaces/iDTO.interface";
+import InsertResult from "../models/helpers/insertResult.model";
 import Paged from "../models/helpers/paged.model";
 
 export default abstract class Client<TDTO extends IDTO> {
@@ -23,8 +24,8 @@ export default abstract class Client<TDTO extends IDTO> {
         return this._client.get<TDTO>(this.url + id);
     }
 
-    insert(entity: TDTO): Observable<TDTO> {
-        return this._client.post<TDTO>(this.url, entity).pipe(
+    insert(entity: TDTO): Observable<InsertResult> {
+        return this._client.post<InsertResult>(this.url, entity).pipe(
             tap(() => {
                 this._translateService.get([ 'common.snackBar.successfullyInserted', 'common.snackBar.close' ])
                     .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyInserted'], literals['common.snackBar.close'], { duration: 3000, panelClass: 'success-snack' }));
@@ -32,8 +33,8 @@ export default abstract class Client<TDTO extends IDTO> {
         );
     }
 
-    update(entity: TDTO): Observable<TDTO> {
-        return this._client.put<TDTO>(this.url, entity).pipe(
+    update(entity: TDTO): Observable<void> {
+        return this._client.put<void>(this.url, entity).pipe(
             tap(() => {
                 this._translateService.get([ 'common.snackBar.successfullyUpdated', 'common.snackBar.close' ])
                     .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyUpdated'], literals['common.snackBar.close'], {duration: 3000, panelClass: 'success-snack'}));
@@ -41,8 +42,8 @@ export default abstract class Client<TDTO extends IDTO> {
         );
     }
 
-    delete(id: number): Observable<TDTO> {
-        return this._client.delete<TDTO>(this.url + id).pipe(
+    delete(id: number): Observable<void> {
+        return this._client.delete<void>(this.url + id).pipe(
             tap(() => {
                 this._translateService.get([ 'common.snackBar.successfullyDeleted', 'common.snackBar.close' ])
                     .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyDeleted'], literals['common.snackBar.close'], {duration: 3000, panelClass: 'success-snack' }));

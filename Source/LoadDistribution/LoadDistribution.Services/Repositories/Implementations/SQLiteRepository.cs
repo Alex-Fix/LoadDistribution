@@ -1,5 +1,6 @@
 ﻿using LoadDistribution.Core.Domain.Interfaces;
 using LoadDistribution.Core.Domain.Models;
+using LoadDistribution.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -30,11 +31,11 @@ namespace LoadDistribution.Services.Repositories.Implementations
             return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
         }
 
-        public async virtual Task<TEntity> Insert(TEntity entity)
+        public async virtual Task<InsertResult> Insert(TEntity entity, bool excludeNested = false)
         {
             if(entity is null)
             {
-                return null;
+                return new InsertResult(null, false);
             }
 
             if(entity is ICreateble creatable)
@@ -45,17 +46,20 @@ namespace LoadDistribution.Services.Repositories.Implementations
             {
                 updateble.Updated = DateTimeOffset.UtcNow;
             }
+            if(excludeNested && entity is INavigationCleanable navigationCleanable)
+            {
+                navigationCleanable.CleanNavigationProperties();
+            }
 
             using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
             try
             {
-                EntityEntry<TEntity> entry = await _dbContext.AddAsync(entity);
-                
+                await _dbContext.AddAsync(entity);
                 await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return entry.Entity;
+                return new InsertResult(entity.Id, true);
             }
             catch
             {
@@ -65,28 +69,31 @@ namespace LoadDistribution.Services.Repositories.Implementations
             }
         }
 
-        public async virtual Task<TEntity> Update(TEntity entity)
+        public async virtual Task<bool> Update(TEntity entity, bool excludeNested = false)
         {
             if(entity is null)
             {
-                return null;
+                return false;
             }
 
             if(entity is IUpdateble updateble)
             {
                 updateble.Updated = DateTimeOffset.UtcNow;
             }
+            if (excludeNested && entity is INavigationCleanable navigationCleanable)
+            {
+                navigationCleanable.CleanNavigationProperties();
+            }
 
             using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
             try
             {
-                EntityEntry<TEntity> entry = _dbContext.Update(entity);
-
+                _dbContext.Update(entity);
                 await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return entry.Entity;
+                return true;
             }
             catch
             {
@@ -96,12 +103,12 @@ namespace LoadDistribution.Services.Repositories.Implementations
             }
         }
 
-        public async virtual Task<TEntity> Delete(int id)
+        public async virtual Task<bool> Delete(int id)
         {
             var entity = await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
             if(entity is null)
             {
-                return null;
+                return false;
             }
 
             using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -109,11 +116,10 @@ namespace LoadDistribution.Services.Repositories.Implementations
             try
             {
                 _dbContext.Remove(entity);
-
                 await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return entity;
+                return true;
             }
             catch
             {

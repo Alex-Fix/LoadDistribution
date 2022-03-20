@@ -48,15 +48,12 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
 
     onUpdateButtonClick(): void {
         const updatedEntity = {...this.base, ...this.form.value};
-        this._client.update(updatedEntity).subscribe(entity => {
-            this.base = entity;
-            this.form.patchValue(entity);
-        });
+        this._client.update(updatedEntity).subscribe();
     }
 
     onUpdateAndReturnButtonClick(returnUrl: string | null = null): void {
         const updatedEntity = {...this.base, ...this.form.value};
-        this._client.update(updatedEntity).subscribe(() => 
+        this._client.update(updatedEntity).subscribe(_ => 
             this._router.navigateByUrl(returnUrl ?? this._returnUrl)
         );
     }

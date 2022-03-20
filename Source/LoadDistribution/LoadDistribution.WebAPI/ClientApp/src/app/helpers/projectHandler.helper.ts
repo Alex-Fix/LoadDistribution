@@ -9,9 +9,9 @@ export class ProjectHandler {
     private readonly _storageKey: string = 'ProjectSubject.SelectedProject';
 
     private readonly _selected$: BehaviorSubject<ProjectDTO | null> = new BehaviorSubject<ProjectDTO | null>(this._getSelected());
-    private readonly _inserted$: BehaviorSubject<ProjectDTO | null> = new BehaviorSubject<ProjectDTO | null>(null);
-    private readonly _updated$: BehaviorSubject<ProjectDTO | null> = new BehaviorSubject<ProjectDTO | null>(null);
-    private readonly _deleted$: BehaviorSubject<ProjectDTO | null> = new BehaviorSubject<ProjectDTO | null>(null);
+    private readonly _insertedId$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+    private readonly _updatedId$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+    private readonly _deletedId$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
 
     private _getSelected() : ProjectDTO | null {
         const json: string | null = localStorage.getItem(this._storageKey);
@@ -31,44 +31,41 @@ export class ProjectHandler {
         this._selected$.next(value);
     }
 
-    get inserted$(): Observable<ProjectDTO | null> {
-        return this._inserted$;
+    get insertedId$(): Observable<number | null> {
+        return this._insertedId$;
     }
 
-    get inserted(): ProjectDTO | null {
-        return this._inserted$.value;
+    get insertedId(): number | null {
+        return this._insertedId$.value;
     }
 
-    set inserted(value: ProjectDTO | null) {
-        this._inserted$.next(value);
+    set insertedId(value: number | null) {
+        this._insertedId$.next(value);
     }
 
-    get updated$(): Observable<ProjectDTO | null> {
-        return this._updated$;
+    get updatedId$(): Observable<number | null> {
+        return this._updatedId$;
     }
 
-    get updated(): ProjectDTO | null {
-        return this._updated$.value;
+    get updatedId(): number | null {
+        return this._updatedId$.value;
     }
 
-    set updated(value: ProjectDTO | null) {
-        this._updated$.next(value);
-        if(value?.id == this.selected?.id) {
-            this.selected = value;
-        }
+    set updatedId(value: number | null) {
+        this._updatedId$.next(value);
     }
 
-    get deleted$(): Observable<ProjectDTO | null> {
-        return this._deleted$;
+    get deletedId$(): Observable<number | null> {
+        return this._deletedId$;
     }
 
-    get deleted(): ProjectDTO | null {
-        return this._deleted$.value;
+    get deletedId(): number | null {
+        return this._deletedId$.value;
     }
 
-    set deleted(value: ProjectDTO | null) {
-        this._deleted$.next(value);
-        if(value?.id == this.selected?.id) {
+    set deletedId(value: number | null) {
+        this._deletedId$.next(value);
+        if(value == this.selected?.id) {
             this.selected = null;
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace LoadDistribution.Core.Domain.Models
+﻿namespace LoadDistribution.Core.Domain.Interfaces
 {
     public interface IProjectRelatedEntity : IEntity
     {

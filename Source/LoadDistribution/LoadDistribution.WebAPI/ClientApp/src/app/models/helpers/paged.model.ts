@@ -1,6 +1,6 @@
-import BaseDTO from "../dto/baseDTO.model";
+import IDTO from "../dto/interfaces/iDTO.interface";
 
-export default class Paged<TEntity extends BaseDTO> {
+export default class Paged<TEntity extends IDTO> {
     pageNumber: number;
     pageSize: number;
     pageCount: number;

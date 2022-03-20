@@ -27,6 +27,8 @@ import { LecturerListComponent } from './components/lecturer/lecturer-list/lectu
 import { DisciplineComponent } from './components/discipline/discipline/discipline.component';
 import { DisciplineListComponent } from './components/discipline/discipline-list/discipline-list.component';
 import { LocalizablePipe } from './pipes/localizable.pipe';
+import { LogListComponent } from './components/log/log-list/log-list.component';
+import { DialogComponent } from './components/common/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { LocalizablePipe } from './pipes/localizable.pipe';
     LecturerListComponent,
     DisciplineComponent,
     DisciplineListComponent,
-    LocalizablePipe
+    LocalizablePipe,
+    LogListComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

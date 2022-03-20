@@ -3,11 +3,11 @@ import { MatPaginator } from "@angular/material/paginator";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { catchError, finalize, map, tap } from "rxjs/operators";
 import Client from "../clients/client.client";
-import BaseDTO from "../models/dto/baseDTO.model";
+import IDTO from "../models/dto/interfaces/iDTO.interface";
 import Paged from "../models/helpers/paged.model";
 import { ProjectHandler } from "./projectHandler.helper";
 
-export default class TableDataSource<TDTO extends BaseDTO> implements DataSource<TDTO> {
+export default class TableDataSource<TDTO extends IDTO> implements DataSource<TDTO> {
     private readonly _pageSizeOptions: number[] = [10, 15, 20, 50, 100, 200, 500];
     private readonly _defaultPaged: Paged<TDTO> = { list: [], pageCount: 0, totalCount: 0, pageSize: 0, pageNumber: 0 };
     private readonly _pageSubject: BehaviorSubject<Paged<TDTO>> = new BehaviorSubject<Paged<TDTO>>(this._defaultPaged);

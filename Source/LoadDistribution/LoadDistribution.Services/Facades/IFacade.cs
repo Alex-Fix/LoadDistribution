@@ -1,7 +1,4 @@
-﻿using LoadDistribution.Core.Domain.Models;
-using LoadDistribution.Core.DTO;
-using LoadDistribution.Core.Helpers;
-using System.Collections.Generic;
+﻿using LoadDistribution.Core.DTO.Interfaces;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Facades

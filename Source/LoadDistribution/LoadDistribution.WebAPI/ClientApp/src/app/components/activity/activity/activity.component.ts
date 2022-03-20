@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import ActivityClient from 'src/app/clients/activityClient.client';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
-import ActivityDTO from 'src/app/models/dto/activityDTO.model';
+import ActivityDTO from 'src/app/models/dto/models/activityDTO.model';
 import { DependencyType } from 'src/app/models/enums/dependencyType.enum';
 import Localizable from 'src/app/models/helpers/localizable.model';
 import EnumService from 'src/app/services/enum.service';

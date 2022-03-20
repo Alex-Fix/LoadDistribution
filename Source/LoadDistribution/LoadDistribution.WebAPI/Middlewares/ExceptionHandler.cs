@@ -10,13 +10,13 @@ namespace LoadDistribution.WebAPI.Middlewares
 {
     public class ExceptionHandler
     {
-        #region Private Fields
+        #region Fields
         private readonly RequestDelegate _next;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<ExceptionHandler> _logger;
         #endregion
 
-        #region Constructor
+        #region Constructors
         public ExceptionHandler(
             RequestDelegate next,
             IWebHostEnvironment webHostEnvironment,
@@ -28,7 +28,7 @@ namespace LoadDistribution.WebAPI.Middlewares
         }
         #endregion
 
-        #region Public Methods
+        #region Methods
         public async Task InvokeAsync(HttpContext context, ILoggerService loggerService)
         {
             try

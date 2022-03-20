@@ -1,6 +1,7 @@
-﻿using System;
+﻿using LoadDistribution.Core.DTO.Interfaces;
+using System;
 
-namespace LoadDistribution.Core.DTO
+namespace LoadDistribution.Core.DTO.Models
 {
     public abstract class BaseDTO : IDTO
     {

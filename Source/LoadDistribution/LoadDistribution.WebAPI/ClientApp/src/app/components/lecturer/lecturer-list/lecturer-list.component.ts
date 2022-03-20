@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import LecturerClient from 'src/app/clients/lecturerClient.client';
 import { ProjectHandler } from 'src/app/helpers/projectHandler.helper';
 import TableComponent from 'src/app/helpers/tableComponent.helper';
-import LecturerDTO from 'src/app/models/dto/lecturerDTO.model';
+import LecturerDTO from 'src/app/models/dto/models/lecturerDTO.model';
 
 @Component({
   selector: 'app-lecturer-list',

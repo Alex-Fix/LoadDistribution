@@ -1,4 +1,4 @@
-﻿using LoadDistribution.Core.DTO;
+﻿using LoadDistribution.Core.DTO.Interfaces;
 using LoadDistribution.Core.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,5 +1,4 @@
 using LoadDistribution.Core.AutoMapperProfiles;
-using LoadDistribution.Core.Domain;
 using LoadDistribution.Core.Options;
 using LoadDistribution.Data;
 using LoadDistribution.Services.Facades;
@@ -18,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoadDistribution.WebAPI
 {
@@ -59,6 +58,10 @@ namespace LoadDistribution.WebAPI
             services.AddScoped<ILecturerFacade, LecturerFacade>();
             services.AddScoped<IProjectFacade, ProjectFacade>();
             services.AddScoped<IUniversityFacade, UniversityFacade>();
+            services.AddScoped<IDisciplineActivityMapFacade, DisciplineActivityMapFacade>();
+            services.AddScoped<ILecturerDisciplineActivityMapFacade, LecturerDisciplineActivityMapFacade>();
+            services.AddScoped<ILogFacade, LogFacade>();
+            services.AddScoped<IUniversityLecturerMapFacade, UniversityLecturerMapFacade>();
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddSpaStaticFiles(cfg =>
@@ -70,6 +73,7 @@ namespace LoadDistribution.WebAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<MigrationMiddleware>();
             app.UseMiddleware<ExceptionHandler>();
 
             app.UseHsts();

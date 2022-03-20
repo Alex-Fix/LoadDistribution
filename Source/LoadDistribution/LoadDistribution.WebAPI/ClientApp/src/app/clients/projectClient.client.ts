@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import ProjectDTO from "../models/dto/projectDTO";
+import ProjectDTO from "../models/dto/models/projectDTO.model";
 import CollectionClient from './collectionClient.client';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";

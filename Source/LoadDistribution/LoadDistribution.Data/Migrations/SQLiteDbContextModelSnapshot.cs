@@ -163,7 +163,8 @@ namespace LoadDistribution.Data.Migrations
 
                     b.HasIndex("DisciplineId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectId", "DisciplineId", "ActivityId")
+                        .IsUnique();
 
                     b.ToTable("DisciplineActivityMaps");
                 });
@@ -235,7 +236,8 @@ namespace LoadDistribution.Data.Migrations
 
                     b.HasIndex("LecturerId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectId", "LecturerId", "DisciplineActivityMapId")
+                        .IsUnique();
 
                     b.ToTable("LecturerDisciplineActivityMaps");
                 });
@@ -348,9 +350,10 @@ namespace LoadDistribution.Data.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.HasIndex("ProjectId");
-
                     b.HasIndex("UniversityId");
+
+                    b.HasIndex("ProjectId", "UniversityId", "LectureId")
+                        .IsUnique();
 
                     b.ToTable("UniversityLecturerMaps");
                 });

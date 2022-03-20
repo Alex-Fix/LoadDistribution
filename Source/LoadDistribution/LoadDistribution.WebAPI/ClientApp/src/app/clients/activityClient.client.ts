@@ -1,4 +1,4 @@
-import ActivityDTO from "../models/dto/activityDTO.model";
+import ActivityDTO from "../models/dto/models/activityDTO.model";
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import ProjectRelatedCollectionClient from "./projectRelatedCollectionClient.client";

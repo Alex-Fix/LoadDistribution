@@ -1,19 +1,13 @@
-﻿using LoadDistribution.Core.DTO;
+﻿using LoadDistribution.Core.DTO.Models;
 using LoadDistribution.Services.Facades;
-using System;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
     public class DisciplineController : ProjectRelatedCollectionController<DisciplineDTO>
     {
-        #region Fields
-        private readonly IDisciplineFacade _disciplineFacade;
-        #endregion
-
         #region Constructors
         public DisciplineController(IDisciplineFacade disciplineFacade) : base(disciplineFacade)
         {
-            _disciplineFacade = disciplineFacade ?? throw new ArgumentNullException(nameof(disciplineFacade));
         }
         #endregion
     }

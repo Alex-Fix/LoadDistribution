@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import ActivityClient from 'src/app/clients/activityClient.client';
 import { ProjectHandler } from 'src/app/helpers/projectHandler.helper';
 import TableComponent from 'src/app/helpers/tableComponent.helper';
-import ActivityDTO from 'src/app/models/dto/activityDTO.model';
+import ActivityDTO from 'src/app/models/dto/models/activityDTO.model';
 import { DependencyType } from 'src/app/models/enums/dependencyType.enum';
 import Localizable from 'src/app/models/helpers/localizable.model';
 import EnumService from 'src/app/services/enum.service';

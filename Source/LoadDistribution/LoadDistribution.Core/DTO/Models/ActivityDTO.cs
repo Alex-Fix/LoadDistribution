@@ -1,6 +1,6 @@
 ﻿using LoadDistribution.Core.Domain.Enums;
 
-namespace LoadDistribution.Core.DTO
+namespace LoadDistribution.Core.DTO.Models
 {
     public class ActivityDTO : BaseProjectRelatedDTO
     {

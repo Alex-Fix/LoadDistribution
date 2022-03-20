@@ -4,7 +4,7 @@ import { merge, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import ProjectClient from 'src/app/clients/projectClient.client';
 import { ProjectHandler } from 'src/app/helpers/projectHandler.helper';
-import ProjectDTO from 'src/app/models/dto/projectDTO';
+import ProjectDTO from 'src/app/models/dto/models/projectDTO.model';
 
 @Component({
   selector: 'app-project-select',

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LoadDistribution.Core.Domain.Models;
-using LoadDistribution.Core.DTO;
+using LoadDistribution.Core.DTO.Models;
 
 namespace LoadDistribution.Core.AutoMapperProfiles
 {
@@ -13,6 +13,10 @@ namespace LoadDistribution.Core.AutoMapperProfiles
             CreateMap<Lecturer, LecturerDTO>().ReverseMap();
             CreateMap<Project, ProjectDTO>().ReverseMap();
             CreateMap<University, UniversityDTO>().ReverseMap();
+            CreateMap<DisciplineActivityMap, DisciplineActivityMapDTO>().ReverseMap();
+            CreateMap<LecturerDisciplineActivityMap, LecturerDisciplineActivityMapDTO>().ReverseMap();
+            CreateMap<Log, LogDTO>().ReverseMap();
+            CreateMap<UniversityLecturerMap, UniversityLecturerMapDTO>().ReverseMap();
         }
     }
 }

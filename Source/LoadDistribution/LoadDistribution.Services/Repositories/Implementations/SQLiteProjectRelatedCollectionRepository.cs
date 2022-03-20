@@ -1,4 +1,4 @@
-﻿using LoadDistribution.Core.Domain.Models;
+﻿using LoadDistribution.Core.Domain.Interfaces;
 using LoadDistribution.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

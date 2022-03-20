@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import Client from "../clients/client.client";
-import BaseDTO from "../models/dto/baseDTO.model";
+import BaseDTO from "../models/dto/models/baseDTO.model";
 import { ProjectHandler } from "./projectHandler.helper";
 import TableDataSource from "./tableDataSource.helper";
 

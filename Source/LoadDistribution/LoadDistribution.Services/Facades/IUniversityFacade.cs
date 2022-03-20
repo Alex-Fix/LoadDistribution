@@ -1,4 +1,4 @@
-﻿using LoadDistribution.Core.DTO;
+﻿using LoadDistribution.Core.DTO.Models;
 
 namespace LoadDistribution.Services.Facades
 {

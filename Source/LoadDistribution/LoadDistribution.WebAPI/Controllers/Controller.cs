@@ -1,9 +1,7 @@
-﻿using LoadDistribution.Core.DTO;
-using LoadDistribution.Core.Helpers;
+﻿using LoadDistribution.Core.DTO.Interfaces;
 using LoadDistribution.Services.Facades;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.WebAPI.Controllers
@@ -19,7 +17,7 @@ namespace LoadDistribution.WebAPI.Controllers
         #region Constructors
         public Controller(IFacade<TDTO> facade)
         {
-            _facade = facade ?? throw new ArgumentNullException(nameof(TDTO));
+            _facade = facade ?? throw new ArgumentNullException(nameof(facade));
         }
         #endregion
 

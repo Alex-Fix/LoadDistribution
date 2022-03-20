@@ -1,4 +1,4 @@
-import DisciplineDTO from "../models/dto/disciplineDTO.model";
+import DisciplineDTO from "../models/dto/models/disciplineDTO.model";
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import ProjectRelatedCollectionClient from "./projectRelatedCollectionClient.client";

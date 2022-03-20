@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import LecturerClient from 'src/app/clients/lecturerClient.client';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
-import LecturerDTO from 'src/app/models/dto/lecturerDTO.model';
+import LecturerDTO from 'src/app/models/dto/models/lecturerDTO.model';
 
 @Component({
   selector: 'app-lecturer',

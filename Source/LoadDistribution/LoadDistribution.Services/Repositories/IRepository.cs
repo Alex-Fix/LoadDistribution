@@ -1,6 +1,4 @@
-﻿using LoadDistribution.Core.Domain.Models;
-using LoadDistribution.Core.Helpers;
-using System.Collections.Generic;
+﻿using LoadDistribution.Core.Domain.Interfaces;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories

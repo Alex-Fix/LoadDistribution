@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import DisciplineClient from 'src/app/clients/disciplineClient.client';
 import { ProjectHandler } from 'src/app/helpers/projectHandler.helper';
 import TableComponent from 'src/app/helpers/tableComponent.helper';
-import DisciplineDTO from 'src/app/models/dto/disciplineDTO.model';
+import DisciplineDTO from 'src/app/models/dto/models/disciplineDTO.model';
 
 @Component({
   selector: 'app-discipline-list',

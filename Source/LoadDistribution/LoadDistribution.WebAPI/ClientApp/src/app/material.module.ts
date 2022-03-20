@@ -17,6 +17,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { TranslateService } from '@ngx-translate/core';
 import PaginatorI18n from './helpers/paginatorI18n.helper';
 
@@ -41,7 +43,8 @@ import PaginatorI18n from './helpers/paginatorI18n.helper';
     MatListModule,
     MatDividerModule,
     MatBadgeModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [
     {

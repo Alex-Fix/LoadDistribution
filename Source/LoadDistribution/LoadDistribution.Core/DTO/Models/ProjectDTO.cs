@@ -1,4 +1,4 @@
-﻿namespace LoadDistribution.Core.DTO
+﻿namespace LoadDistribution.Core.DTO.Models
 {
     public class ProjectDTO : BaseDTO
     {

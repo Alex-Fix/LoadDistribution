@@ -1,4 +1,4 @@
-﻿using LoadDistribution.Core.DTO;
+﻿using LoadDistribution.Core.DTO.Interfaces;
 using LoadDistribution.Core.Helpers;
 using LoadDistribution.Services.Facades;
 using Microsoft.AspNetCore.Mvc;

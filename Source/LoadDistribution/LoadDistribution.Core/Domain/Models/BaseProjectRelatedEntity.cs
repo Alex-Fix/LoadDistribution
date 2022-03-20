@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoadDistribution.Core.Domain.Interfaces;
+using System;
 
 namespace LoadDistribution.Core.Domain.Models
 {

@@ -15,13 +15,13 @@
                 <td mat-cell *matCellDef="let discipline">{{ discipline.id }}</td>
             </ng-container>
 
-            <!-- CreatedUtc column -->
+            <!-- Created column -->
             <ng-container matColumnDef="created">
                 <th mat-header-cell *matHeaderCellDef>{{ 'base.created' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.created | date: 'short' }}</td>
             </ng-container>
 
-            <!-- UpdatedUtc column -->
+            <!-- Updated column -->
             <ng-container matColumnDef="updated">
                 <th mat-header-cell *matHeaderCellDef>{{ 'base.updated' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.updated | date: 'short' }}</td>

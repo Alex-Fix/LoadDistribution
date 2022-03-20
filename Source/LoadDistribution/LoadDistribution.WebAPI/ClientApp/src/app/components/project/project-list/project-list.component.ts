@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import ProjectClient from 'src/app/clients/projectClient.client';
-import ProjectDTO from 'src/app/models/dto/projectDTO';
+import ProjectDTO from 'src/app/models/dto/models/projectDTO.model';
 import TableComponent from 'src/app/helpers/tableComponent.helper';
 
 @Component({

@@ -1,5 +1,5 @@
-﻿using LoadDistribution.Core.Domain.Models;
-using LoadDistribution.Core.Helpers;
+﻿using LoadDistribution.Core.Domain.Interfaces;
+using LoadDistribution.Core.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -37,15 +37,32 @@ namespace LoadDistribution.Services.Repositories.Implementations
                 return null;
             }
 
-            if(entity is BaseEntity baseEntity)
+            if(entity is ICreateble creatable)
             {
-                baseEntity.Created = DateTimeOffset.UtcNow;
-                baseEntity.Updated = DateTimeOffset.UtcNow;
+                creatable.Created = DateTimeOffset.UtcNow;
+            }
+            if(entity is IUpdateble updateble)
+            {
+                updateble.Updated = DateTimeOffset.UtcNow;
             }
 
-            EntityEntry<TEntity> entry = await _dbContext.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
-            return entry.Entity;
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+            try
+            {
+                EntityEntry<TEntity> entry = await _dbContext.AddAsync(entity);
+                
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return entry.Entity;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                _dbContext.ChangeTracker.Clear();
+                throw;
+            }
         }
 
         public async virtual Task<TEntity> Update(TEntity entity)
@@ -55,14 +72,28 @@ namespace LoadDistribution.Services.Repositories.Implementations
                 return null;
             }
 
-            if (entity is BaseEntity baseEntity)
+            if(entity is IUpdateble updateble)
             {
-                baseEntity.Updated = DateTimeOffset.UtcNow;
+                updateble.Updated = DateTimeOffset.UtcNow;
             }
 
-            EntityEntry<TEntity> entry = _dbContext.Update(entity);
-            await _dbContext.SaveChangesAsync();
-            return entry.Entity;
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+            try
+            {
+                EntityEntry<TEntity> entry = _dbContext.Update(entity);
+
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return entry.Entity;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                _dbContext.ChangeTracker.Clear();
+                throw;
+            }
         }
 
         public async virtual Task<TEntity> Delete(int id)
@@ -73,17 +104,30 @@ namespace LoadDistribution.Services.Repositories.Implementations
                 return null;
             }
 
-            _dbContext.Remove(entity);
-            await _dbContext.SaveChangesAsync();
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
-            return entity;
+            try
+            {
+                _dbContext.Remove(entity);
+
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return entity;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                _dbContext.ChangeTracker.Clear();
+                throw;
+            }
         }
 
         protected IQueryable<TEntity> Sort(IQueryable<TEntity> query)
         {
-            if(query is IQueryable<BaseEntity>)
+            if(query is IQueryable<ICreateble>)
             {
-                return query.OrderByDescending(e => (e as BaseEntity).Created);
+                return query.OrderByDescending(e => (e as ICreateble).Created);
             }
 
             return query;

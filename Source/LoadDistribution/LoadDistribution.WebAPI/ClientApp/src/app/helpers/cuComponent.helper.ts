@@ -2,8 +2,8 @@ import { Inject, Injectable, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import Client from "../clients/client.client";
-import BaseDTO from "../models/dto/baseDTO.model";
-import { ComponentMode } from "../models/enums/componentMode.model";
+import BaseDTO from "../models/dto/models/baseDTO.model";
+import { ComponentMode } from "../models/enums/componentMode.enum";
 
 // Create-Update component
 @Injectable()

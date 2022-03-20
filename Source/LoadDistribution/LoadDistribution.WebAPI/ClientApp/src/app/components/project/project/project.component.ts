@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import ProjectClient from 'src/app/clients/projectClient.client';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
-import ProjectDTO from 'src/app/models/dto/projectDTO';
+import ProjectDTO from 'src/app/models/dto/models/projectDTO.model';
 
 @Component({
   selector: 'app-project',

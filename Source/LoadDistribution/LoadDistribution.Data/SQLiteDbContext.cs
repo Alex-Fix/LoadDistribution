@@ -41,8 +41,6 @@ namespace LoadDistribution.Data
                 .UseLazyLoadingProxies()
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging();
-
-            SaveChangesFailed += (_, _) => ChangeTracker.Clear();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import DisciplineClient from 'src/app/clients/disciplineClient.client';
 import UniversityClient from 'src/app/clients/universityClient.client';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
-import DisciplineDTO from 'src/app/models/dto/disciplineDTO.model';
-import UniversityDTO from 'src/app/models/dto/universityDTO.model';
+import DisciplineDTO from 'src/app/models/dto/models/disciplineDTO.model';
+import UniversityDTO from 'src/app/models/dto/models/universityDTO.model';
 
 @Component({
   selector: 'app-discipline',

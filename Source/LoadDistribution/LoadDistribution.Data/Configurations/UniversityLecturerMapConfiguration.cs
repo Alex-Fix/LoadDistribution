@@ -15,6 +15,8 @@ namespace LoadDistribution.Data.Configurations
             builder.Property(p => p.Created).HasConversion(new DateTimeOffsetToBinaryConverter());
             builder.Property(p => p.Updated).HasConversion(new DateTimeOffsetToBinaryConverter());
 
+            builder.HasIndex(p => new { p.ProjectId, p.UniversityId, p.LectureId }).IsUnique();
+
             builder
                 .HasOne(p => p.Project)
                 .WithMany(p => p.UniversityLecturerMaps)

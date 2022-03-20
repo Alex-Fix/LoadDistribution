@@ -24,6 +24,9 @@
       "rangePageLabel1": "0 з {{length}}",
       "rangePageLabel2": "{{startIndex}} - {{endIndex}} з {{length}}"
     },
+    "dialog": {
+      "close": "Закрити"
+    },
     "undefined": "Не визначено"
   },
   "app": {
@@ -121,5 +124,18 @@
     "groupCount": "Кількіть груп",
     "subgroupCount": "Кількість підгруп",
     "threadCount": "Кількість потоків"
+  },
+  "log": {
+    "logs": "Логи",
+    "id": "Ід",
+    "created": "Створено",
+    "message": "Повідомлення",
+    "details": "Деталі",
+    "type": "Тип",
+    "exceptionType": "Вид виключення"
+  },
+  "logType": {
+    "undefined": "Не визначено",
+    "exception": "Виключення"
   }
 }

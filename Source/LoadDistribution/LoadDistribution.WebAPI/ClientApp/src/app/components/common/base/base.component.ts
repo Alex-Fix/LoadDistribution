@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import BaseDTO from 'src/app/models/dto/baseDTO.model';
+import BaseDTO from 'src/app/models/dto/models/baseDTO.model';
 
 @Component({
   selector: 'app-base',

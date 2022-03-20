@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using LoadDistribution.Core.Domain.Models;
-using LoadDistribution.Core.DTO;
-using LoadDistribution.Core.Helpers;
+using LoadDistribution.Core.Domain.Interfaces;  
+using LoadDistribution.Core.DTO.Interfaces;
 using LoadDistribution.Services.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Facades.Implementations

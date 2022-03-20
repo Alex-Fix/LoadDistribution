@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
-import BaseDTO from 'src/app/models/dto/baseDTO.model';
+import BaseDTO from 'src/app/models/dto/models/baseDTO.model';
 
 @Component({
   selector: 'app-form-actions',

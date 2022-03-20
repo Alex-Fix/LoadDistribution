@@ -1,14 +1,14 @@
 import Client from "./client.client";
 import { HttpClient } from "@angular/common/http";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import Paged from "../models/helpers/paged.model";
-import BaseProjectRelatedDTO from "../models/dto/baseProjectRelatedDTO.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
 import { ProjectHandler } from "../helpers/projectHandler.helper";
 import { tap } from "rxjs/operators";
+import IProjectRelatedDTO from "../models/dto/interfaces/iProjectRelatedDTO.interface";
 
-export default abstract class ProjectRelatedCollectionClient<TDTO extends BaseProjectRelatedDTO> extends Client<TDTO> {
+export default abstract class ProjectRelatedCollectionClient<TDTO extends IProjectRelatedDTO> extends Client<TDTO> {
     constructor(
         private readonly _projectHandler: ProjectHandler,
         controller: string,

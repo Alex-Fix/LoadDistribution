@@ -12,7 +12,6 @@ namespace LoadDistribution.Core.Domain.Models
         // navigation properties
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Discipline> Disciplines { get; set; }
-        public virtual ICollection<DisciplineActivityMap> DisciplineActivityMaps { get; set; }
         public virtual ICollection<Lecturer> Lecturers { get; set; }
         public virtual ICollection<LecturerDisciplineActivityMap> LecturerDisciplineActivityMaps { get; set; }
         public virtual ICollection<University> Universities { get; set; }

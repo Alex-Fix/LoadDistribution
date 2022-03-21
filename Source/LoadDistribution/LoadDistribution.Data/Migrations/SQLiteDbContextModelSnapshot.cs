@@ -136,39 +136,6 @@ namespace LoadDistribution.Data.Migrations
                     b.ToTable("Disciplines");
                 });
 
-            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("Created")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DisciplineId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("Updated")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("DisciplineId");
-
-                    b.HasIndex("ProjectId", "DisciplineId", "ActivityId")
-                        .IsUnique();
-
-                    b.ToTable("DisciplineActivityMaps");
-                });
-
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Lecturer", b =>
                 {
                     b.Property<int>("Id")
@@ -212,10 +179,13 @@ namespace LoadDistribution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long>("Created")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DisciplineActivityMapId")
+                    b.Property<int>("DisciplineId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LecturerId")
@@ -232,11 +202,13 @@ namespace LoadDistribution.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DisciplineActivityMapId");
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("DisciplineId");
 
                     b.HasIndex("LecturerId");
 
-                    b.HasIndex("ProjectId", "LecturerId", "DisciplineActivityMapId")
+                    b.HasIndex("ProjectId", "LecturerId", "DisciplineId", "ActivityId")
                         .IsUnique();
 
                     b.ToTable("LecturerDisciplineActivityMaps");
@@ -334,7 +306,7 @@ namespace LoadDistribution.Data.Migrations
                     b.Property<long>("Created")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("LectureId")
+                    b.Property<int>("LecturerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ProjectId")
@@ -348,11 +320,11 @@ namespace LoadDistribution.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LectureId");
+                    b.HasIndex("LecturerId");
 
                     b.HasIndex("UniversityId");
 
-                    b.HasIndex("ProjectId", "UniversityId", "LectureId")
+                    b.HasIndex("ProjectId", "UniversityId", "LecturerId")
                         .IsUnique();
 
                     b.ToTable("UniversityLecturerMaps");
@@ -388,33 +360,6 @@ namespace LoadDistribution.Data.Migrations
                     b.Navigation("University");
                 });
 
-            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", b =>
-                {
-                    b.HasOne("LoadDistribution.Core.Domain.Models.Activity", "Activity")
-                        .WithMany("DisciplineActivityMaps")
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LoadDistribution.Core.Domain.Models.Discipline", "Discipline")
-                        .WithMany("DisciplineActivityMaps")
-                        .HasForeignKey("DisciplineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
-                        .WithMany("DisciplineActivityMaps")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Discipline");
-
-                    b.Navigation("Project");
-                });
-
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Lecturer", b =>
                 {
                     b.HasOne("LoadDistribution.Core.Domain.Models.Project", "Project")
@@ -428,9 +373,15 @@ namespace LoadDistribution.Data.Migrations
 
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.LecturerDisciplineActivityMap", b =>
                 {
-                    b.HasOne("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", "DisciplineActivityMap")
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Activity", "Activity")
                         .WithMany("LecturerDisciplineActivityMaps")
-                        .HasForeignKey("DisciplineActivityMapId")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LoadDistribution.Core.Domain.Models.Discipline", "Discipline")
+                        .WithMany("LecturerDisciplineActivityMaps")
+                        .HasForeignKey("DisciplineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -446,7 +397,9 @@ namespace LoadDistribution.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DisciplineActivityMap");
+                    b.Navigation("Activity");
+
+                    b.Navigation("Discipline");
 
                     b.Navigation("Lecturer");
 
@@ -468,7 +421,7 @@ namespace LoadDistribution.Data.Migrations
                 {
                     b.HasOne("LoadDistribution.Core.Domain.Models.Lecturer", "Lecturer")
                         .WithMany("UniversityLectureMaps")
-                        .HasForeignKey("LectureId")
+                        .HasForeignKey("LecturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -493,15 +446,10 @@ namespace LoadDistribution.Data.Migrations
 
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Activity", b =>
                 {
-                    b.Navigation("DisciplineActivityMaps");
+                    b.Navigation("LecturerDisciplineActivityMaps");
                 });
 
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Discipline", b =>
-                {
-                    b.Navigation("DisciplineActivityMaps");
-                });
-
-            modelBuilder.Entity("LoadDistribution.Core.Domain.Models.DisciplineActivityMap", b =>
                 {
                     b.Navigation("LecturerDisciplineActivityMaps");
                 });
@@ -516,8 +464,6 @@ namespace LoadDistribution.Data.Migrations
             modelBuilder.Entity("LoadDistribution.Core.Domain.Models.Project", b =>
                 {
                     b.Navigation("Activities");
-
-                    b.Navigation("DisciplineActivityMaps");
 
                     b.Navigation("Disciplines");
 

@@ -42,7 +42,6 @@ namespace LoadDistribution.WebAPI
             services.AddDbContext<SQLiteDbContext>();
 
             services.AddScoped<IActivityRepository, SQLiteActivityRepository>();
-            services.AddScoped<IDisciplineActivityMapRepository, SQLiteDisciplineActivityMapRepository>();
             services.AddScoped<IDisciplineRepository, SQLiteDisciplineRepository>();
             services.AddScoped<ILecturerDisciplineActivityMapRepository, SQLiteLecturerDisciplineActivityMapRepository>();
             services.AddScoped<ILecturerRepository, SQLiteLecturerRepository>();
@@ -58,7 +57,6 @@ namespace LoadDistribution.WebAPI
             services.AddScoped<ILecturerFacade, LecturerFacade>();
             services.AddScoped<IProjectFacade, ProjectFacade>();
             services.AddScoped<IUniversityFacade, UniversityFacade>();
-            services.AddScoped<IDisciplineActivityMapFacade, DisciplineActivityMapFacade>();
             services.AddScoped<ILecturerDisciplineActivityMapFacade, LecturerDisciplineActivityMapFacade>();
             services.AddScoped<ILogFacade, LogFacade>();
             services.AddScoped<IUniversityLecturerMapFacade, UniversityLecturerMapFacade>();

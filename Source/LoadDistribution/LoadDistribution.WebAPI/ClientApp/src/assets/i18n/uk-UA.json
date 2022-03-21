@@ -114,7 +114,9 @@
       "full": "Кількість потоків",
       "short": "Потоків"
     },
-    "university": "Університет"
+    "university": "Університет",
+    "universityId": "Ід університету",
+    "universityName": "Назва університету"
   },
   "dependencyType": {
     "absolute": "Абсолютне значення",
@@ -137,5 +139,31 @@
   "logType": {
     "undefined": "Не визначено",
     "exception": "Виключення"
+  },
+  "lecturerDisciplineActivityMap": {
+    "lecturerDisciplineActivityMap": "Лектор - дисципліна - активність",
+    "lecturerDisciplineActivityMaps": "Лектори - дисципліни - активності",
+    "lecturer": "Лектор",
+    "lecturerId": "Ід лектора",
+    "lecturerLastName": "Прізвище лектора",
+    "lecturerFirstName": "Ім'я лектора",
+    "discipline": "Дисципліна",
+    "disciplineId": "Ід дисципліни",
+    "disciplineName": "Назва дисципліни",
+    "activity": "Активність",
+    "activityId": "Ід активності",
+    "activityName": "Назва активності",
+    "rate": "Відсоток"
+  },
+  "universityLecturerMap": {
+    "universityLecturerMap": "Університет - лектор",
+    "universityLecturerMaps": "Університети - лектори",
+    "university": "Університет",
+    "universityId": "Ід університету",
+    "universityName": "Назва університету",
+    "lecturer": "Лектор",
+    "lecturerId": "Ід лектора",
+    "lecturerLastName": "Прізвище лектора",
+    "lecturerFirstName": "Ім'я лектора"
   }
 }

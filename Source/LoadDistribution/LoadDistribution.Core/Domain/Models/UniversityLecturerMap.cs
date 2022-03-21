@@ -3,7 +3,7 @@
     public class UniversityLecturerMap : BaseProjectRelatedEntity
     {
         public int UniversityId { get; set; }
-        public int LectureId { get; set; }
+        public int LecturerId { get; set; }
 
         // navigation properties
         public virtual University University { get; set; }

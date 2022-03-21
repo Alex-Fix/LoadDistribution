@@ -10,6 +10,6 @@ namespace LoadDistribution.Core.Domain.Models
         public DependencyType DependencyType { get; set; }
 
         // navigation properties
-        public virtual ICollection<DisciplineActivityMap> DisciplineActivityMaps { get; set; }
+        public virtual ICollection<LecturerDisciplineActivityMap> LecturerDisciplineActivityMaps { get; set; }
     }
 }

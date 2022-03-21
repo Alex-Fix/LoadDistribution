@@ -24,7 +24,6 @@ namespace LoadDistribution.Data
         #region Properties
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Discipline> Disciplines { get; set; }
-        public DbSet<DisciplineActivityMap> DisciplineActivityMaps { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<LecturerDisciplineActivityMap> LecturerDisciplineActivityMaps { get; set; }
         public DbSet<Log> Logs { get; set; }

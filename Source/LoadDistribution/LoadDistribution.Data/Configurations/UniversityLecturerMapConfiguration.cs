@@ -15,7 +15,7 @@ namespace LoadDistribution.Data.Configurations
             builder.Property(p => p.Created).HasConversion(new DateTimeOffsetToBinaryConverter());
             builder.Property(p => p.Updated).HasConversion(new DateTimeOffsetToBinaryConverter());
 
-            builder.HasIndex(p => new { p.ProjectId, p.UniversityId, p.LectureId }).IsUnique();
+            builder.HasIndex(p => new { p.ProjectId, p.UniversityId, p.LecturerId }).IsUnique();
 
             builder
                 .HasOne(p => p.Project)
@@ -30,7 +30,7 @@ namespace LoadDistribution.Data.Configurations
             builder
                 .HasOne(p => p.Lecturer)
                 .WithMany(p => p.UniversityLectureMaps)
-                .HasForeignKey(fk => fk.LectureId)
+                .HasForeignKey(fk => fk.LecturerId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

@@ -86,7 +86,7 @@
                     <mat-label>{{ 'discipline.university' | translate }}</mat-label>
                     <mat-select formControlName="universityId" required>
                       <mat-option *ngFor="let university of universities$ | async" [value]="university.id">
-                        {{ university.name }}
+                        ({{ university.id }}) {{ university.name }}
                       </mat-option>
                     </mat-select>
                 </mat-form-field>

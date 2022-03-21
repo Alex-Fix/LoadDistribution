@@ -29,6 +29,10 @@ import { DisciplineListComponent } from './components/discipline/discipline-list
 import { LocalizablePipe } from './pipes/localizable.pipe';
 import { LogListComponent } from './components/log/log-list/log-list.component';
 import { DialogComponent } from './components/common/dialog/dialog.component';
+import { LecturerDisciplineActivityMapComponent } from './components/lecturerDisciplineActivityMap/lecturer-discipline-activity-map/lecturer-discipline-activity-map.component';
+import { LecturerDisciplineActivityMapListComponent } from './components/lecturerDisciplineActivityMap/lecturer-discipline-activity-map-list/lecturer-discipline-activity-map-list.component';
+import { UniversityLecturerMapComponent } from './components/universityLecturerMap/university-lecturer-map/university-lecturer-map.component';
+import { UniversityLecturerMapListComponent } from './components/universityLecturerMap/university-lecturer-map-list/university-lecturer-map-list.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { DialogComponent } from './components/common/dialog/dialog.component';
     DisciplineListComponent,
     LocalizablePipe,
     LogListComponent,
-    DialogComponent
+    DialogComponent,
+    LecturerDisciplineActivityMapComponent,
+    LecturerDisciplineActivityMapListComponent,
+    UniversityLecturerMapComponent,
+    UniversityLecturerMapListComponent
   ],
   imports: [
     BrowserModule,

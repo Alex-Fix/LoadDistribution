@@ -9,8 +9,8 @@
     </mat-card-title>
     <mat-card-content>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-max">
-             <!-- Id column -->
-             <ng-container matColumnDef="id">
+            <!-- Id column -->
+            <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>{{ 'base.id' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.id }}</td>
             </ng-container>
@@ -129,9 +129,15 @@
                 <td mat-cell *matCellDef="let discipline">{{ discipline.type }}</td>
             </ng-container>
 
-            <!-- University column -->
-            <ng-container matColumnDef="university">
-                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.university' | translate }}</th>
+            <!-- University id column -->
+            <ng-container matColumnDef="universityId">
+                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.universityId' | translate }}</th>
+                <td mat-cell *matCellDef="let discipline">{{ discipline.universityId }}</td>
+            </ng-container>
+
+            <!-- University name column -->
+            <ng-container matColumnDef="universityName">
+                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.universityName' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.university.name }}</td>
             </ng-container>
 

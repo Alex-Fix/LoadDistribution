@@ -46,6 +46,7 @@ namespace LoadDistribution.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    DependencyType = table.Column<int>(type: "INTEGER", nullable: false),
                     Created = table.Column<long>(type: "INTEGER", nullable: false),
                     Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -159,7 +160,7 @@ namespace LoadDistribution.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UniversityId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LectureId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LecturerId = table.Column<int>(type: "INTEGER", nullable: false),
                     Created = table.Column<long>(type: "INTEGER", nullable: false),
                     Updated = table.Column<long>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -168,8 +169,8 @@ namespace LoadDistribution.Data.Migrations
                 {
                     table.PrimaryKey("PK_UniversityLecturerMaps", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UniversityLecturerMaps_Lecturers_LectureId",
-                        column: x => x.LectureId,
+                        name: "FK_UniversityLecturerMaps_Lecturers_LecturerId",
+                        column: x => x.LecturerId,
                         principalTable: "Lecturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -188,48 +189,14 @@ namespace LoadDistribution.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DisciplineActivityMaps",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DisciplineId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ActivityId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Created = table.Column<long>(type: "INTEGER", nullable: false),
-                    Updated = table.Column<long>(type: "INTEGER", nullable: false),
-                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DisciplineActivityMaps", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DisciplineActivityMaps_Activities_ActivityId",
-                        column: x => x.ActivityId,
-                        principalTable: "Activities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DisciplineActivityMaps_Disciplines_DisciplineId",
-                        column: x => x.DisciplineId,
-                        principalTable: "Disciplines",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DisciplineActivityMaps_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "LecturerDisciplineActivityMaps",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     LecturerId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DisciplineActivityMapId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DisciplineId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ActivityId = table.Column<int>(type: "INTEGER", nullable: false),
                     Rate = table.Column<decimal>(type: "TEXT", nullable: false),
                     Created = table.Column<long>(type: "INTEGER", nullable: false),
                     Updated = table.Column<long>(type: "INTEGER", nullable: false),
@@ -239,9 +206,15 @@ namespace LoadDistribution.Data.Migrations
                 {
                     table.PrimaryKey("PK_LecturerDisciplineActivityMaps", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LecturerDisciplineActivityMaps_DisciplineActivityMaps_DisciplineActivityMapId",
-                        column: x => x.DisciplineActivityMapId,
-                        principalTable: "DisciplineActivityMaps",
+                        name: "FK_LecturerDisciplineActivityMaps_Activities_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "Activities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LecturerDisciplineActivityMaps_Disciplines_DisciplineId",
+                        column: x => x.DisciplineId,
+                        principalTable: "Disciplines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -264,21 +237,6 @@ namespace LoadDistribution.Data.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DisciplineActivityMaps_ActivityId",
-                table: "DisciplineActivityMaps",
-                column: "ActivityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DisciplineActivityMaps_DisciplineId",
-                table: "DisciplineActivityMaps",
-                column: "DisciplineId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DisciplineActivityMaps_ProjectId",
-                table: "DisciplineActivityMaps",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Disciplines_ProjectId",
                 table: "Disciplines",
                 column: "ProjectId");
@@ -289,9 +247,14 @@ namespace LoadDistribution.Data.Migrations
                 column: "UniversityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LecturerDisciplineActivityMaps_DisciplineActivityMapId",
+                name: "IX_LecturerDisciplineActivityMaps_ActivityId",
                 table: "LecturerDisciplineActivityMaps",
-                column: "DisciplineActivityMapId");
+                column: "ActivityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LecturerDisciplineActivityMaps_DisciplineId",
+                table: "LecturerDisciplineActivityMaps",
+                column: "DisciplineId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LecturerDisciplineActivityMaps_LecturerId",
@@ -299,9 +262,10 @@ namespace LoadDistribution.Data.Migrations
                 column: "LecturerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LecturerDisciplineActivityMaps_ProjectId",
+                name: "IX_LecturerDisciplineActivityMaps_ProjectId_LecturerId_DisciplineId_ActivityId",
                 table: "LecturerDisciplineActivityMaps",
-                column: "ProjectId");
+                columns: new[] { "ProjectId", "LecturerId", "DisciplineId", "ActivityId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lecturers_ProjectId",
@@ -314,14 +278,15 @@ namespace LoadDistribution.Data.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UniversityLecturerMaps_LectureId",
+                name: "IX_UniversityLecturerMaps_LecturerId",
                 table: "UniversityLecturerMaps",
-                column: "LectureId");
+                column: "LecturerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UniversityLecturerMaps_ProjectId",
+                name: "IX_UniversityLecturerMaps_ProjectId_UniversityId_LecturerId",
                 table: "UniversityLecturerMaps",
-                column: "ProjectId");
+                columns: new[] { "ProjectId", "UniversityId", "LecturerId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UniversityLecturerMaps_UniversityId",
@@ -341,16 +306,13 @@ namespace LoadDistribution.Data.Migrations
                 name: "UniversityLecturerMaps");
 
             migrationBuilder.DropTable(
-                name: "DisciplineActivityMaps");
-
-            migrationBuilder.DropTable(
-                name: "Lecturers");
-
-            migrationBuilder.DropTable(
                 name: "Activities");
 
             migrationBuilder.DropTable(
                 name: "Disciplines");
+
+            migrationBuilder.DropTable(
+                name: "Lecturers");
 
             migrationBuilder.DropTable(
                 name: "Universities");

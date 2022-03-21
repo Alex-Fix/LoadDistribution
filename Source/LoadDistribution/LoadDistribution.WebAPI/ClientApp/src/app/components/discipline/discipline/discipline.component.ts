@@ -26,12 +26,16 @@ export class DisciplineComponent extends CUComponent<DisciplineDTO> {
     super(disciplineClient, activatedRoute, router, '/disciplines');
   }
 
+  protected _payloadMapper(entity: DisciplineDTO): DisciplineDTO {
+    return {...entity, university: null};
+  }
+
   protected _initForm(): void {
     this.form = this._formBuilder.group({
       name: new FormControl(null, [Validators.required]),
       type: new FormControl(null),
       term: new FormControl(null, [Validators.required]),
-      educationLevel: new FormControl(null, ),
+      educationLevel: new FormControl(null),
       educationForm: new FormControl(null, [Validators.required]),
       planIndex: new FormControl(null, [Validators.required]),
       speciality: new FormControl(null, [Validators.required]),
@@ -45,7 +49,7 @@ export class DisciplineComponent extends CUComponent<DisciplineDTO> {
       groupCount: new FormControl(null, [Validators.required]),
       subgroupCount: new FormControl(null, [Validators.required]),
       threadCount: new FormControl(null, [Validators.required]),
-      university: new FormControl(null, [Validators.required])
+      universityId: new FormControl(null, [Validators.required])
     });
   }
 }

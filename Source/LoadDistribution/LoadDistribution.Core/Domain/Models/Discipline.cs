@@ -5,7 +5,6 @@ namespace LoadDistribution.Core.Domain.Models
 {
     public class Discipline : BaseProjectRelatedEntity
     {
-        #region Properties
         public string Name { get; set; }
         public string Type { get; set; }
         public int Term { get; set; }
@@ -28,15 +27,5 @@ namespace LoadDistribution.Core.Domain.Models
         // navigation properties
         public virtual University University { get; set; }
         public virtual ICollection<DisciplineActivityMap> DisciplineActivityMaps { get; set; }
-        #endregion
-
-        #region Methods
-        public override void CleanNavigationProperties()
-        {
-            base.CleanNavigationProperties();
-            University = null;
-            DisciplineActivityMaps = null;
-        }
-        #endregion
     }
 }

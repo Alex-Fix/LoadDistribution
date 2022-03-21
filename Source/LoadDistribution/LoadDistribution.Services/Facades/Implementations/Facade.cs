@@ -35,14 +35,14 @@ namespace LoadDistribution.Services.Facades.Implementations
         public async virtual Task<InsertResult> Insert(TDTO entity)
         {
             TEntity dbEntity = _mapper.Map<TEntity>(entity);
-            InsertResult result = await _repository.Insert(dbEntity, excludeNested: true);
+            InsertResult result = await _repository.Insert(dbEntity);
             return result; 
         }
 
         public async virtual Task<bool> Update(TDTO entity)
         {
             TEntity dbEntity = _mapper.Map<TEntity>(entity);
-            bool updated = await _repository.Update(dbEntity, excludeNested: true);
+            bool updated = await _repository.Update(dbEntity);
             return updated;
         }
 

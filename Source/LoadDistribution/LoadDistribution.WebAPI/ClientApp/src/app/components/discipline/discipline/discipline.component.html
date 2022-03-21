@@ -84,8 +84,8 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>{{ 'discipline.university' | translate }}</mat-label>
-                    <mat-select formControlName="university" required [compareWith]="baseComparer">
-                      <mat-option *ngFor="let university of universities$ | async" [value]="university">
+                    <mat-select formControlName="universityId" required>
+                      <mat-option *ngFor="let university of universities$ | async" [value]="university.id">
                         {{ university.name }}
                       </mat-option>
                     </mat-select>

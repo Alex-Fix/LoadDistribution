@@ -10,8 +10,8 @@ import { ComponentMode } from "../models/enums/componentMode.enum";
 export default abstract class CUComponent<TDTO extends BaseDTO> implements OnInit {
     componentModes = ComponentMode;
     componentMode: ComponentMode = ComponentMode.undefined;
-    base: BaseDTO;
     form: FormGroup;
+    base: TDTO;
 
     constructor(
         private readonly _client: Client<TDTO>,
@@ -36,6 +36,10 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
         }
     }
 
+    protected _payloadMapper(entity: TDTO): TDTO {
+        return entity;
+    }
+
     protected abstract _initForm(): void;
 
     onCreateButtonClick(): void {
@@ -47,18 +51,14 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
     }
 
     onUpdateButtonClick(): void {
-        const updatedEntity = {...this.base, ...this.form.value};
+        const updatedEntity = {...this._payloadMapper(this.base), ...this.form.value};
         this._client.update(updatedEntity).subscribe();
     }
 
     onUpdateAndReturnButtonClick(returnUrl: string | null = null): void {
-        const updatedEntity = {...this.base, ...this.form.value};
+        const updatedEntity = {...this._payloadMapper(this.base), ...this.form.value};
         this._client.update(updatedEntity).subscribe(_ => 
             this._router.navigateByUrl(returnUrl ?? this._returnUrl)
         );
-    }
-
-    baseComparer(option: BaseDTO, selection: BaseDTO): boolean {
-        return option?.id == selection?.id;
     }
 }

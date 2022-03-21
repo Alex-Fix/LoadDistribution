@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace LoadDistribution.Core.Domain.Models
 {
-    public class Project : BaseEntity, INavigationCleanable
+    public class Project : BaseEntity
     {
-        #region Properties
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -18,19 +17,5 @@ namespace LoadDistribution.Core.Domain.Models
         public virtual ICollection<LecturerDisciplineActivityMap> LecturerDisciplineActivityMaps { get; set; }
         public virtual ICollection<University> Universities { get; set; }
         public virtual ICollection<UniversityLecturerMap> UniversityLecturerMaps { get; set; }
-        #endregion
-
-        #region Methods
-        public void CleanNavigationProperties()
-        {
-            Activities = null;
-            Disciplines = null;
-            DisciplineActivityMaps = null;
-            Lecturers = null;
-            LecturerDisciplineActivityMaps = null;
-            Universities = null;
-            UniversityLecturerMaps = null;
-        }
-        #endregion
     }
 }

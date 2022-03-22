@@ -1,0 +1,51 @@
+<mat-card>
+    <mat-card-title>{{ 'log.logs' | translate }}</mat-card-title>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-max">
+             <!-- Id column -->
+             <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>{{ 'log.id' | translate }}</th>
+                <td mat-cell *matCellDef="let log">{{ log.id }}</td>
+            </ng-container>
+
+            <!-- Created column -->
+            <ng-container matColumnDef="created">
+                <th mat-header-cell *matHeaderCellDef>{{ 'log.created' | translate }}</th>
+                <td mat-cell *matCellDef="let log">{{ log.created | date: 'short' }}</td>
+            </ng-container>
+
+            <!-- Message column -->
+            <ng-container matColumnDef="message">
+                <th mat-header-cell *matHeaderCellDef>{{ 'log.message' | translate }}</th>
+                <td mat-cell *matCellDef="let log">{{ log.message }}</td>
+            </ng-container>
+
+            <!-- Type column -->
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef>{{ 'log.type' | translate }}</th>
+                <td mat-cell *matCellDef="let log">{{ log.type | localizable:logTypes | translate }}</td>
+            </ng-container>
+
+            <!-- Exception type column -->
+            <ng-container matColumnDef="exceptionType">
+                <th mat-header-cell *matHeaderCellDef>{{ 'log.exceptionType' | translate }}</th>
+                <td mat-cell *matCellDef="let log">{{ log.exceptionType }}</td>
+            </ng-container>
+
+            <!-- Details column -->
+            <ng-container matColumnDef="details">
+                <th mat-header-cell *matHeaderCellDef>{{ 'log.details' | translate }}</th>
+                <td mat-cell *matCellDef="let log">
+                    <button mat-mini-fab color="primary" (click)="onDetailsClick(log)">
+                        <mat-icon>message</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            
+            <!-- Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let log; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator class="mat-elevation-z8"></mat-paginator>
+    </mat-card-content>
+</mat-card>

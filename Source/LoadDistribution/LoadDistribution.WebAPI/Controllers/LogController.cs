@@ -1,13 +1,14 @@
-﻿using LoadDistribution.Core.DTO;
+﻿using LoadDistribution.Core.Domain.Models;
+using LoadDistribution.Core.DTO;
 using LoadDistribution.Core.DTO.Models;
 using LoadDistribution.Services.Facades;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
-    public class LogController : CollectionController<LogDTO>
+    public class LogController : CollectionController<Log, LogDTO>
     {
         #region Constructors
-        public LogController(ILogFacade logFacade) : base(logFacade)
+        public LogController(ICollectionFacade<Log, LogDTO> logFacade) : base(logFacade)
         {
         }
         #endregion

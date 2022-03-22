@@ -9,13 +9,13 @@ namespace LoadDistribution.Services.Services.Implementations
     public class DbLoggerService : ILoggerService
     {
         #region Fields
-        private readonly ILogRepository _logRepository;
+        private readonly IRepository<Log> _logRepository;
         #endregion
 
         #region Constructors
-        public DbLoggerService(ILogRepository logRepository)
+        public DbLoggerService(IRepository<Log> logRepository)
         {
-            _logRepository = logRepository ?? throw new ArgumentException(nameof(logRepository));
+            _logRepository = logRepository ?? throw new ArgumentNullException(nameof(logRepository));
         }
         #endregion
 

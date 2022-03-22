@@ -1,5 +1,6 @@
 ﻿using LoadDistribution.Core.Domain.Interfaces;
 using LoadDistribution.Core.Helpers;
+using LoadDistribution.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,10 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories.Implementations
 {
-    public abstract class SQLiteProjectRelatedCollectionRepository<TEntity, TContext> : SQLiteRepository<TEntity, TContext>, IProjectRelatedCollectionRepository<TEntity>
-        where TEntity : class, IProjectRelatedEntity
-        where TContext : DbContext
+    public class SQLiteProjectRelatedCollectionRepository<TEntity> : SQLiteRepository<TEntity>, IProjectRelatedCollectionRepository<TEntity> where TEntity : class, IProjectRelatedEntity
     {
         #region Constructors
-        public SQLiteProjectRelatedCollectionRepository(TContext context) : base(context)
+        public SQLiteProjectRelatedCollectionRepository(IDbContext context) : base(context)
         {
         }
         #endregion

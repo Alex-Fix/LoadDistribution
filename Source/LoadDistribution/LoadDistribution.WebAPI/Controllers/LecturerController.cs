@@ -1,12 +1,13 @@
-﻿using LoadDistribution.Core.DTO.Models;
+﻿using LoadDistribution.Core.Domain.Models;
+using LoadDistribution.Core.DTO.Models;
 using LoadDistribution.Services.Facades;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
-    public class LecturerController : ProjectRelatedCollectionController<LecturerDTO>
+    public class LecturerController : ProjectRelatedCollectionController<Lecturer, LecturerDTO>
     {
         #region Constructors
-        public LecturerController(ILecturerFacade lecturerFacade) : base(lecturerFacade)
+        public LecturerController(IProjectRelatedCollectionFacade<Lecturer, LecturerDTO> lecturerFacade) : base(lecturerFacade)
         {
         }
         #endregion

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Facades.Implementations
 {
-    public abstract class ProjectRelatedCollectionFacade<TEntity, TDTO> : Facade<TEntity, TDTO>, IProjectRelatedCollectionFacade<TDTO>
+    public class ProjectRelatedCollectionFacade<TEntity, TDTO> : Facade<TEntity, TDTO>, IProjectRelatedCollectionFacade<TEntity, TDTO>
         where TEntity : class, IProjectRelatedEntity
         where TDTO : class, IProjectRelatedDTO
     {

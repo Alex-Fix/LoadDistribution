@@ -1,4 +1,5 @@
-﻿using LoadDistribution.Core.DTO.Interfaces;
+﻿using LoadDistribution.Core.Domain.Interfaces;
+using LoadDistribution.Core.DTO.Interfaces;
 using LoadDistribution.Core.Helpers;
 using LoadDistribution.Services.Facades;
 using Microsoft.AspNetCore.Mvc;
@@ -8,14 +9,16 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
-    public abstract class CollectionController<TDTO> : Controller<TDTO> where TDTO : class, IDTO
+    public abstract class CollectionController<TEntity, TDTO> : Controller<TEntity, TDTO> 
+        where TEntity : class, IEntity
+        where TDTO : class, IDTO
     {
         #region Fields
-        private readonly ICollectionFacade<TDTO> _collectionFacade;
+        private readonly ICollectionFacade<TEntity, TDTO> _collectionFacade;
         #endregion
 
         #region Constructors
-        public CollectionController(ICollectionFacade<TDTO> collectionFacade) : base(collectionFacade)
+        public CollectionController(ICollectionFacade<TEntity, TDTO> collectionFacade) : base(collectionFacade)
         {
             _collectionFacade = collectionFacade ?? throw new ArgumentNullException(nameof(collectionFacade));
         }

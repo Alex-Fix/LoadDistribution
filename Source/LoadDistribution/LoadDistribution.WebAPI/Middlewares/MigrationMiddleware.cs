@@ -1,8 +1,6 @@
-﻿using LoadDistribution.Data;
-using Microsoft.AspNetCore.Builder;
+﻿using LoadDistribution.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 
@@ -22,7 +20,7 @@ namespace LoadDistribution.WebAPI.Middlewares
         #endregion
 
         #region Methods
-        public async Task InvokeAsync(HttpContext context, SQLiteDbContext dbContext)
+        public async Task InvokeAsync(HttpContext context, IDbContext dbContext)
         {
             await dbContext.Database.MigrateAsync();
             await _next(context);

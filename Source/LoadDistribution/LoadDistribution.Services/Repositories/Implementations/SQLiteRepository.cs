@@ -1,6 +1,7 @@
 ﻿using LoadDistribution.Core.Domain.Interfaces;
 using LoadDistribution.Core.Domain.Models;
 using LoadDistribution.Core.Helpers;
+using LoadDistribution.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -10,16 +11,14 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories.Implementations
 {
-    public abstract class SQLiteRepository<TEntity, TContext> : IRepository<TEntity>
-        where TEntity : class, IEntity
-        where TContext : DbContext
+    public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
         #region Fields
-        protected readonly TContext _dbContext;
+        protected readonly IDbContext _dbContext;
         #endregion
 
         #region Constructors
-        public SQLiteRepository(TContext dbContext)
+        public SQLiteRepository(IDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
@@ -51,7 +50,7 @@ namespace LoadDistribution.Services.Repositories.Implementations
 
             try
             {
-                await _dbContext.AddAsync(entity);
+                await _dbContext.Set<TEntity>().AddAsync(entity);
                 await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
 
@@ -81,7 +80,7 @@ namespace LoadDistribution.Services.Repositories.Implementations
 
             try
             {
-                _dbContext.Update(entity);
+                _dbContext.Set<TEntity>().Update(entity);
                 await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
 
@@ -107,7 +106,7 @@ namespace LoadDistribution.Services.Repositories.Implementations
 
             try
             {
-                _dbContext.Remove(entity);
+                _dbContext.Set<TEntity>().Remove(entity);
                 await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
 

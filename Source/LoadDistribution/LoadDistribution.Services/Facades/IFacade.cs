@@ -1,10 +1,13 @@
-﻿using LoadDistribution.Core.DTO.Interfaces;
+﻿using LoadDistribution.Core.Domain.Interfaces;
+using LoadDistribution.Core.DTO.Interfaces;
 using LoadDistribution.Core.Helpers;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Facades
 {
-    public interface IFacade<TDTO> where TDTO : class, IDTO
+    public interface IFacade<TEntity, TDTO>
+        where TEntity: class, IEntity
+        where TDTO : class, IDTO
     {
         Task<TDTO> Get(int id);
         Task<InsertResult> Insert(TDTO entity);

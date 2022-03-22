@@ -18,6 +18,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using LoadDistribution.Core.Interfaces;
 
 namespace LoadDistribution.WebAPI
 {
@@ -39,27 +40,17 @@ namespace LoadDistribution.WebAPI
 
             services.AddAutoMapper(typeof(DomainToDTOProfile), typeof(HelperProfile));
 
-            services.AddDbContext<SQLiteDbContext>();
+            services.AddDbContext<IDbContext, SQLiteDbContext>();
 
-            services.AddScoped<IActivityRepository, SQLiteActivityRepository>();
-            services.AddScoped<IDisciplineRepository, SQLiteDisciplineRepository>();
-            services.AddScoped<ILecturerDisciplineActivityMapRepository, SQLiteLecturerDisciplineActivityMapRepository>();
-            services.AddScoped<ILecturerRepository, SQLiteLecturerRepository>();
-            services.AddScoped<ILogRepository, SQLiteLogRepository>();
-            services.AddScoped<IProjectRepository, SQLiteProjectRepository>();
-            services.AddScoped<IUniversityLecturerMapRepository, SQLiteUniversityLecturerMapRepository>();
-            services.AddScoped<IUniversityRepository, SQLiteUniversityRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(SQLiteRepository<>));
+            services.AddScoped(typeof(ICollectionRepository<>), typeof(SQLiteCollectionRepository<>));
+            services.AddScoped(typeof(IProjectRelatedCollectionRepository<>), typeof(SQLiteProjectRelatedCollectionRepository<>));
 
             services.AddScoped<ILoggerService, DbLoggerService>();
 
-            services.AddScoped<IActivityFacade, ActivityFacade>();
-            services.AddScoped<IDisciplineFacade, DisciplineFacade>();
-            services.AddScoped<ILecturerFacade, LecturerFacade>();
-            services.AddScoped<IProjectFacade, ProjectFacade>();
-            services.AddScoped<IUniversityFacade, UniversityFacade>();
-            services.AddScoped<ILecturerDisciplineActivityMapFacade, LecturerDisciplineActivityMapFacade>();
-            services.AddScoped<ILogFacade, LogFacade>();
-            services.AddScoped<IUniversityLecturerMapFacade, UniversityLecturerMapFacade>();
+            services.AddScoped(typeof(IFacade<,>), typeof(Facade<,>));
+            services.AddScoped(typeof(ICollectionFacade<,>), typeof(CollectionFacade<,>));
+            services.AddScoped(typeof(IProjectRelatedCollectionFacade<,>), typeof(ProjectRelatedCollectionFacade<,>));
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddSpaStaticFiles(cfg =>

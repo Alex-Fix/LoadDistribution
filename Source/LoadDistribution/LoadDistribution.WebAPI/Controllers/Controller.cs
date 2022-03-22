@@ -1,4 +1,5 @@
-﻿using LoadDistribution.Core.DTO.Interfaces;
+﻿using LoadDistribution.Core.Domain.Interfaces;
+using LoadDistribution.Core.DTO.Interfaces;
 using LoadDistribution.Core.Helpers;
 using LoadDistribution.Services.Facades;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +10,16 @@ namespace LoadDistribution.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public abstract class Controller<TDTO> : ControllerBase where TDTO : class, IDTO
+    public abstract class Controller<TEntity, TDTO> : ControllerBase 
+        where TEntity : class, IEntity
+        where TDTO : class, IDTO
     {
         #region Fields
-        private readonly IFacade<TDTO> _facade;
+        private readonly IFacade<TEntity, TDTO> _facade;
         #endregion
 
         #region Constructors
-        public Controller(IFacade<TDTO> facade)
+        public Controller(IFacade<TEntity, TDTO> facade)
         {
             _facade = facade ?? throw new ArgumentNullException(nameof(facade));
         }

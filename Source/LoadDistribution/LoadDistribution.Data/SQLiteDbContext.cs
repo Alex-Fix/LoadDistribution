@@ -1,14 +1,13 @@
-﻿using LoadDistribution.Core.Domain;
-using LoadDistribution.Core.Domain.Models;
+﻿using LoadDistribution.Core.Domain.Interfaces;
+using LoadDistribution.Core.Interfaces;
 using LoadDistribution.Core.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
-using System.Reflection;
 
 namespace LoadDistribution.Data
 {
-    public class SQLiteDbContext : DbContext
+    public class SQLiteDbContext : DbContext, IDbContext
     {
         #region Fields
         private readonly SQLiteDbOptions _dbOptions;
@@ -19,17 +18,6 @@ namespace LoadDistribution.Data
         {
             _dbOptions = dbOptions?.Value ?? throw new ArgumentNullException(nameof(dbOptions));
         }
-        #endregion
-
-        #region Properties
-        public DbSet<Activity> Activities { get; set; }
-        public DbSet<Discipline> Disciplines { get; set; }
-        public DbSet<Lecturer> Lecturers { get; set; }
-        public DbSet<LecturerDisciplineActivityMap> LecturerDisciplineActivityMaps { get; set; }
-        public DbSet<Log> Logs { get; set; }
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<University> Universities { get; set; }
-        public DbSet<UniversityLecturerMap> UniversityLecturerMaps { get; set; }
         #endregion
 
         #region Methods
@@ -46,6 +34,8 @@ namespace LoadDistribution.Data
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SQLiteDbContext).Assembly);
         }
+
+        public new DbSet<TEntity> Set<TEntity>() where TEntity : class, IEntity => base.Set<TEntity>();
         #endregion
     }
 }

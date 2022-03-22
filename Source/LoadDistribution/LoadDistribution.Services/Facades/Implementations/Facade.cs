@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Facades.Implementations
 {
-    public abstract class Facade<TEntity, TDTO> : IFacade<TDTO>
+    public class Facade<TEntity, TDTO> : IFacade<TEntity, TDTO>
         where TEntity : class, IEntity
         where TDTO : class, IDTO
     {

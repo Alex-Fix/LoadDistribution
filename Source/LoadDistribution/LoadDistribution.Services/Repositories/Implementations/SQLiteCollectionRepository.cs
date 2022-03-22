@@ -1,17 +1,16 @@
 ﻿using LoadDistribution.Core.Domain.Interfaces;
 using LoadDistribution.Core.Helpers;
+using LoadDistribution.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories.Implementations
 {
-    public abstract class SQLiteCollectionRepository<TEntity, TContext> : SQLiteRepository<TEntity, TContext>, ICollectionRepository<TEntity>
-        where TEntity : class, IEntity
-        where TContext : DbContext
+    public class SQLiteCollectionRepository<TEntity> : SQLiteRepository<TEntity>, ICollectionRepository<TEntity> where TEntity : class, IEntity
     {
         #region Constructors
-        public SQLiteCollectionRepository(TContext context) : base(context)
+        public SQLiteCollectionRepository(IDbContext context) : base(context)
         {
         }
         #endregion

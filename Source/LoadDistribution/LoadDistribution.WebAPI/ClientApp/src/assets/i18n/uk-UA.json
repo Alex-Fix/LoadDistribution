@@ -27,7 +27,8 @@
     "dialog": {
       "close": "Закрити"
     },
-    "undefined": "Не визначено"
+    "undefined": "Не визначено",
+    "obsolete": "Застаріле"
   },
   "app": {
     "toolbar": {

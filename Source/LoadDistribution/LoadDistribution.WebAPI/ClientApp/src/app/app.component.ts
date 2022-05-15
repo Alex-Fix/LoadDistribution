@@ -7,7 +7,7 @@ import { LanguageService } from 'src/app/services/language.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isDrawerOpened: boolean = false;
+  isDrawerOpened: boolean = true;
 
   constructor(
     languageService: LanguageService

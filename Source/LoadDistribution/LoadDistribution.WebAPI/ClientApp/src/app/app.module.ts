@@ -33,6 +33,7 @@ import { LecturerDisciplineActivityMapComponent } from './components/lecturerDis
 import { LecturerDisciplineActivityMapListComponent } from './components/lecturerDisciplineActivityMap/lecturer-discipline-activity-map-list/lecturer-discipline-activity-map-list.component';
 import { UniversityLecturerMapComponent } from './components/universityLecturerMap/university-lecturer-map/university-lecturer-map.component';
 import { UniversityLecturerMapListComponent } from './components/universityLecturerMap/university-lecturer-map-list/university-lecturer-map-list.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { UniversityLecturerMapListComponent } from './components/universityLectu
     LecturerDisciplineActivityMapComponent,
     LecturerDisciplineActivityMapListComponent,
     UniversityLecturerMapComponent,
-    UniversityLecturerMapListComponent
+    UniversityLecturerMapListComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

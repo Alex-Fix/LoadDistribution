@@ -8,6 +8,7 @@ import { ProjectHandler } from "../helpers/projectHandler.helper";
 import { tap } from "rxjs/operators";
 import IProjectRelatedDTO from "../models/dto/interfaces/iProjectRelatedDTO.interface";
 import InsertResult from "../models/helpers/insertResult.model";
+import BulkInsertResult from "../models/helpers/bulkInsertResult.model";
 
 export default abstract class ProjectRelatedCollectionClient<TDTO extends IProjectRelatedDTO> extends Client<TDTO> {
     constructor(
@@ -37,6 +38,26 @@ export default abstract class ProjectRelatedCollectionClient<TDTO extends IProje
         return throwError(new Error());
     }
 
+    bulkInsert(entities: TDTO[]): Observable<BulkInsertResult> {
+        if(this._projectHandler.selected) {
+            for(let entity of entities) {
+                entity.projectId = this._projectHandler.selected.id;
+            }
+            
+            return this._client.post<BulkInsertResult>(this.url + "bulk", entities).pipe(
+                tap(() => {
+                    this._translateService.get([ 'common.snackBar.successfullyInserted', 'common.snackBar.close' ])
+                        .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyInserted'], literals['common.snackBar.close'], { duration: 3000, panelClass: 'success-snack' }));
+                })
+            );
+        }
+        
+        this._translateService.get([ 'common.snackBar.projectIsNotSelected', 'common.snackBar.close' ])
+            .subscribe(literals => this._snackBar.open(literals['common.snackBar.projectIsNotSelected'], literals['common.snackBar.close'], { duration: 3000, panelClass: 'errorSnack' }));
+
+        return throwError(new Error());
+    }
+
     getAll(): Observable<TDTO[]> {
         if(this._projectHandler.selected) {
             return this._client.get<TDTO[]>(this.url + `all?projectId=${this._projectHandler.selected?.id}`);
@@ -48,7 +69,7 @@ export default abstract class ProjectRelatedCollectionClient<TDTO extends IProje
         return throwError(new Error());
     }
 
-    getPaged(pageNumber: number = 0, pageSize: number = 0): Observable<Paged<TDTO>> {
+    getPaged(pageNumber: number, pageSize: number): Observable<Paged<TDTO>> {
         if(this._projectHandler.selected) {
             return this._client.get<Paged<TDTO>>(this.url + `paged?projectId=${this._projectHandler.selected?.id}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
         }

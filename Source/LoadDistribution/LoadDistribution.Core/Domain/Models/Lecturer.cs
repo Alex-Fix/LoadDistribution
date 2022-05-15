@@ -9,7 +9,7 @@ namespace LoadDistribution.Core.Domain.Models
         public string LastName { get; set; }
 
         // navigation properties
-        public virtual ICollection<UniversityLecturerMap> UniversityLectureMaps { get; set; }
+        public virtual ICollection<UniversityLecturerMap> UniversityLecturerMaps { get; set; }
         public virtual ICollection<LecturerDisciplineActivityMap> LecturerDisciplineActivityMaps { get; set; }
     }
 }

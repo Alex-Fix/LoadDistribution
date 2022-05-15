@@ -1,8 +1,7 @@
 using LoadDistribution.Core.AutoMapperProfiles;
+using LoadDistribution.Core.Interfaces;
 using LoadDistribution.Core.Options;
 using LoadDistribution.Data;
-using LoadDistribution.Services.Facades;
-using LoadDistribution.Services.Facades.Implementations;
 using LoadDistribution.Services.Repositories;
 using LoadDistribution.Services.Repositories.Implementations;
 using LoadDistribution.Services.Services;
@@ -17,8 +16,6 @@ using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using LoadDistribution.Core.Interfaces;
 
 namespace LoadDistribution.WebAPI
 {
@@ -43,20 +40,16 @@ namespace LoadDistribution.WebAPI
             services.AddDbContext<IDbContext, SQLiteDbContext>();
 
             services.AddScoped(typeof(IRepository<>), typeof(SQLiteRepository<>));
-            services.AddScoped(typeof(ICollectionRepository<>), typeof(SQLiteCollectionRepository<>));
-            services.AddScoped(typeof(IProjectRelatedCollectionRepository<>), typeof(SQLiteProjectRelatedCollectionRepository<>));
 
             services.AddScoped<ILoggerService, DbLoggerService>();
 
-            services.AddScoped(typeof(IFacade<,>), typeof(Facade<,>));
-            services.AddScoped(typeof(ICollectionFacade<,>), typeof(CollectionFacade<,>));
-            services.AddScoped(typeof(IProjectRelatedCollectionFacade<,>), typeof(ProjectRelatedCollectionFacade<,>));
-
             services.AddControllers().AddNewtonsoftJson();
+
             services.AddSpaStaticFiles(cfg =>
             {
                 cfg.RootPath = Path.Combine("ClientApp", "dist");
             });
+
             services.AddSwaggerGen();
         }
 
@@ -85,6 +78,7 @@ namespace LoadDistribution.WebAPI
             app.UseEndpoints(cfg => cfg.MapControllers());
             app.UseSwagger();
             app.UseSwaggerUI();
+
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";

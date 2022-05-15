@@ -1,5 +1,4 @@
 {
-  "undefined": "asdf",
   "common": {
     "snackBar": {
       "error": "Помилка",
@@ -28,7 +27,8 @@
       "close": "Закрити"
     },
     "undefined": "Не визначено",
-    "obsolete": "Застаріле"
+    "obsolete": "Застаріле",
+    "addItem": "Додати елемент"
   },
   "app": {
     "toolbar": {
@@ -63,7 +63,8 @@
     "lecturers": "Лектори",
     "firstName": "Ім'я",
     "middleName": "По батькові",
-    "lastName": "Прізвище"
+    "lastName": "Прізвище",
+    "university": "Університет"
   },
   "discipline": {
     "discipline": "Дисципліна",

@@ -1,4 +1,4 @@
-﻿namespace LoadDistribution.Core.Helpers
+﻿namespace LoadDistribution.Core.Helpers.Models
 {
     public class InsertResult
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using LoadDistribution.Core.Helpers;
+using LoadDistribution.Core.Helpers.Models;
 
 namespace LoadDistribution.Core.AutoMapperProfiles
 {

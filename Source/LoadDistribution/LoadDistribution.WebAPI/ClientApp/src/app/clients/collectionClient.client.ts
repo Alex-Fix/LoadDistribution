@@ -20,7 +20,7 @@ export default abstract class CollectionClient<TDTO extends IDTO> extends Client
         return this._client.get<TDTO[]>(this.url + 'all');
     }
 
-    getPaged(pageNumber: number = 0, pageSize: number = 0): Observable<Paged<TDTO>> {
+    getPaged(pageNumber: number, pageSize: number): Observable<Paged<TDTO>> {
         return this._client.get<Paged<TDTO>>(this.url + `paged?pageNumber=${pageNumber}&pageSize=${pageSize}`);
     }
 }

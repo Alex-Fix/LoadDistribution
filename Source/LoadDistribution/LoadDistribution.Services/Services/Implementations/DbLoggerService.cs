@@ -22,7 +22,7 @@ namespace LoadDistribution.Services.Services.Implementations
         #region Methods
         public async Task Exception(Exception ex, string message)
         {
-            if(ex is null)
+            if (ex is null)
             {
                 throw new ArgumentNullException(nameof(ex));
             }
@@ -40,7 +40,7 @@ namespace LoadDistribution.Services.Services.Implementations
                 Details = ex.ToString()
             };
 
-            await _logRepository.Insert(log);
+            await _logRepository.InsertAsync(log);
         }
         #endregion
     }

@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import IDTO from "../models/dto/interfaces/iDTO.interface";
+import BulkInsertResult from "../models/helpers/bulkInsertResult.model";
 import InsertResult from "../models/helpers/insertResult.model";
 import Paged from "../models/helpers/paged.model";
 
@@ -33,8 +34,26 @@ export default abstract class Client<TDTO extends IDTO> {
         );
     }
 
+    bulkInsert(entities: TDTO[]): Observable<BulkInsertResult> {
+        return this._client.post<BulkInsertResult>(this.url + "bulk", entities).pipe(
+            tap(() => {
+                this._translateService.get([ 'common.snackBar.successfullyInserted', 'common.snackBar.close' ])
+                    .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyInserted'], literals['common.snackBar.close'], { duration: 3000, panelClass: 'success-snack' }));
+            })
+        );
+    }
+
     update(entity: TDTO): Observable<void> {
         return this._client.put<void>(this.url, entity).pipe(
+            tap(() => {
+                this._translateService.get([ 'common.snackBar.successfullyUpdated', 'common.snackBar.close' ])
+                    .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyUpdated'], literals['common.snackBar.close'], {duration: 3000, panelClass: 'success-snack'}));
+            })
+        );
+    }
+
+    bulkUpdate(entities: TDTO): Observable<void> {
+        return this._client.put<void>(this.url + 'bulk', entities).pipe(
             tap(() => {
                 this._translateService.get([ 'common.snackBar.successfullyUpdated', 'common.snackBar.close' ])
                     .subscribe(literals => this._snackBar.open(literals['common.snackBar.successfullyUpdated'], literals['common.snackBar.close'], {duration: 3000, panelClass: 'success-snack'}));

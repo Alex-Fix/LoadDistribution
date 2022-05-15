@@ -24,12 +24,12 @@ namespace LoadDistribution.Data.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
             builder
                 .HasOne(p => p.University)
-                .WithMany(p => p.UniversityLectureMaps)
+                .WithMany(p => p.UniversityLecturerMaps)
                 .HasForeignKey(fk => fk.UniversityId)
                 .OnDelete(DeleteBehavior.Cascade);
             builder
                 .HasOne(p => p.Lecturer)
-                .WithMany(p => p.UniversityLectureMaps)
+                .WithMany(p => p.UniversityLecturerMaps)
                 .HasForeignKey(fk => fk.LecturerId)
                 .OnDelete(DeleteBehavior.Cascade);
         }

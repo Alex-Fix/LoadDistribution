@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-title align="center">{{ 'discipline.discipline' | translate }}</mat-card-title>
     <mat-card-content>
-        <form [formGroup]="form" class="centred-form">
+        <form [formGroup]="form" class="centered-form">
             <app-base [base]="base" *ngIf="componentMode == componentModes.edit"></app-base>
             <div>
                 <mat-form-field appearance="outline" class="mr-3">

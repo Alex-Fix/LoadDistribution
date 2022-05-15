@@ -1,12 +1,12 @@
 ﻿using LoadDistribution.Core.Domain.Interfaces;
-using LoadDistribution.Core.Domain.Models;
-using LoadDistribution.Core.Helpers;
+using LoadDistribution.Core.Helpers.Enums;
+using LoadDistribution.Core.Helpers.Models;
 using LoadDistribution.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories.Implementations
@@ -25,23 +25,23 @@ namespace LoadDistribution.Services.Repositories.Implementations
         #endregion
 
         #region Methods
-        public async virtual Task<TEntity> Get(int id)
+        public async virtual Task<TEntity> GetAsync(int id)
         {
             return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
         }
 
-        public async virtual Task<InsertResult> Insert(TEntity entity)
+        public async virtual Task<InsertResult> InsertAsync(TEntity entity)
         {
-            if(entity is null)
+            if (entity is null)
             {
                 return new InsertResult(null, false);
             }
 
-            if(entity is ICreateble creatable)
+            if (entity is ICreateble creatable)
             {
                 creatable.Created = DateTimeOffset.UtcNow;
             }
-            if(entity is IUpdateble updateble)
+            if (entity is IUpdateble updateble)
             {
                 updateble.Updated = DateTimeOffset.UtcNow;
             }
@@ -64,14 +64,51 @@ namespace LoadDistribution.Services.Repositories.Implementations
             }
         }
 
-        public async virtual Task<bool> Update(TEntity entity)
+        public async virtual Task<BulkInsertResult> InsertAsync(IEnumerable<TEntity> entities)
         {
-            if(entity is null)
+            if (entities is null)
+            {
+                return new BulkInsertResult(null, false);
+            }
+
+            foreach (TEntity entity in entities)
+            {
+                if (entity is ICreateble creatable)
+                {
+                    creatable.Created = DateTimeOffset.UtcNow;
+                }
+                if (entity is IUpdateble updateble)
+                {
+                    updateble.Updated = DateTimeOffset.UtcNow;
+                }
+            }
+
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+            try
+            {
+                await _dbContext.Set<TEntity>().AddRangeAsync(entities);
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return new BulkInsertResult(entities.Select(e => e.Id).ToList(), true);
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                _dbContext.ChangeTracker.Clear();
+                throw;
+            }
+        }
+
+        public async virtual Task<bool> UpdateAsync(TEntity entity)
+        {
+            if (entity is null)
             {
                 return false;
             }
 
-            if(entity is IUpdateble updateble)
+            if (entity is IUpdateble updateble)
             {
                 updateble.Updated = DateTimeOffset.UtcNow;
             }
@@ -94,10 +131,43 @@ namespace LoadDistribution.Services.Repositories.Implementations
             }
         }
 
-        public async virtual Task<bool> Delete(int id)
+        public async virtual Task<bool> UpdateAsync(IEnumerable<TEntity> entities)
+        {
+            if (entities is null)
+            {
+                return false;
+            }
+
+            foreach (TEntity entity in entities)
+            {
+                if (entity is IUpdateble updateble)
+                {
+                    updateble.Updated = DateTimeOffset.UtcNow;
+                }
+            }
+
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+            try
+            {
+                _dbContext.Set<TEntity>().UpdateRange(entities);
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return true;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                _dbContext.ChangeTracker.Clear();
+                throw;
+            }
+        }
+
+        public async virtual Task<bool> DeleteAsync(int id)
         {
             var entity = await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
-            if(entity is null)
+            if (entity is null)
             {
                 return false;
             }
@@ -120,14 +190,94 @@ namespace LoadDistribution.Services.Repositories.Implementations
             }
         }
 
-        protected IQueryable<TEntity> Sort(IQueryable<TEntity> query)
+        public async virtual Task<IList<TEntity>> ListAsync(Expression<Func<TEntity, bool>> filterExpression = null)
         {
-            if(query is IQueryable<ICreateble>)
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+
+            if (filterExpression is not null)
             {
-                return query.OrderByDescending(e => (e as ICreateble).Created);
+                query = query.Where(filterExpression);
             }
 
-            return query;
+            return await query.ToListAsync();
+        }
+
+        public async virtual Task<IList<TEntity>> ListAsync<TKey>(Expression<Func<TEntity, TKey>> sortExpression, AscDesc ascDesc = AscDesc.Desc, Expression<Func<TEntity, bool>> filterExpression = null)
+        {
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+
+            if (filterExpression is not null)
+            {
+                query = query.Where(filterExpression);
+            }
+
+            query = ascDesc switch
+            {
+                AscDesc.Asc => query.OrderBy(sortExpression),
+                AscDesc.Desc => query.OrderByDescending(sortExpression),
+                _ => throw new NotImplementedException()
+            };
+
+            return await query.ToListAsync();
+        }
+
+        public async virtual Task<Paged<TEntity>> PagedAsync(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> filterExpression = null)
+        {
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+
+            if (filterExpression is not null)
+            {
+                query = query.Where(filterExpression);
+            }
+
+            query.Skip((pageNumber - 1) * pageSize);
+            query.Take(pageSize);
+
+            int totalCount = await query.CountAsync();
+            int pageCount = (int)Math.Ceiling((double)totalCount / pageSize);
+            List<TEntity> entities = await query.ToListAsync();
+
+            return new Paged<TEntity>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                PageCount = pageCount,
+                TotalCount = totalCount,
+                List = entities
+            };
+        }
+
+        public async virtual Task<Paged<TEntity>> PagedAsync<TKey>(int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> sortExpression, AscDesc ascDesc = AscDesc.Desc, Expression<Func<TEntity, bool>> filterExpression = null)
+        {
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+
+            if (filterExpression is not null)
+            {
+                query = query.Where(filterExpression);
+            }
+
+            query = ascDesc switch
+            {
+                AscDesc.Asc => query.OrderBy(sortExpression),
+                AscDesc.Desc => query.OrderByDescending(sortExpression),
+                _ => throw new NotImplementedException()
+            };
+
+            query.Skip((pageNumber - 1) * pageSize);
+            query.Take(pageSize);
+
+            int totalCount = await query.CountAsync();
+            int pageCount = (int)Math.Ceiling((double)totalCount / pageSize);
+            List<TEntity> entities = await query.ToListAsync();
+
+            return new Paged<TEntity>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                PageCount = pageCount,
+                TotalCount = totalCount,
+                List = entities
+            };
         }
         #endregion
     }

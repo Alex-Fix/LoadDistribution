@@ -1,14 +1,14 @@
-﻿using LoadDistribution.Core.Domain.Models;
-using LoadDistribution.Core.DTO;
+﻿using AutoMapper;
+using LoadDistribution.Core.Domain.Models;
 using LoadDistribution.Core.DTO.Models;
-using LoadDistribution.Services.Facades;
+using LoadDistribution.Services.Repositories;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
     public class LogController : CollectionController<Log, LogDTO>
     {
         #region Constructors
-        public LogController(ICollectionFacade<Log, LogDTO> logFacade) : base(logFacade)
+        public LogController(IRepository<Log> repository, IMapper mapper) : base(repository, mapper)
         {
         }
         #endregion

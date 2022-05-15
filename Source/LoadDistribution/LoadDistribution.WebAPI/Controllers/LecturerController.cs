@@ -1,13 +1,14 @@
-﻿using LoadDistribution.Core.Domain.Models;
+﻿using AutoMapper;
+using LoadDistribution.Core.Domain.Models;
 using LoadDistribution.Core.DTO.Models;
-using LoadDistribution.Services.Facades;
+using LoadDistribution.Services.Repositories;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
     public class LecturerController : ProjectRelatedCollectionController<Lecturer, LecturerDTO>
     {
         #region Constructors
-        public LecturerController(IProjectRelatedCollectionFacade<Lecturer, LecturerDTO> lecturerFacade) : base(lecturerFacade)
+        public LecturerController(IRepository<Lecturer> repository, IMapper mapper) : base(repository, mapper)
         {
         }
         #endregion

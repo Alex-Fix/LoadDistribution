@@ -1,13 +1,14 @@
-﻿using LoadDistribution.Core.Domain.Models;
+﻿using AutoMapper;
+using LoadDistribution.Core.Domain.Models;
 using LoadDistribution.Core.DTO.Models;
-using LoadDistribution.Services.Facades;
+using LoadDistribution.Services.Repositories;
 
 namespace LoadDistribution.WebAPI.Controllers
 {
     public class ActivityController : ProjectRelatedCollectionController<Activity, ActivityDTO>
     {
         #region Constructors
-        public ActivityController(IProjectRelatedCollectionFacade<Activity, ActivityDTO> activityFacade) : base(activityFacade)
+        public ActivityController(IRepository<Activity> repository, IMapper mapper) : base(repository, mapper)
         {
         }
         #endregion

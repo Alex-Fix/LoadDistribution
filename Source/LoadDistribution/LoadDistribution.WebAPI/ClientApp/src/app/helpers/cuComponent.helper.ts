@@ -1,6 +1,7 @@
 import { Inject, Injectable, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Observable, Subject } from "rxjs";
 import Client from "../clients/client.client";
 import BaseDTO from "../models/dto/models/baseDTO.model";
 import { ComponentMode } from "../models/enums/componentMode.enum";
@@ -8,6 +9,8 @@ import { ComponentMode } from "../models/enums/componentMode.enum";
 // Create-Update component
 @Injectable()
 export default abstract class CUComponent<TDTO extends BaseDTO> implements OnInit {
+    private _id$: Subject<number> = new Subject();
+
     componentModes = ComponentMode;
     componentMode: ComponentMode = ComponentMode.undefined;
     form: FormGroup;
@@ -25,22 +28,9 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
         this._activatedRoute.params.subscribe(params => this._tryLoadData(params.id));
     }
 
-    protected _tryLoadData(id: number): void {
-        this.componentMode = id ? ComponentMode.edit : ComponentMode.create;
-
-        if(id) {
-            this._client.get(id).subscribe(entity => {
-                this.base = entity;
-                this.form.patchValue(entity);
-            });
-        }
+    get id$(): Observable<number> {
+        return this._id$;
     }
-
-    protected _payloadMapper(entity: TDTO): TDTO {
-        return entity;
-    }
-
-    protected abstract _initForm(): void;
 
     onCreateButtonClick(): void {
         this._client.insert(this.form.value).subscribe(() => this._initForm());
@@ -61,4 +51,22 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
             this._router.navigateByUrl(returnUrl ?? this._returnUrl)
         );
     }
+
+    protected _tryLoadData(id: number): void {
+        this.componentMode = id ? ComponentMode.edit : ComponentMode.create;
+
+        if(id) {
+            this._id$.next(id);
+            this._client.get(id).subscribe(entity => {
+                this.base = entity;
+                this.form.patchValue(entity);
+            });
+        }
+    }
+
+    protected _payloadMapper(entity: TDTO): TDTO {
+        return entity;
+    }
+
+    protected abstract _initForm(): void;
 }

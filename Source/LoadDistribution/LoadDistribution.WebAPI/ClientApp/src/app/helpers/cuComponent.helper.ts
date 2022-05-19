@@ -1,4 +1,4 @@
-import { Inject, Injectable, OnInit } from "@angular/core";
+import { Component, Inject, Injectable, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
@@ -28,10 +28,6 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
         this._activatedRoute.params.subscribe(params => this._tryLoadData(params.id));
     }
 
-    get id$(): Observable<number> {
-        return this._id$;
-    }
-
     onCreateButtonClick(): void {
         this._client.insert(this.form.value).subscribe(() => this._initForm());
     }
@@ -50,6 +46,10 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
         this._client.update(updatedEntity).subscribe(_ => 
             this._router.navigateByUrl(returnUrl ?? this._returnUrl)
         );
+    }
+
+    protected get id$(): Observable<number> {
+        return this._id$;
     }
 
     protected _tryLoadData(id: number): void {

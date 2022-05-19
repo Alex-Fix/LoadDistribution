@@ -1,4 +1,4 @@
-import IDTO from "../dto/interfaces/iDTO.interface";
+import IDTO from "../../dto/interfaces/iDTO.interface";
 
 export default class Paged<TEntity extends IDTO> {
     pageNumber: number;

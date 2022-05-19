@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import Localizable from "../models/helpers/localizable.model";
-import { Enum } from "../models/helpers/enum.model";
+import { Enum } from "../models/helpers/models/enum.model";
+import Localizable from "../models/helpers/models/localizable.model";
 
 @Injectable({
     providedIn: 'root'

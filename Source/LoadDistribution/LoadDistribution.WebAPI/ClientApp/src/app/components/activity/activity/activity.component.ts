@@ -6,7 +6,7 @@ import ActivityClient from 'src/app/clients/activityClient.client';
 import CUComponent from 'src/app/helpers/cuComponent.helper';
 import ActivityDTO from 'src/app/models/dto/models/activityDTO.model';
 import { DependencyType } from 'src/app/models/enums/dependencyType.enum';
-import Localizable from 'src/app/models/helpers/localizable.model';
+import Localizable from 'src/app/models/helpers/models/localizable.model';
 import EnumService from 'src/app/services/enum.service';
 
 @Component({

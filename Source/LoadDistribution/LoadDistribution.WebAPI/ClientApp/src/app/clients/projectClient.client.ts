@@ -7,7 +7,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ProjectHandler } from '../helpers/projectHandler.helper';
-import InsertResult from '../models/helpers/insertResult.model';
+import InsertResult from '../models/helpers/models/insertResult.model';
 
 @Injectable({
     providedIn: 'root'

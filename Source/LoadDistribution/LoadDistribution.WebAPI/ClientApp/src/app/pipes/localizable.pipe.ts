@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import Localizable from "../models/helpers/localizable.model";
+import Localizable from "../models/helpers/models/localizable.model";
 
 @Pipe({
     name: 'localizable'

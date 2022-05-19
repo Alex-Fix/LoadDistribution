@@ -1,10 +1,10 @@
 import Client from "./client.client";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import Paged from "../models/helpers/paged.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
 import IDTO from "../models/dto/interfaces/iDTO.interface";
+import Paged from "../models/helpers/models/paged.model";
 
 export default abstract class CollectionClient<TDTO extends IDTO> extends Client<TDTO> {
     constructor(

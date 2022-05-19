@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 import { catchError, finalize, map, tap } from "rxjs/operators";
 import Client from "../clients/client.client";
 import IDTO from "../models/dto/interfaces/iDTO.interface";
-import Paged from "../models/helpers/paged.model";
+import Paged from "../models/helpers/models/paged.model";
 import { ProjectHandler } from "./projectHandler.helper";
 
 export default class TableDataSource<TDTO extends IDTO> implements DataSource<TDTO> {

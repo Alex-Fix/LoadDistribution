@@ -5,8 +5,8 @@ import LogClient from 'src/app/clients/logClient.client';
 import TableDataSource from 'src/app/helpers/tableDataSource.helper';
 import LogDTO from 'src/app/models/dto/models/logDTO.model';
 import { LogType } from 'src/app/models/enums/logType.enum';
-import DialogData from 'src/app/models/helpers/dialogData.model';
-import Localizable from 'src/app/models/helpers/localizable.model';
+import DialogData from 'src/app/models/helpers/models/dialogData.model';
+import Localizable from 'src/app/models/helpers/models/localizable.model';
 import EnumService from 'src/app/services/enum.service';
 import { DialogComponent } from '../../common/dialog/dialog.component';
 

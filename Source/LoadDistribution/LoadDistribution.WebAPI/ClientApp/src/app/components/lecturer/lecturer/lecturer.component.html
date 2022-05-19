@@ -18,22 +18,22 @@
                 </mat-form-field>
             </div>
             <div formArrayName="universityLecturerMaps">
-                <div *ngFor="let universityLecturerMap of universityLecturerMapsFormArray.controls; let i = index">
+                <div *ngFor="let universityLecturerMap of operationManager.controls | async; let i = index">
                     <mat-form-field appearance="outline" [formGroupName]="i" class="mr-3">
                         <mat-label>{{ 'lecturer.university' | translate }}</mat-label>
                         <mat-select formControlName="universityId" required>
-                            <mat-option *ngFor="let university of universities$ | async" [value]="university.id">
+                            <mat-option *ngFor="let university of universities" [value]="university.id">
                             ({{ university.id }}) {{ university.name }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button mat-mini-fab color="warn">
+                    <button mat-mini-fab color="warn" (click)="operationManager.delete(universityLecturerMap)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>
                 <div class="centered pb-2">
                     <span class="mr-3">{{ 'common.addItem' | translate }}</span>
-                    <button mat-mini-fab color="primary" (click)="addUniversityLecturerMap()">
+                    <button mat-mini-fab color="primary" (click)="operationManager.create()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>

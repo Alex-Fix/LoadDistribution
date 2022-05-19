@@ -5,9 +5,9 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import IDTO from "../models/dto/interfaces/iDTO.interface";
-import BulkInsertResult from "../models/helpers/bulkInsertResult.model";
-import InsertResult from "../models/helpers/insertResult.model";
-import Paged from "../models/helpers/paged.model";
+import BulkInsertResult from "../models/helpers/models/bulkInsertResult.model";
+import InsertResult from "../models/helpers/models/insertResult.model";
+import Paged from "../models/helpers/models/paged.model";
 
 export default abstract class Client<TDTO extends IDTO> {
     constructor(
@@ -52,7 +52,7 @@ export default abstract class Client<TDTO extends IDTO> {
         );
     }
 
-    bulkUpdate(entities: TDTO): Observable<void> {
+    bulkUpdate(entities: TDTO[]): Observable<void> {
         return this._client.put<void>(this.url + 'bulk', entities).pipe(
             tap(() => {
                 this._translateService.get([ 'common.snackBar.successfullyUpdated', 'common.snackBar.close' ])

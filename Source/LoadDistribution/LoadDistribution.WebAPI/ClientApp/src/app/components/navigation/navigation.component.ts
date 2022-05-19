@@ -1,8 +1,8 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import Navigation from 'src/app/models/helpers/navigation.model';
-import NavigationFlatNode from 'src/app/models/helpers/navigationFlatNode.model';
+import Navigation from 'src/app/models/helpers/models/navigation.model';
+import NavigationFlatNode from 'src/app/models/helpers/models/navigationFlatNode.model';
 
 @Component({
   selector: 'app-navigation',

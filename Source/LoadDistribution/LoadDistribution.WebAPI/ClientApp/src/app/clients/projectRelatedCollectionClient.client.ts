@@ -1,14 +1,14 @@
 import Client from "./client.client";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import Paged from "../models/helpers/paged.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
 import { ProjectHandler } from "../helpers/projectHandler.helper";
 import { tap } from "rxjs/operators";
 import IProjectRelatedDTO from "../models/dto/interfaces/iProjectRelatedDTO.interface";
-import InsertResult from "../models/helpers/insertResult.model";
-import BulkInsertResult from "../models/helpers/bulkInsertResult.model";
+import BulkInsertResult from "../models/helpers/models/bulkInsertResult.model";
+import InsertResult from "../models/helpers/models/insertResult.model";
+import Paged from "../models/helpers/models/paged.model";
 
 export default abstract class ProjectRelatedCollectionClient<TDTO extends IProjectRelatedDTO> extends Client<TDTO> {
     constructor(

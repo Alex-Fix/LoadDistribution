@@ -30,8 +30,8 @@ export class UniversityLecturerMapComponent extends CUComponent<UniversityLectur
     super(universityLecturerMapClient, activatedRoute, router, '/universityLecturerMaps');
   }
 
-  protected _payloadMapper(entity: UniversityLecturerMapDTO): UniversityLecturerMapDTO {
-    return {...entity, university: null, lecturer: null};
+  protected _payloadMapper(): any {
+    return {...this.base, ...this.form.value, university: null, lecturer: null};
   }
 
   protected _initForm(): void {

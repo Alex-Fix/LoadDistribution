@@ -26,8 +26,8 @@ export class DisciplineComponent extends CUComponent<DisciplineDTO> {
     super(disciplineClient, activatedRoute, router, '/disciplines');
   }
 
-  protected _payloadMapper(entity: DisciplineDTO): DisciplineDTO {
-    return {...entity, university: null};
+  protected _payloadMapper(): any {
+    return {...this.base, ...this.form.value, university: null};
   }
 
   protected _initForm(): void {

@@ -29,23 +29,30 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
     }
 
     onCreateButtonClick(): void {
-        this._client.insert(this.form.value).subscribe(() => this._initForm());
+        this._client
+            .insert(this._payloadMapper())
+            .subscribe(() => this._initForm());
     }
 
     onCreateAndReturnButtonClick(returnUrl: string | null = null): void {
-        this._client.insert(this.form.value).subscribe(() => this._router.navigateByUrl(returnUrl ?? this._returnUrl));
+        this._client
+            .insert(this._payloadMapper())
+            .subscribe(() => this._router.navigateByUrl(returnUrl ?? this._returnUrl));
     }
 
     onUpdateButtonClick(): void {
-        const updatedEntity = {...this._payloadMapper(this.base), ...this.form.value};
-        this._client.update(updatedEntity).subscribe();
+        this._client
+            .update(this._payloadMapper())
+            .subscribe(() => {
+                this._initForm();
+                this._tryLoadData(this.base.id);
+            });
     }
 
     onUpdateAndReturnButtonClick(returnUrl: string | null = null): void {
-        const updatedEntity = {...this._payloadMapper(this.base), ...this.form.value};
-        this._client.update(updatedEntity).subscribe(_ => 
-            this._router.navigateByUrl(returnUrl ?? this._returnUrl)
-        );
+        this._client
+            .update(this._payloadMapper())
+            .subscribe(() => this._router.navigateByUrl(returnUrl ?? this._returnUrl));
     }
 
     protected get id$(): Observable<number> {
@@ -64,8 +71,8 @@ export default abstract class CUComponent<TDTO extends BaseDTO> implements OnIni
         }
     }
 
-    protected _payloadMapper(entity: TDTO): TDTO {
-        return entity;
+    protected _payloadMapper(): any {
+        return {...this.base, ...this.form.value};
     }
 
     protected abstract _initForm(): void;

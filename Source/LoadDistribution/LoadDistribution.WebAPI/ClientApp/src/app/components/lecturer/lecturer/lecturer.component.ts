@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { merge, Observable } from 'rxjs';
 import LecturerClient from 'src/app/clients/lecturerClient.client';
 import UniversityClient from 'src/app/clients/universityClient.client';
 import UniversityLecturerMapClient from 'src/app/clients/universityLecturerMapClient.client';
@@ -10,8 +9,8 @@ import LecturerDTO from 'src/app/models/dto/models/lecturerDTO.model';
 import UniversityDTO from 'src/app/models/dto/models/universityDTO.model';
 import UniversityLecturerMapDTO from 'src/app/models/dto/models/universityLecturerMapDTO.model';
 import OperationManager from 'src/app/helpers/operationManager.helper';
-import SynchronizationManager from 'src/app/helpers/synchronizationManager.helper';
-import { last, tap } from 'rxjs/operators';
+import { last, map } from 'rxjs/operators';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-lecturer',
@@ -19,15 +18,12 @@ import { last, tap } from 'rxjs/operators';
   styleUrls: ['./lecturer.component.scss']
 })
 export class LecturerComponent extends CUComponent<LecturerDTO> {
-  private _synchronizationManager = new SynchronizationManager<UniversityLecturerMapDTO>(this._universityLecturerMapClient, dto => {
-    return {...dto, lecturerId: this.base.id };
-  });
-
   universities: UniversityDTO[];
 
-  operationManager = new OperationManager<UniversityLecturerMapDTO>(ulm => this._formBuilder.group({
-    universityId: new FormControl(ulm?.universityId, [Validators.required])
-  }));
+  operationManager = new OperationManager<UniversityLecturerMapDTO>(
+    this._universityLecturerMapClient,
+    dto => this._initUniversityLecturerMapForm(dto)
+  );
   
   constructor(
     private readonly _formBuilder: FormBuilder,
@@ -42,6 +38,59 @@ export class LecturerComponent extends CUComponent<LecturerDTO> {
     this._universityClient.getAll().subscribe(us => this.universities = us);
   }
 
+  onCreateButtonClick(): void {
+    this._lecturerClient
+        .insert(this._payloadMapper())
+        .subscribe(({id}) => {
+          this.operationManager.synchronize((dto, form) => { 
+            return {...dto, ...form.value, lecturerId: id, university: null, lecturer: null};
+          }).subscribe(() => {
+            this.operationManager.clear();
+            this._initForm();
+          })
+        });
+  }
+
+  onCreateAndReturnButtonClick(returnUrl: string | null = null): void {
+    this._lecturerClient
+        .insert(this._payloadMapper())
+        .subscribe(({id}) => {
+          this.operationManager.synchronize((dto, form) => {
+            return {...dto, ...form.value, lecturerId: id, university: null, lecturer: null};
+          }).subscribe(() => this._router.navigateByUrl(returnUrl ?? this._returnUrl));
+        });
+  }
+
+  onUpdateButtonClick(): void {
+    merge(
+      this._lecturerClient.update(this._payloadMapper()),
+      this.operationManager.synchronize((dto, form) => {
+        return {...dto, ...form.value, lecturerId: this.base.id, university: null, lecturer: null};
+      })
+    ).pipe(
+      last()
+    ).subscribe(() => {
+      this.operationManager.clear();
+      this._initForm();
+      this._tryLoadData(this.base.id);
+    });
+  }
+
+  onUpdateAndReturnButtonClick(returnUrl: string | null = null): void {
+    merge(
+      this._lecturerClient.update(this._payloadMapper()),
+      this.operationManager.synchronize((dto, form) => {
+        return {...dto, ...form.value, lecturerId: this.base.id, university: null, lecturer: null};
+      })
+    ).pipe(
+      last()
+    ).subscribe(() => this._router.navigateByUrl(returnUrl ?? this._returnUrl));
+  }
+
+  protected _payloadMapper(): any {
+    return {...this.base, ...this.form.value, universityLecturerMaps: null};
+  }
+
   protected _initForm(): void {
     this.form = this._formBuilder.group({
       lastName: new FormControl(null, [Validators.required]),
@@ -51,49 +100,10 @@ export class LecturerComponent extends CUComponent<LecturerDTO> {
     });
   }
 
-  onCreateButtonClick(): void {
-    merge(
-      this._lecturerClient.insert(this.form.value),
-      this._synchronizationManager.synchronize(this.operationManager)
-    ).subscribe(() => {
-      this._initForm();
-      this.operationManager.clear();
+  private _initUniversityLecturerMapForm(dto: UniversityLecturerMapDTO | null): FormGroup {
+    return this._formBuilder.group({
+      universityId: new FormControl(dto?.universityId, [Validators.required])
     });
-  }
-
-  onCreateAndReturnButtonClick(returnUrl: string | null = null): void {
-    merge(
-      this._lecturerClient.insert(this.form.value),
-      this._synchronizationManager.synchronize(this.operationManager)
-    ).subscribe(() => this._router.navigateByUrl(returnUrl ?? this._returnUrl));
-  }
-
-  onUpdateButtonClick(): void {
-      const updatedEntity = {...this._payloadMapper(this.base), ...this.form.value};
-
-      merge(
-        this._lecturerClient.update(updatedEntity),
-        this._synchronizationManager.synchronize(this.operationManager)
-      ).pipe(
-        last()
-      ).subscribe(() => 
-        this._universityLecturerMapClient.search(this.base.id)
-        .subscribe(ulms => {
-          this.operationManager.clear();
-          this.operationManager.addRange(ulms)
-        })
-      );
-  }
-
-  onUpdateAndReturnButtonClick(returnUrl: string | null = null): void {
-      const updatedEntity = {...this._payloadMapper(this.base), ...this.form.value};
-
-      merge(
-        this._lecturerClient.update(updatedEntity),
-        this._synchronizationManager.synchronize(this.operationManager)
-      ).subscribe(() => 
-          this._router.navigateByUrl(returnUrl ?? this._returnUrl)
-      );
   }
 
   private _onIdChanged(id: number): void {

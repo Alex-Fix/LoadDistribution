@@ -11,274 +11,276 @@ using System.Threading.Tasks;
 
 namespace LoadDistribution.Services.Repositories.Implementations
 {
-    public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
-    {
-        #region Fields
-        protected readonly IDbContext _dbContext;
-        #endregion
+      public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
+      {
+            #region Fields
+            protected readonly IDbContext _dbContext;
+            #endregion
 
-        #region Constructors
-        public SQLiteRepository(IDbContext dbContext)
-        {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        }
-        #endregion
-
-        #region Methods
-        public async virtual Task<TEntity> GetAsync(int id)
-        {
-            return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
-        }
-
-        public async virtual Task<InsertResult> InsertAsync(TEntity entity)
-        {
-            if (entity is null)
+            #region Constructors
+            public SQLiteRepository(IDbContext dbContext)
             {
-                return new InsertResult(null, false);
+                  _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            }
+            #endregion
+
+            #region Methods
+            public async virtual Task<TEntity> GetAsync(int id)
+            {
+                  return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
             }
 
-            if (entity is ICreateble creatable)
+            public async virtual Task<InsertResult> InsertAsync(TEntity entity)
             {
-                creatable.Created = DateTimeOffset.UtcNow;
-            }
-            if (entity is IUpdateble updateble)
-            {
-                updateble.Updated = DateTimeOffset.UtcNow;
-            }
+                  if (entity is null)
+                  {
+                        return new InsertResult(null, false);
+                  }
 
-            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+                  if (entity is ICreateble creatable)
+                  {
+                        creatable.Created = DateTimeOffset.UtcNow;
+                  }
+                  if (entity is IUpdateble updateble)
+                  {
+                        updateble.Updated = DateTimeOffset.UtcNow;
+                  }
 
-            try
-            {
-                await _dbContext.Set<TEntity>().AddAsync(entity);
-                await _dbContext.SaveChangesAsync();
-                await transaction.CommitAsync();
+                  using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
-                return new InsertResult(entity.Id, true);
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                _dbContext.ChangeTracker.Clear();
-                throw;
-            }
-        }
+                  try
+                  {
+                        await _dbContext.Set<TEntity>().AddAsync(entity);
+                        await _dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
 
-        public async virtual Task<BulkInsertResult> InsertAsync(IEnumerable<TEntity> entities)
-        {
-            if (entities is null)
-            {
-                return new BulkInsertResult(null, false);
-            }
-
-            foreach (TEntity entity in entities)
-            {
-                if (entity is ICreateble creatable)
-                {
-                    creatable.Created = DateTimeOffset.UtcNow;
-                }
-                if (entity is IUpdateble updateble)
-                {
-                    updateble.Updated = DateTimeOffset.UtcNow;
-                }
+                        return new InsertResult(entity.Id, true);
+                  }
+                  catch
+                  {
+                        await transaction.RollbackAsync();
+                        _dbContext.ChangeTracker.Clear();
+                        throw;
+                  }
             }
 
-            using var transaction = await _dbContext.Database.BeginTransactionAsync();
-
-            try
+            public async virtual Task<BulkInsertResult> InsertAsync(IEnumerable<TEntity> entities)
             {
-                await _dbContext.Set<TEntity>().AddRangeAsync(entities);
-                await _dbContext.SaveChangesAsync();
-                await transaction.CommitAsync();
+                  if (entities is null)
+                  {
+                        return new BulkInsertResult(null, false);
+                  }
 
-                return new BulkInsertResult(entities.Select(e => e.Id).ToList(), true);
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                _dbContext.ChangeTracker.Clear();
-                throw;
-            }
-        }
+                  foreach (TEntity entity in entities)
+                  {
+                        if (entity is ICreateble creatable)
+                        {
+                              creatable.Created = DateTimeOffset.UtcNow;
+                        }
+                        if (entity is IUpdateble updateble)
+                        {
+                              updateble.Updated = DateTimeOffset.UtcNow;
+                        }
+                  }
 
-        public async virtual Task<bool> UpdateAsync(TEntity entity)
-        {
-            if (entity is null)
-            {
-                return false;
-            }
+                  using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
-            if (entity is IUpdateble updateble)
-            {
-                updateble.Updated = DateTimeOffset.UtcNow;
-            }
+                  try
+                  {
+                        await _dbContext.Set<TEntity>().AddRangeAsync(entities);
+                        await _dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
 
-            using var transaction = await _dbContext.Database.BeginTransactionAsync();
-
-            try
-            {
-                _dbContext.Set<TEntity>().Update(entity);
-                await _dbContext.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                return true;
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                _dbContext.ChangeTracker.Clear();
-                throw;
-            }
-        }
-
-        public async virtual Task<bool> UpdateAsync(IEnumerable<TEntity> entities)
-        {
-            if (entities is null)
-            {
-                return false;
+                        return new BulkInsertResult(entities.Select(e => e.Id).ToList(), true);
+                  }
+                  catch
+                  {
+                        await transaction.RollbackAsync();
+                        _dbContext.ChangeTracker.Clear();
+                        throw;
+                  }
             }
 
-            foreach (TEntity entity in entities)
+            public async virtual Task<bool> UpdateAsync(TEntity entity)
             {
-                if (entity is IUpdateble updateble)
-                {
-                    updateble.Updated = DateTimeOffset.UtcNow;
-                }
+                  if (entity is null)
+                  {
+                        return false;
+                  }
+
+                  if (entity is IUpdateble updateble)
+                  {
+                        updateble.Updated = DateTimeOffset.UtcNow;
+                  }
+
+                  using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+                  try
+                  {
+                        _dbContext.Set<TEntity>().Update(entity);
+                        await _dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
+
+                        return true;
+                  }
+                  catch
+                  {
+                        await transaction.RollbackAsync();
+                        _dbContext.ChangeTracker.Clear();
+                        throw;
+                  }
             }
 
-            using var transaction = await _dbContext.Database.BeginTransactionAsync();
-
-            try
+            public async virtual Task<bool> UpdateAsync(IEnumerable<TEntity> entities)
             {
-                _dbContext.Set<TEntity>().UpdateRange(entities);
-                await _dbContext.SaveChangesAsync();
-                await transaction.CommitAsync();
+                  if (entities is null)
+                  {
+                        return false;
+                  }
 
-                return true;
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                _dbContext.ChangeTracker.Clear();
-                throw;
-            }
-        }
+                  foreach (TEntity entity in entities)
+                  {
+                        if (entity is IUpdateble updateble)
+                        {
+                              updateble.Updated = DateTimeOffset.UtcNow;
+                        }
+                  }
 
-        public async virtual Task<bool> DeleteAsync(int id)
-        {
-            var entity = await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
-            if (entity is null)
-            {
-                return false;
-            }
+                  using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
-            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+                  try
+                  {
+                        _dbContext.Set<TEntity>().UpdateRange(entities);
+                        await _dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
 
-            try
-            {
-                _dbContext.Set<TEntity>().Remove(entity);
-                await _dbContext.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                return true;
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                _dbContext.ChangeTracker.Clear();
-                throw;
-            }
-        }
-
-        public async virtual Task<IList<TEntity>> ListAsync(Expression<Func<TEntity, bool>> filterExpression = null)
-        {
-            var query = _dbContext.Set<TEntity>().AsQueryable();
-
-            if (filterExpression is not null)
-            {
-                query = query.Where(filterExpression);
+                        return true;
+                  }
+                  catch
+                  {
+                        await transaction.RollbackAsync();
+                        _dbContext.ChangeTracker.Clear();
+                        throw;
+                  }
             }
 
-            return await query.ToListAsync();
-        }
-
-        public async virtual Task<IList<TEntity>> ListAsync<TKey>(Expression<Func<TEntity, TKey>> sortExpression, AscDesc ascDesc = AscDesc.Desc, Expression<Func<TEntity, bool>> filterExpression = null)
-        {
-            var query = _dbContext.Set<TEntity>().AsQueryable();
-
-            if (filterExpression is not null)
+            public async virtual Task<bool> DeleteAsync(int id)
             {
-                query = query.Where(filterExpression);
+                  var entity = await _dbContext.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == id);
+                  if (entity is null)
+                  {
+                        return false;
+                  }
+
+                  using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+                  try
+                  {
+                        _dbContext.Set<TEntity>().Remove(entity);
+                        await _dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
+
+                        return true;
+                  }
+                  catch
+                  {
+                        await transaction.RollbackAsync();
+                        _dbContext.ChangeTracker.Clear();
+                        throw;
+                  }
             }
 
-            query = ascDesc switch
+            public async virtual Task<IList<TEntity>> ListAsync(Expression<Func<TEntity, bool>> filterExpression = null)
             {
-                AscDesc.Asc => query.OrderBy(sortExpression),
-                AscDesc.Desc => query.OrderByDescending(sortExpression),
-                _ => throw new NotImplementedException()
-            };
+                  var query = _dbContext.Set<TEntity>().AsQueryable();
 
-            return await query.ToListAsync();
-        }
+                  if (filterExpression is not null)
+                  {
+                        query = query.Where(filterExpression);
+                  }
 
-        public async virtual Task<Paged<TEntity>> PagedAsync(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> filterExpression = null)
-        {
-            var query = _dbContext.Set<TEntity>().AsQueryable();
-
-            if (filterExpression is not null)
-            {
-                query = query.Where(filterExpression);
+                  return await query.ToListAsync();
             }
 
-            query.Skip((pageNumber - 1) * pageSize);
-            query.Take(pageSize);
-
-            int totalCount = await query.CountAsync();
-            int pageCount = (int)Math.Ceiling((double)totalCount / pageSize);
-            List<TEntity> entities = await query.ToListAsync();
-
-            return new Paged<TEntity>
+            public async virtual Task<IList<TEntity>> ListAsync<TKey>(Expression<Func<TEntity, TKey>> sortExpression, AscDesc ascDesc = AscDesc.Desc, Expression<Func<TEntity, bool>> filterExpression = null)
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                PageCount = pageCount,
-                TotalCount = totalCount,
-                List = entities
-            };
-        }
+                  var query = _dbContext.Set<TEntity>().AsQueryable();
 
-        public async virtual Task<Paged<TEntity>> PagedAsync<TKey>(int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> sortExpression, AscDesc ascDesc = AscDesc.Desc, Expression<Func<TEntity, bool>> filterExpression = null)
-        {
-            var query = _dbContext.Set<TEntity>().AsQueryable();
+                  if (filterExpression is not null)
+                  {
+                        query = query.Where(filterExpression);
+                  }
 
-            if (filterExpression is not null)
-            {
-                query = query.Where(filterExpression);
+                  query = ascDesc switch
+                  {
+                        AscDesc.Asc => query.OrderBy(sortExpression),
+                        AscDesc.Desc => query.OrderByDescending(sortExpression),
+                        _ => throw new NotImplementedException()
+                  };
+
+                  return await query.ToListAsync();
             }
 
-            query = ascDesc switch
+            public async virtual Task<Paged<TEntity>> PagedAsync(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> filterExpression = null)
             {
-                AscDesc.Asc => query.OrderBy(sortExpression),
-                AscDesc.Desc => query.OrderByDescending(sortExpression),
-                _ => throw new NotImplementedException()
-            };
+                  var query = _dbContext.Set<TEntity>().AsQueryable();
 
-            query.Skip((pageNumber - 1) * pageSize);
-            query.Take(pageSize);
+                  if (filterExpression is not null)
+                  {
+                        query = query.Where(filterExpression);
+                  }
 
-            int totalCount = await query.CountAsync();
-            int pageCount = (int)Math.Ceiling((double)totalCount / pageSize);
-            List<TEntity> entities = await query.ToListAsync();
+                  int totalCount = await query.CountAsync();
 
-            return new Paged<TEntity>
+                  query = query.Skip(pageNumber * pageSize);
+                  query = query.Take(pageSize);
+
+                  int pageCount = (int)Math.Ceiling((double)totalCount / pageSize);
+                  List<TEntity> entities = await query.ToListAsync();
+
+                  return new Paged<TEntity>
+                  {
+                        PageNumber = pageNumber,
+                        PageSize = pageSize,
+                        PageCount = pageCount,
+                        TotalCount = totalCount,
+                        List = entities
+                  };
+            }
+
+            public async virtual Task<Paged<TEntity>> PagedAsync<TKey>(int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> sortExpression, AscDesc ascDesc = AscDesc.Desc, Expression<Func<TEntity, bool>> filterExpression = null)
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                PageCount = pageCount,
-                TotalCount = totalCount,
-                List = entities
-            };
-        }
-        #endregion
-    }
+                  var query = _dbContext.Set<TEntity>().AsQueryable();
+
+                  if (filterExpression is not null)
+                  {
+                        query = query.Where(filterExpression);
+                  }
+
+                  query = ascDesc switch
+                  {
+                        AscDesc.Asc => query.OrderBy(sortExpression),
+                        AscDesc.Desc => query.OrderByDescending(sortExpression),
+                        _ => throw new NotImplementedException()
+                  };
+
+                  int totalCount = await query.CountAsync();
+
+                  query = query.Skip(pageNumber * pageSize);
+                  query = query.Take(pageSize);
+
+                  int pageCount = (int)Math.Ceiling((double)totalCount / pageSize);
+                  List<TEntity> entities = await query.ToListAsync();
+
+                  return new Paged<TEntity>
+                  {
+                        PageNumber = pageNumber,
+                        PageSize = pageSize,
+                        PageCount = pageCount,
+                        TotalCount = totalCount,
+                        List = entities
+                  };
+            }
+            #endregion
+      }
 }

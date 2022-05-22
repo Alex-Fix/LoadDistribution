@@ -8,7 +8,7 @@ import Paged from "../models/helpers/models/paged.model";
 import { ProjectHandler } from "./projectHandler.helper";
 
 export default class TableDataSource<TDTO extends IDTO> implements DataSource<TDTO> {
-    private readonly _pageSizeOptions: number[] = [10, 15, 20, 50, 100, 200, 500];
+    private readonly _pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100, 200, 500];
     private readonly _defaultPaged: Paged<TDTO> = { list: [], pageCount: 0, totalCount: 0, pageSize: 0, pageNumber: 0 };
     private readonly _pageSubject: BehaviorSubject<Paged<TDTO>> = new BehaviorSubject<Paged<TDTO>>(this._defaultPaged);
     private readonly _loadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -28,7 +28,7 @@ export default class TableDataSource<TDTO extends IDTO> implements DataSource<TD
         this._loadingSubject.complete();
     }
 
-    loadPage(pageNumber: number = 0, pageSize: number = 0): void {
+    loadPage(pageNumber: number = 0, pageSize: number = 10): void {
         this._loadingSubject.next(true);
 
         this._client.getPaged(pageNumber, pageSize)
@@ -39,7 +39,7 @@ export default class TableDataSource<TDTO extends IDTO> implements DataSource<TD
                 this._pageSubject.next(page)
             });
     }
-
+    
     addPaginator(paginator: MatPaginator): void {
         setTimeout(() => {
             this._pageSubject.pipe(

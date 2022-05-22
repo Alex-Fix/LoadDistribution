@@ -1,5 +1,6 @@
 import { AbstractControl, FormGroup, FormArray } from "@angular/forms";
 import { BehaviorSubject, concat, Observable, Subscription } from "rxjs";
+import { defaultIfEmpty } from "rxjs/operators";
 import Client from "../clients/client.client";
 import IDTO from "../models/dto/interfaces/iDTO.interface";
 import IFormInitializer from "../models/helpers/interfaces/iFormInitializer.interface";
@@ -108,7 +109,10 @@ export default class OperationManager<TDTO extends IDTO> {
             observables.push(this._client.bulkUpdate(updated));
         }
 
-        return concat(...observables) as Observable<void>;
+        return concat(...observables)
+            .pipe(
+                defaultIfEmpty(null as any) // this is workaround!!! I hope I can improve it in the future
+            ) as Observable<void>;
     }
 
     clear(): void {

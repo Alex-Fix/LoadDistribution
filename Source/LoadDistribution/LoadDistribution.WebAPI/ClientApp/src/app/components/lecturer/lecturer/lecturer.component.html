@@ -22,8 +22,8 @@
                     <mat-form-field appearance="outline" [formGroupName]="i" class="mr-3">
                         <mat-label>{{ 'lecturer.university' | translate }}</mat-label>
                         <mat-select formControlName="universityId" required>
-                            <mat-option *ngFor="let university of universities" [value]="university.id">
-                            ({{ university.id }}) {{ university.name }}
+                            <mat-option *ngFor="let university of filterUniversities(universityLecturerMap)" [value]="university.id">
+                                ({{ university.id }}) {{ university.name }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

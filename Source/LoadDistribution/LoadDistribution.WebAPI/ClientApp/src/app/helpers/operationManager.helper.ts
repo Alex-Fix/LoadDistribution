@@ -1,6 +1,5 @@
 import { AbstractControl, FormGroup, FormArray } from "@angular/forms";
-import { merge, Observable, Subject, Subscription } from "rxjs";
-import { last } from "rxjs/operators";
+import { BehaviorSubject, concat, Observable, Subscription } from "rxjs";
 import Client from "../clients/client.client";
 import IDTO from "../models/dto/interfaces/iDTO.interface";
 import IFormInitializer from "../models/helpers/interfaces/iFormInitializer.interface";
@@ -13,17 +12,22 @@ import UpdateOperation from "../models/helpers/models/updateOperation.model";
 
 export default class OperationManager<TDTO extends IDTO> {
     private readonly _operations: Operation[] = [];
-    private readonly _controls$: Subject<FormGroup[]> = new Subject<FormGroup[]>();
     private readonly _formArray: FormArray = new FormArray([]);
+    private readonly _controls$: BehaviorSubject<FormGroup[]> = new BehaviorSubject<FormGroup[]>(this.controls);
 
     constructor(
         private readonly _client: Client<TDTO>,
         private readonly _initializer: IFormInitializer<TDTO>
     ) {
+        this._formArray.valueChanges.subscribe(() => this._controls$.next(this.controls));
     }
 
     get controls$(): Observable<FormGroup[]> {
         return this._controls$;
+    }
+
+    get controls(): FormGroup[] {
+        return this._formArray.controls as FormGroup[];
     }
 
     get formArray(): FormArray {
@@ -36,8 +40,7 @@ export default class OperationManager<TDTO extends IDTO> {
 
         this._formArray.push(form);
         this._operations.push(operation);
-        this._updateControls();
-
+        
         const subscription: Subscription = form.valueChanges.subscribe(() => {
             subscription.unsubscribe();
 
@@ -58,7 +61,6 @@ export default class OperationManager<TDTO extends IDTO> {
 
         this._formArray.push(form);
         this._operations.push(new CreateOperation(form));
-        this._updateControls();
     }
 
     delete(form: AbstractControl | FormGroup): void {
@@ -84,12 +86,17 @@ export default class OperationManager<TDTO extends IDTO> {
         const formIndex = this._formArray.controls.findIndex(f => f == form);
         if(formIndex != -1) {
             this._formArray.removeAt(formIndex);
-            this._updateControls();
         }
     }
 
     synchronize(mapper: IPayloadMapper<TDTO>): Observable<void> {
-        const observables: Observable<unknown>[] = []; 
+        const observables: Observable<unknown>[] = [];
+
+        const deleted = this._deleted.map(o => o.id);
+        if (deleted.length) 
+        {
+            observables.push(...deleted.map(d => this._client.delete(d)));
+        }
 
         const created = this._created.map(o => mapper(null, o.form));
         if (created.length) {
@@ -101,18 +108,12 @@ export default class OperationManager<TDTO extends IDTO> {
             observables.push(this._client.bulkUpdate(updated));
         }
 
-        const deleted = this._deleted.map(o => o.id);
-        if (deleted.length) {
-            deleted.forEach(id => observables.push(this._client.delete(id)));
-        }
-
-        return merge(...observables) as Observable<void>;
+        return concat(...observables) as Observable<void>;
     }
 
     clear(): void {
         this._operations.splice(0, this._operations.length);
         this._formArray.clear();
-        this._updateControls();
     }
 
     private get _updated(): UpdateOperation<TDTO>[] {
@@ -131,9 +132,5 @@ export default class OperationManager<TDTO extends IDTO> {
         return this._operations
             .filter(o => o instanceof DeleteOperation)
             .map(o => o as DeleteOperation);
-    }
-
-    private _updateControls(): void {
-        this._controls$.next(this._formArray.controls as FormGroup[]);
     }
 }

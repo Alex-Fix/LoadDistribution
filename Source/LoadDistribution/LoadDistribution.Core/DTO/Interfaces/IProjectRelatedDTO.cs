@@ -1,7 +1,6 @@
-﻿namespace LoadDistribution.Core.DTO.Interfaces
+﻿namespace LoadDistribution.Core.DTO.Interfaces;
+
+public interface IProjectRelatedDTO : IDTO
 {
-    public interface IProjectRelatedDTO : IDTO
-    {
-        int ProjectId { get; set; }
-    }
+      int ProjectId { get; set; }
 }

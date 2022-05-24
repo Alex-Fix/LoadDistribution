@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace LoadDistribution.Core.Domain.Interfaces
+namespace LoadDistribution.Core.Domain.Interfaces;
+
+public interface IUpdateble
 {
-    public interface IUpdateble
-    {
-        public DateTimeOffset Updated { get; set; }
-    }
+      public DateTimeOffset Updated { get; set; }
 }

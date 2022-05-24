@@ -1,7 +1,6 @@
-﻿namespace LoadDistribution.Core.DTO.Models
+﻿namespace LoadDistribution.Core.DTO.Models;
+
+public class UniversityDTO : BaseProjectRelatedDTO
 {
-    public class UniversityDTO : BaseProjectRelatedDTO
-    {
-        public string Name { get; set; }
-    }
+      public string Name { get; set; } = string.Empty;
 }

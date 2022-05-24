@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace LoadDistribution.Core.Domain.Interfaces
+namespace LoadDistribution.Core.Domain.Interfaces;
+
+public interface ICreateble
 {
-    public interface ICreateble
-    {
-        public DateTimeOffset Created { get; set; }
-    }
+      public DateTimeOffset Created { get; set; }
 }

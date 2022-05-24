@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using LoadDistribution.Core.Helpers.Models;
 
-namespace LoadDistribution.Core.AutoMapperProfiles
+namespace LoadDistribution.Core.AutoMapperProfiles;
+
+public class HelperProfile : Profile
 {
-    public class HelperProfile : Profile
-    {
-        public HelperProfile()
-        {
+      public HelperProfile()
+      {
             CreateMap(typeof(Paged<>), typeof(Paged<>));
-        }
-    }
+      }
 }

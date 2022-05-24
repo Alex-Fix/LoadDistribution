@@ -2,12 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LoadDistribution.Data.Configurations
+namespace LoadDistribution.Data.Configurations;
+
+public class UniversityConfiguration : IEntityTypeConfiguration<University>
 {
-    public class UniversityConfiguration : IEntityTypeConfiguration<University>
-    {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<University> builder)
-        {
+      public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<University> builder)
+      {
             builder.ToTable("Universities");
             builder.HasKey(k => k.Id);
 
@@ -17,9 +17,8 @@ namespace LoadDistribution.Data.Configurations
 
             builder
                 .HasOne(p => p.Project)
-                .WithMany(p => p.Universities)
+                .WithMany(p => p!.Universities)
                 .HasForeignKey(fk => fk.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
-        }
-    }
+      }
 }

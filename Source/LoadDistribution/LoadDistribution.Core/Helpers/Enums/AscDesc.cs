@@ -1,8 +1,7 @@
-﻿namespace LoadDistribution.Core.Helpers.Enums
+﻿namespace LoadDistribution.Core.Helpers.Enums;
+
+public enum AscDesc
 {
-    public enum AscDesc
-    {
-        Asc,
-        Desc
-    }
+      Asc,
+      Desc
 }

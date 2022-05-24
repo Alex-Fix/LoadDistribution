@@ -1,8 +1,7 @@
-﻿namespace LoadDistribution.Core.DTO.Models
+﻿namespace LoadDistribution.Core.DTO.Models;
+
+public class ProjectDTO : BaseDTO
 {
-    public class ProjectDTO : BaseDTO
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-    }
+      public string Title { get; set; } = string.Empty;
+      public string? Description { get; set; }
 }

@@ -6,20 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LoadDistribution.WebAPI.Controllers
-{
-    public class UniversityLecturerMapController : ProjectRelatedCollectionController<UniversityLecturerMap, UniversityLecturerMapDTO>
-    {
-        #region Constructors
-        public UniversityLecturerMapController(IRepository<UniversityLecturerMap> repository, IMapper mapper) : base(repository, mapper)
-        {
-        }
-        #endregion
+namespace LoadDistribution.WebAPI.Controllers;
 
-        #region Methods
-        [HttpGet("Search")]
-        public async Task<IActionResult> Search([FromQuery] int? lecturerId)
-        {
+public class UniversityLecturerMapController : ProjectRelatedCollectionController<UniversityLecturerMap, UniversityLecturerMapDTO>
+{
+      #region Constructors
+      public UniversityLecturerMapController(IRepository<UniversityLecturerMap> repository, IMapper mapper) : base(repository, mapper)
+      {
+      }
+      #endregion
+
+      #region Methods
+      [HttpGet("Search")]
+      public async Task<IActionResult> SearchAsync([FromQuery] int? lecturerId)
+      {
             IList<UniversityLecturerMap> entities = await _repository.ListAsync(
                 sortExpression: ulp => ulp.Created,
                 filterExpression: ulp => (lecturerId == null || ulp.LecturerId == lecturerId.Value)
@@ -29,7 +29,6 @@ namespace LoadDistribution.WebAPI.Controllers
             IList<UniversityLecturerMapDTO> dtos = _mapper.Map<IList<UniversityLecturerMapDTO>>(entities);
 
             return Ok(dtos);
-        }
-        #endregion
-    }
+      }
+      #endregion
 }

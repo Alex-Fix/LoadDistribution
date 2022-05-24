@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LoadDistribution.Data.Configurations
+namespace LoadDistribution.Data.Configurations;
+
+public class DisciplineConfiguration : IEntityTypeConfiguration<Discipline>
 {
-    public class DisciplineConfiguration : IEntityTypeConfiguration<Discipline>
-    {
-        public void Configure(EntityTypeBuilder<Discipline> builder)
-        {
+      public void Configure(EntityTypeBuilder<Discipline> builder)
+      {
             builder.ToTable("Disciplines");
             builder.HasKey(k => k.Id);
 
@@ -24,14 +24,13 @@ namespace LoadDistribution.Data.Configurations
 
             builder
                 .HasOne(p => p.Project)
-                .WithMany(p => p.Disciplines)
+                .WithMany(p => p!.Disciplines)
                 .HasForeignKey(fk => fk.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
             builder
                 .HasOne(p => p.University)
-                .WithMany(p => p.Disciplines)
+                .WithMany(p => p!.Disciplines)
                 .HasForeignKey(p => p.UniversityId)
                 .OnDelete(DeleteBehavior.Cascade);
-        }
-    }
+      }
 }

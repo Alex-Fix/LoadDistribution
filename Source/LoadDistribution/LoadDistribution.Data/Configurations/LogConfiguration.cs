@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LoadDistribution.Data.Configurations
+namespace LoadDistribution.Data.Configurations;
+
+public class LogConfiguration : IEntityTypeConfiguration<Log>
 {
-    public class LogConfiguration : IEntityTypeConfiguration<Log>
-    {
-        public void Configure(EntityTypeBuilder<Log> builder)
-        {
+      public void Configure(EntityTypeBuilder<Log> builder)
+      {
             builder.ToTable("Logs");
             builder.HasKey(k => k.Id);
 
@@ -16,6 +16,5 @@ namespace LoadDistribution.Data.Configurations
             builder.Property(p => p.Details).HasMaxLength(4096);
             builder.Property(p => p.ExceptionType).HasMaxLength(256);
             builder.Property(p => p.Created).HasConversion(new DateTimeOffsetToBinaryConverter());
-        }
-    }
+      }
 }

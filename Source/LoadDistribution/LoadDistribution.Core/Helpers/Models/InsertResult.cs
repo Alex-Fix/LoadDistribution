@@ -1,18 +1,17 @@
-﻿namespace LoadDistribution.Core.Helpers.Models
+﻿namespace LoadDistribution.Core.Helpers.Models;
+
+public class InsertResult
 {
-    public class InsertResult
-    {
-        #region Constructors
-        public InsertResult(int? id, bool success)
-        {
+      #region Constructors
+      public InsertResult(int? id, bool success)
+      {
             Id = id;
             Success = success;
-        }
-        #endregion
+      }
+      #endregion
 
-        #region Properties
-        public int? Id { get; set; }
-        public bool Success { get; set; }
-        #endregion
-    }
+      #region Properties
+      public int? Id { get; set; }
+      public bool Success { get; set; }
+      #endregion
 }

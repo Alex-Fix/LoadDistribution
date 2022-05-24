@@ -1,7 +1,6 @@
-﻿namespace LoadDistribution.Core.DTO.Interfaces
+﻿namespace LoadDistribution.Core.DTO.Interfaces;
+
+public interface IDTO
 {
-    public interface IDTO
-    {
-        public int Id { get; set; }
-    }
+      public int Id { get; set; }
 }

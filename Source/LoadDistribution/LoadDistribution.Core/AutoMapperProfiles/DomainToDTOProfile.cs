@@ -2,12 +2,12 @@
 using LoadDistribution.Core.Domain.Models;
 using LoadDistribution.Core.DTO.Models;
 
-namespace LoadDistribution.Core.AutoMapperProfiles
+namespace LoadDistribution.Core.AutoMapperProfiles;
+
+public class DomainToDTOProfile : Profile
 {
-    public class DomainToDTOProfile : Profile
-    {
-        public DomainToDTOProfile()
-        {
+      public DomainToDTOProfile()
+      {
             CreateMap<Activity, ActivityDTO>().ReverseMap();
             CreateMap<Discipline, DisciplineDTO>().ReverseMap();
             CreateMap<Lecturer, LecturerDTO>().ReverseMap();
@@ -16,6 +16,5 @@ namespace LoadDistribution.Core.AutoMapperProfiles
             CreateMap<LecturerDisciplineActivityMap, LecturerDisciplineActivityMapDTO>().ReverseMap();
             CreateMap<Log, LogDTO>().ReverseMap();
             CreateMap<UniversityLecturerMap, UniversityLecturerMapDTO>().ReverseMap();
-        }
-    }
+      }
 }

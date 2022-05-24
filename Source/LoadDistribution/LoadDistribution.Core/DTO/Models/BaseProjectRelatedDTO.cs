@@ -1,9 +1,8 @@
 ﻿using LoadDistribution.Core.DTO.Interfaces;
 
-namespace LoadDistribution.Core.DTO.Models
+namespace LoadDistribution.Core.DTO.Models;
+
+public abstract class BaseProjectRelatedDTO : BaseDTO, IProjectRelatedDTO
 {
-    public abstract class BaseProjectRelatedDTO : BaseDTO, IProjectRelatedDTO
-    {
-        public int ProjectId { get; set; }
-    }
+      public int ProjectId { get; set; }
 }

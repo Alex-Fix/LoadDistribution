@@ -17,20 +17,20 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace LoadDistribution.WebAPI
+namespace LoadDistribution.WebAPI;
+
+internal class Startup
 {
-    public class Startup
-    {
-        private readonly IConfiguration _configuration;
-        private readonly string[] _languages = new[] { "uk-UA" };
+      private readonly IConfiguration _configuration;
+      private readonly string[] _languages = new[] { "uk-UA" };
 
-        public Startup(IConfiguration configuration)
-        {
+      public Startup(IConfiguration configuration)
+      {
             _configuration = configuration;
-        }
+      }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
+      public void ConfigureServices(IServiceCollection services)
+      {
             services.AddLocalization(opt => opt.ResourcesPath = "Resources");
 
             services.Configure<SQLiteDbOptions>(_configuration.GetSection(nameof(SQLiteDbOptions)));
@@ -47,15 +47,15 @@ namespace LoadDistribution.WebAPI
 
             services.AddSpaStaticFiles(cfg =>
             {
-                cfg.RootPath = Path.Combine("ClientApp", "dist");
+                  cfg.RootPath = Path.Combine("ClientApp", "dist");
             });
 
             services.AddSwaggerGen();
-        }
+      }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseMiddleware<MigrationMiddleware>();
+      public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+      {
+            app.UseMiddleware<MigrationHandler>();
             app.UseMiddleware<ExceptionHandler>();
 
             app.UseHsts();
@@ -63,26 +63,26 @@ namespace LoadDistribution.WebAPI
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture(_languages.First()),
-                SupportedCultures = _languages.Select(l => new CultureInfo(l)).ToList()
+                  DefaultRequestCulture = new RequestCulture(_languages.First()),
+                  SupportedCultures = _languages.Select(l => new CultureInfo(l)).ToList()
             });
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
-                app.UseSpaStaticFiles();
+                  app.UseSpaStaticFiles();
             }
 
             app.UseRouting();
             app.UseCors(opt => opt.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseEndpoints(cfg => cfg.MapControllers());
+
             app.UseSwagger();
             app.UseSwaggerUI();
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                  spa.Options.SourcePath = "ClientApp";
             });
-        }
-    }
+      }
 }

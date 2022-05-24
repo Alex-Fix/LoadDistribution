@@ -1,8 +1,7 @@
-﻿namespace LoadDistribution.Core.Domain.Enums
+﻿namespace LoadDistribution.Core.Domain.Enums;
+
+public enum LogType
 {
-    public enum LogType
-    {
-        Undefined = 0,
-        Exception = 10
-    }
+      Undefined = 0,
+      Exception = 10
 }

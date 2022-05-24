@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LoadDistribution.Data.Configurations
+namespace LoadDistribution.Data.Configurations;
+
+public class UniversityLecturerMapConfiguration : IEntityTypeConfiguration<UniversityLecturerMap>
 {
-    public class UniversityLecturerMapConfiguration : IEntityTypeConfiguration<UniversityLecturerMap>
-    {
-        public void Configure(EntityTypeBuilder<UniversityLecturerMap> builder)
-        {
+      public void Configure(EntityTypeBuilder<UniversityLecturerMap> builder)
+      {
             builder.ToTable("UniversityLecturerMaps");
             builder.HasKey(k => k.Id);
 
@@ -19,19 +19,18 @@ namespace LoadDistribution.Data.Configurations
 
             builder
                 .HasOne(p => p.Project)
-                .WithMany(p => p.UniversityLecturerMaps)
+                .WithMany(p => p!.UniversityLecturerMaps)
                 .HasForeignKey(fk => fk.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
             builder
                 .HasOne(p => p.University)
-                .WithMany(p => p.UniversityLecturerMaps)
+                .WithMany(p => p!.UniversityLecturerMaps)
                 .HasForeignKey(fk => fk.UniversityId)
                 .OnDelete(DeleteBehavior.Cascade);
             builder
                 .HasOne(p => p.Lecturer)
-                .WithMany(p => p.UniversityLecturerMaps)
+                .WithMany(p => p!.UniversityLecturerMaps)
                 .HasForeignKey(fk => fk.LecturerId)
                 .OnDelete(DeleteBehavior.Cascade);
-        }
-    }
+      }
 }

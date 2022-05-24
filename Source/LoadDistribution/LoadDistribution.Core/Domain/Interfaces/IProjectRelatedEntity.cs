@@ -1,7 +1,6 @@
-﻿namespace LoadDistribution.Core.Domain.Interfaces
+﻿namespace LoadDistribution.Core.Domain.Interfaces;
+
+public interface IProjectRelatedEntity : IEntity
 {
-    public interface IProjectRelatedEntity : IEntity
-    {
-        int ProjectId { get; set; }
-    }
+      int ProjectId { get; set; }
 }

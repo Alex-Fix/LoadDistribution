@@ -8,7 +8,7 @@
         </div>
     </mat-card-title>
     <mat-card-content>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-max">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-max" multiTemplateDataRows>
             <!-- Id column -->
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>{{ 'base.id' | translate }}</th>
@@ -29,44 +29,20 @@
 
             <!-- Term column -->
             <ng-container matColumnDef="term">
-                <th mat-header-cell title="{{ 'discipline.term.full' | translate }}" *matHeaderCellDef>{{ 'discipline.term.short' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.term' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.term }}</td>
             </ng-container>
 
-            <!-- Education level column -->
-            <ng-container matColumnDef="educationLevel">
-                <th mat-header-cell title="{{ 'discipline.educationLevel.full' | translate }}" *matHeaderCellDef>{{ 'discipline.educationLevel.short' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.educationLevel }}</td>
-            </ng-container>
-            
             <!-- Education form column -->
             <ng-container matColumnDef="educationForm">
-                <th mat-header-cell title="{{ 'discipline.educationForm.full' | translate }}" *matHeaderCellDef>{{ 'discipline.educationForm.short' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.educationForm' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.educationForm }}</td>
-            </ng-container>
-
-            <!-- Plan index column -->
-            <ng-container matColumnDef="planIndex">
-                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.planIndex' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.planIndex }}</td>
-            </ng-container>
-
-            <!-- Speciality column -->
-            <ng-container matColumnDef="speciality">
-                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.speciality' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.speciality }}</td>
             </ng-container>
 
             <!-- Group abbreviation column -->
             <ng-container matColumnDef="groupAbbreviation">
-                <th mat-header-cell title="{{ 'discipline.groupAbbreviation.full' | translate }}" *matHeaderCellDef>{{ 'discipline.groupAbbreviation.short' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.groupAbbreviation' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.groupAbbreviation }}</td>
-            </ng-container>
-
-            <!-- Specialization column -->
-            <ng-container matColumnDef="specialization">
-                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.specialization' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.specialization }}</td>
             </ng-container>
 
             <!-- Institute column -->
@@ -81,42 +57,6 @@
                 <td mat-cell *matCellDef="let discipline">{{ discipline.course }}</td>
             </ng-container>
 
-            <!-- Student count column -->
-            <ng-container matColumnDef="studentCount">
-                <th mat-header-cell title="{{ 'discipline.studentCount.full' | translate }}" *matHeaderCellDef>{{ 'discipline.studentCount.short' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.studentCount }}</td>
-            </ng-container>
-
-            <!-- Budget student count column -->
-            <ng-container matColumnDef="budgetStudentCount">
-                <th mat-header-cell title="{{ 'discipline.budgetStudentCount.full' | translate }}" *matHeaderCellDef>{{ 'discipline.budgetStudentCount.short' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.budgetStudentCount }}</td>
-            </ng-container>
-
-            <!-- Comercial student count column -->
-            <ng-container matColumnDef="comercialStudentCount">
-                <th mat-header-cell title="{{ 'discipline.comercialStudentCount.full' | translate }}" *matHeaderCellDef>{{ 'discipline.comercialStudentCount.short' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.comercialStudentCount }}</td>
-            </ng-container>
-
-            <!-- Group count column -->
-            <ng-container matColumnDef="groupCount">
-                <th mat-header-cell  title="{{ 'discipline.groupCount.full' | translate }}" *matHeaderCellDef>{{ 'discipline.groupCount.short' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.groupCount }}</td>
-            </ng-container>
-
-            <!-- Subgroup count column -->
-            <ng-container matColumnDef="subgroupCount">
-                <th mat-header-cell  title="{{ 'discipline.subgroupCount.full' | translate }}" *matHeaderCellDef>{{ 'discipline.subgroupCount.short' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.subgroupCount }}</td>
-            </ng-container>
-
-            <!-- Thread count column -->
-            <ng-container matColumnDef="threadCount">
-                <th mat-header-cell  title="{{ 'discipline.threadCount.full' | translate }}" *matHeaderCellDef>{{ 'discipline.threadCount.short' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.threadCount }}</td>
-            </ng-container>
-
             <!-- Name column -->
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>{{ 'discipline.name' | translate }}</th>
@@ -127,12 +67,6 @@
             <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef>{{ 'discipline.type' | translate }}</th>
                 <td mat-cell *matCellDef="let discipline">{{ discipline.type }}</td>
-            </ng-container>
-
-            <!-- University id column -->
-            <ng-container matColumnDef="universityId">
-                <th mat-header-cell *matHeaderCellDef>{{ 'discipline.universityId' | translate }}</th>
-                <td mat-cell *matCellDef="let discipline">{{ discipline.universityId }}</td>
             </ng-container>
 
             <!-- University name column -->
@@ -155,9 +89,68 @@
                 </td>
             </ng-container>
 
+            <!-- Discipline expanded description -->
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let discipline" [attr.colspan]="displayedColumns.length">
+                    <div class="flex wrap justify-center expanded-details" [@detailExpand]="discipline == expandedDiscipline ? 'expanded' : 'collapsed'">
+                        <!-- Education level -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.educationLevel' | translate }}:</span>
+                            <span>{{ discipline.educationLevel }}</span>
+                        </div>
+                        <!-- Plan index -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.planIndex' | translate }}:</span>
+                            <span>{{ discipline.planIndex }}</span>
+                        </div>
+                        <!-- Speciality -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.speciality' | translate }}:</span>
+                            <span>{{ discipline.speciality }}</span>
+                        </div>
+                        <!-- Specialization -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.specialization' | translate }}:</span>
+                            <span>{{ discipline.specialization }}</span>
+                        </div>
+                        <!-- Student count -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.studentCount' | translate }}:</span>
+                            <span>{{ discipline.studentCount }}</span>
+                        </div>
+                        <!-- Budge student count -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.budgetStudentCount' | translate }}:</span>
+                            <span>{{ discipline.budgetStudentCount }}</span>
+                        </div>
+                        <!-- Comercial student count -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.comercialStudentCount' | translate }}:</span>
+                            <span>{{ discipline.comercialStudentCount }}</span>
+                        </div>
+                        <!-- Group count -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.groupCount' | translate }}:</span>
+                            <span>{{ discipline.groupCount }}</span>
+                        </div>
+                        <!-- Subgroup count -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.subgroupCount' | translate }}:</span>
+                            <span>{{ discipline.subgroupCount }}</span>
+                        </div>
+                        <!-- Thread count -->
+                        <div class="m-1 mr-3">
+                            <span class="mr-1 header">{{ 'discipline.threadCount' | translate }}:</span>
+                            <span>{{ discipline.threadCount }}</span>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
             <!-- Rows -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let discipline; columns: displayedColumns"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+            <tr mat-row *matRowDef="let discipline; columns: displayedColumns" class="expandable-row" (click)="onDisciplineRowClick(discipline)"></tr>
+            <tr mat-row *matRowDef="let expandedDiscipline; columns: ['expandedDetail'];" class="expanded-row"></tr>
         </table>
         <mat-paginator class="mat-elevation-z8"></mat-paginator>
     </mat-card-content>

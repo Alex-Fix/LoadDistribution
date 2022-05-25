@@ -4,12 +4,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 // margins
 $margin: 10px;
 
+.m-1 { margin: $margin !important; }
+.m-2 { margin: $margin * 2 !important; }
+.m-3 { margin: $margin * 3 !important; }
+.m-4 { margin: $margin * 4 !important; }
+.m-5 { margin: $margin * 5 !important; }
+.m-6 { margin: $margin * 6 !important; }
+
 .mr-1 { margin-right: $margin !important; }
 .mr-2 { margin-right: $margin * 2 !important; }
 .mr-3 { margin-right: $margin * 3 !important; }
 .mr-4 { margin-right: $margin * 4 !important; }
 .mr-5 { margin-right: $margin * 5 !important; }
 .mr-6 { margin-right: $margin * 6 !important; }
+
+.mb-1 { margin-bottom: $margin !important; }
+.mb-2 { margin-bottom: $margin * 2 !important; }
+.mb-3 { margin-bottom: $margin * 3 !important; }
+.mb-4 { margin-bottom: $margin * 4 !important; }
+.mb-5 { margin-bottom: $margin * 5 !important; }
+.mb-6 { margin-bottom: $margin * 6 !important; }
 // /margins
 
 // paddings
@@ -46,9 +60,29 @@ $padding: 10px;
 // /mat card
 
 // table 
-.self-width-cell {
-    white-space: nowrap;
-    width: 1%;
+table {
+    .self-width-cell {
+        white-space: nowrap;
+        width: 1%;
+    }
+    
+    .expanded-details {
+        overflow: hidden;
+
+        .header {
+            font-weight: 500;
+        }
+    }
+    
+    tr {
+        &.expandable-row td {
+            border-bottom-width: 0;
+        }
+
+        &.expanded-row {
+            height: 0;
+        }
+    }
 }
 // /table
 
@@ -56,18 +90,36 @@ $padding: 10px;
 .mat-drawer-container { height: calc(100vh - 64px); }
 // /mat drower
 
-// /form
-.centered-form{
+// form
+.centered-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 // /form
 
-// positions
-.centered {
+// flex
+.flex {
     display: flex;
-    justify-content: center;
-    align-items: center;
+
+    &.justify-center {
+        justify-content: center;
+    }
+
+    &.justify-between {
+        justify-content: space-between;
+    }
+
+    &.align-center {
+        align-items: center;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
+    &.column-direction {
+        flex-direction: column;
+    }
 }
-// /positions
+// /flex

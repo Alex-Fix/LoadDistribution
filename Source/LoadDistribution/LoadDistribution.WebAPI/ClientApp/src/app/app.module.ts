@@ -34,6 +34,7 @@ import { LecturerDisciplineActivityMapListComponent } from './components/lecture
 import { UniversityLecturerMapComponent } from './components/universityLecturerMap/university-lecturer-map/university-lecturer-map.component';
 import { UniversityLecturerMapListComponent } from './components/universityLecturerMap/university-lecturer-map-list/university-lecturer-map-list.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { FirstSymbolPipe } from './pipes/firstSymbol.pipe';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     DisciplineComponent,
     DisciplineListComponent,
     LocalizablePipe,
+    FirstSymbolPipe,
     LogListComponent,
     DialogComponent,
     LecturerDisciplineActivityMapComponent,

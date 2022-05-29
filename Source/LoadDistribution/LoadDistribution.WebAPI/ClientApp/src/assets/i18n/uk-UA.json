@@ -27,8 +27,7 @@
       "close": "Закрити"
     },
     "undefined": "Не визначено",
-    "obsolete": "Застаріле",
-    "addItem": "Додати елемент"
+    "obsolete": "Застаріле"
   },
   "app": {
     "toolbar": {
@@ -64,7 +63,8 @@
     "firstName": "Ім'я",
     "middleName": "По батькові",
     "lastName": "Прізвище",
-    "university": "Університет"
+    "university": "Університет",
+    "universities": "Університети"
   },
   "discipline": {
     "discipline": "Дисципліна",
@@ -88,7 +88,11 @@
     "threadCount": "Кількість потоків",
     "university": "Університет",
     "universityId": "Ід університету",
-    "universityName": "Назва університету"
+    "universityName": "Назва університету",
+    "lecturersAndActivities": "Лектори та Активності",
+    "lecturer": "Лектор",
+    "activity": "Активність",
+    "rate": "Відсоток"
   },
   "dependencyType": {
     "absolute": "Абсолютне значення",

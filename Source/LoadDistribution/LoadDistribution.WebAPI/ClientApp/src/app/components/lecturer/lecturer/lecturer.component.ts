@@ -18,7 +18,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./lecturer.component.scss']
 })
 export class LecturerComponent extends CUComponent<LecturerDTO> {
-  private universities: UniversityDTO[];
+  private _universities: UniversityDTO[];
 
   operationManager = new OperationManager<UniversityLecturerMapDTO>(
     this._universityLecturerMapClient,
@@ -36,7 +36,7 @@ export class LecturerComponent extends CUComponent<LecturerDTO> {
     super(_lecturerClient, activatedRoute, router, '/lecturers');
     
     this.id$.subscribe(id => this._onIdChanged(id));
-    this._universityClient.getAll().subscribe(us => this.universities = us);
+    this._universityClient.getAll().subscribe(u => this._universities = u);
   }
 
   onCreateButtonClick(): void {
@@ -89,7 +89,7 @@ export class LecturerComponent extends CUComponent<LecturerDTO> {
   }
 
   filterUniversities(control: FormGroup): UniversityDTO[] {
-    return this.universities.filter(u => !this.operationManager.controls.some(c => c != control && c.value.universityId == u.id));
+    return this._universities.filter(u => !this.operationManager.controls.some(c => c != control && c.value.universityId == u.id));
   }
 
   protected _payloadMapper(): any {

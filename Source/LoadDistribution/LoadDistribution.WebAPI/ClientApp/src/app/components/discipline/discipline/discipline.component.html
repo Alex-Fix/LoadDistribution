@@ -91,35 +91,27 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div formArrayName="lecturerDisciplineActivityMaps">
+            <div formArrayName="disciplineActivityMaps">
                 <div class="flex justify-center align-center mb-2">
                     <button mat-mini-fab color="primary" class="mr-2" (click)="operationManager.create()">
                         <mat-icon>add</mat-icon>
                     </button>
-                    <span>{{ 'discipline.lecturersAndActivities' | translate }}</span>
+                    <span>{{ 'discipline.activities' | translate }}</span>
                 </div>
-                <div *ngFor="let lecturerDisciplineActivityMap of operationManager.controls$ | async; let i = index">
-                    <mat-form-field appearance="outline" [formGroupName]="i" class="mr-3">
-                        <mat-label>{{ 'discipline.lecturer' | translate }}</mat-label>
-                        <mat-select formControlName="lecturerId" required>
-                            <mat-option *ngFor="let lecturer of filterLecturers(lecturerDisciplineActivityMap)" [value]="lecturer.id">
-                                ({{ lecturer.id }}) {{ lecturer.lastName }} {{ lecturer.firstName | uppercase | firstSymbol }}. {{ lecturer.middleName | uppercase | firstSymbol }}.
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div *ngFor="let disciplineActivityMap of operationManager.controls$ | async; let i = index">
                     <mat-form-field appearance="outline" [formGroupName]="i" class="mr-3">
                         <mat-label>{{ 'discipline.activity' | translate }}</mat-label>
                         <mat-select formControlName="activityId" required>
-                            <mat-option *ngFor="let activity of filterActivities(lecturerDisciplineActivityMap)" [value]="activity.id">
+                            <mat-option *ngFor="let activity of filterActivities(disciplineActivityMap)" [value]="activity.id">
                                 ({{ activity.id }}) {{ activity.name }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="outline" [formGroupName]="i" class="mr-3">
-                        <mat-label>{{ 'discipline.rate' | translate }}</mat-label>
-                        <input formControlName="rate" matInput required type="number" />
+                        <mat-label>{{ 'discipline.value' | translate }}</mat-label>
+                        <input matInput required type="number" formControlName="value" />
                     </mat-form-field>
-                    <button mat-mini-fab color="warn" (click)="operationManager.delete(lecturerDisciplineActivityMap)">
+                    <button mat-mini-fab color="warn" (click)="operationManager.delete(disciplineActivityMap)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>

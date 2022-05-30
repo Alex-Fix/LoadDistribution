@@ -8,7 +8,6 @@ public class UniversityConfiguration : IEntityTypeConfiguration<University>
 {
       public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<University> builder)
       {
-            builder.ToTable("Universities");
             builder.HasKey(k => k.Id);
 
             builder.Property(p => p.Name).IsRequired().HasMaxLength(256);

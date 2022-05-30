@@ -10,5 +10,4 @@ public class Lecturer : BaseProjectRelatedEntity
 
       // navigation properties
       public virtual ICollection<UniversityLecturerMap>? UniversityLecturerMaps { get; set; }
-      public virtual ICollection<LecturerDisciplineActivityMap>? LecturerDisciplineActivityMaps { get; set; }
 }

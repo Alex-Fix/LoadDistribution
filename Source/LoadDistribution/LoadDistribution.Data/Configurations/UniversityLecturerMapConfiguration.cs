@@ -9,7 +9,6 @@ public class UniversityLecturerMapConfiguration : IEntityTypeConfiguration<Unive
 {
       public void Configure(EntityTypeBuilder<UniversityLecturerMap> builder)
       {
-            builder.ToTable("UniversityLecturerMaps");
             builder.HasKey(k => k.Id);
 
             builder.Property(p => p.Created).HasConversion(new DateTimeOffsetToBinaryConverter());

@@ -9,7 +9,6 @@ public class LecturerConfiguration : IEntityTypeConfiguration<Lecturer>
 {
       public void Configure(EntityTypeBuilder<Lecturer> builder)
       {
-            builder.ToTable("Lecturers");
             builder.HasKey(k => k.Id);
 
             builder.Property(p => p.FirstName).IsRequired().HasMaxLength(256);

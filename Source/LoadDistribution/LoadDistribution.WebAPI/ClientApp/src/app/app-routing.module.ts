@@ -6,8 +6,6 @@ import { DisciplineListComponent } from './components/discipline/discipline-list
 import { DisciplineComponent } from './components/discipline/discipline/discipline.component';
 import { LecturerListComponent } from './components/lecturer/lecturer-list/lecturer-list.component';
 import { LecturerComponent } from './components/lecturer/lecturer/lecturer.component';
-import { LecturerDisciplineActivityMapListComponent } from './components/lecturerDisciplineActivityMap/lecturer-discipline-activity-map-list/lecturer-discipline-activity-map-list.component';
-import { LecturerDisciplineActivityMapComponent } from './components/lecturerDisciplineActivityMap/lecturer-discipline-activity-map/lecturer-discipline-activity-map.component';
 import { LogListComponent } from './components/log/log-list/log-list.component';
 import { ProjectListComponent } from './components/project/project-list/project-list.component';
 import { ProjectComponent } from './components/project/project/project.component';
@@ -28,8 +26,6 @@ const routes: Routes = [
   { path: 'lecturer', children: [{path: '', component: LecturerComponent}, {path: ':id', component: LecturerComponent}], canActivate: [ProjectRelatedGuard]},
   { path: 'disciplines', component: DisciplineListComponent, canActivate: [ProjectRelatedGuard] },
   { path: 'discipline', children: [{path: '', component: DisciplineComponent}, {path: ':id', component: DisciplineComponent}], canActivate: [ProjectRelatedGuard]},
-  { path: 'lecturerDisciplineActivityMaps', component: LecturerDisciplineActivityMapListComponent, canActivate: [ProjectRelatedGuard]},
-  { path: 'lecturerDisciplineActivityMap', children: [{path: '', component: LecturerDisciplineActivityMapComponent}, {path: ':id', component: LecturerDisciplineActivityMapComponent}], canActivate: [ProjectRelatedGuard]},
   { path: 'universityLecturerMaps', component: UniversityLecturerMapListComponent, canActivate: [ProjectRelatedGuard]},
   { path: 'universityLecturerMap', children: [{path: '', component: UniversityLecturerMapComponent}, {path: ':id', component: UniversityLecturerMapComponent}], canActivate: [ProjectRelatedGuard]},
   { path: 'logs', component: LogListComponent },

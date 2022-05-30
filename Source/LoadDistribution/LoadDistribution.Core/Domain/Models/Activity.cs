@@ -9,5 +9,5 @@ public class Activity : BaseProjectRelatedEntity
       public DependencyType DependencyType { get; set; }
 
       // navigation properties
-      public virtual ICollection<LecturerDisciplineActivityMap>? LecturerDisciplineActivityMaps { get; set; }
+      public virtual ICollection<DisciplineActivityMap>? DisciplineActivityMaps { get; set; }
 }

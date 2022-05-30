@@ -25,5 +25,5 @@ public class Discipline : BaseProjectRelatedEntity
 
       // navigation properties
       public virtual University? University { get; set; }
-      public virtual ICollection<LecturerDisciplineActivityMap>? LecturerDisciplineActivityMaps { get; set; }
+      public virtual ICollection<DisciplineActivityMap>? DisciplineActivityMaps { get; set; }
 }

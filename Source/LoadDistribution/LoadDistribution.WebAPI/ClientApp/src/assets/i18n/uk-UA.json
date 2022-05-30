@@ -89,10 +89,9 @@
     "university": "Університет",
     "universityId": "Ід університету",
     "universityName": "Назва університету",
-    "lecturersAndActivities": "Лектори та Активності",
-    "lecturer": "Лектор",
+    "activities": "Активності",
     "activity": "Активність",
-    "rate": "Відсоток"
+    "value": "Значення"
   },
   "dependencyType": {
     "absolute": "Абсолютне значення",
@@ -115,21 +114,6 @@
   "logType": {
     "undefined": "Не визначено",
     "exception": "Виключення"
-  },
-  "lecturerDisciplineActivityMap": {
-    "lecturerDisciplineActivityMap": "Лектор - дисципліна - активність",
-    "lecturerDisciplineActivityMaps": "Лектори - дисципліни - активності",
-    "lecturer": "Лектор",
-    "lecturerId": "Ід лектора",
-    "lecturerLastName": "Прізвище лектора",
-    "lecturerFirstName": "Ім'я лектора",
-    "discipline": "Дисципліна",
-    "disciplineId": "Ід дисципліни",
-    "disciplineName": "Назва дисципліни",
-    "activity": "Активність",
-    "activityId": "Ід активності",
-    "activityName": "Назва активності",
-    "rate": "Відсоток"
   },
   "universityLecturerMap": {
     "universityLecturerMap": "Університет - лектор",

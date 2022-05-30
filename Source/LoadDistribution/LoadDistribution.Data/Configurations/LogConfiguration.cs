@@ -9,7 +9,6 @@ public class LogConfiguration : IEntityTypeConfiguration<Log>
 {
       public void Configure(EntityTypeBuilder<Log> builder)
       {
-            builder.ToTable("Logs");
             builder.HasKey(k => k.Id);
 
             builder.Property(p => p.Message).IsRequired().HasMaxLength(512);

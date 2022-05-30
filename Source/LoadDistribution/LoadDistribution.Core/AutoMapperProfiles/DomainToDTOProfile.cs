@@ -13,8 +13,8 @@ public class DomainToDTOProfile : Profile
             CreateMap<Lecturer, LecturerDTO>().ReverseMap();
             CreateMap<Project, ProjectDTO>().ReverseMap();
             CreateMap<University, UniversityDTO>().ReverseMap();
-            CreateMap<LecturerDisciplineActivityMap, LecturerDisciplineActivityMapDTO>().ReverseMap();
             CreateMap<Log, LogDTO>().ReverseMap();
             CreateMap<UniversityLecturerMap, UniversityLecturerMapDTO>().ReverseMap();
+            CreateMap<DisciplineActivityMap, DisciplineActivityMapDTO>().ReverseMap();
       }
 }

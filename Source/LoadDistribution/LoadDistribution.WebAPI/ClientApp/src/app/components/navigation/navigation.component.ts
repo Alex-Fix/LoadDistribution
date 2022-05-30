@@ -36,7 +36,6 @@ export class NavigationComponent {
       new Navigation("discipline.disciplines", "/disciplines"),
       new Navigation("log.logs", "/logs"),
       new Navigation("common.obsolete", null, [
-        new Navigation("lecturerDisciplineActivityMap.lecturerDisciplineActivityMaps", "/lecturerDisciplineActivityMaps"),
         new Navigation("universityLecturerMap.universityLecturerMaps", "/universityLecturerMaps")
       ])
     ];

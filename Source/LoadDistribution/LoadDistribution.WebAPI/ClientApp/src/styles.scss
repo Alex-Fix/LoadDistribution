@@ -68,10 +68,6 @@ table {
     
     .expanded-details {
         overflow: hidden;
-
-        .header {
-            font-weight: 500;
-        }
     }
     
     tr {
@@ -123,3 +119,9 @@ table {
     }
 }
 // /flex
+
+// typogaphy
+.header {
+    font-weight: 500;
+}
+// /typogaphy

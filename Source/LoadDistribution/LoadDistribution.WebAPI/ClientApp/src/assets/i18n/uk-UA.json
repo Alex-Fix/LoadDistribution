@@ -91,13 +91,14 @@
     "universityName": "Назва університету",
     "activities": "Активності",
     "activity": "Активність",
-    "value": "Значення"
+    "value": "Значення",
+    "budgetHours": "Бюджет години",
+    "comercialHours": "Комерція години",
+    "totalHours": "Загальні години"
   },
   "dependencyType": {
     "absolute": "Абсолютне значення",
     "studentCount": "Кількість студентів",
-    "budgetStudentCount": "Кількість студентів бюджетників",
-    "comercialStudentCount": "Кількість студентів на комерції",
     "groupCount": "Кількіть груп",
     "subgroupCount": "Кількість підгруп",
     "threadCount": "Кількість потоків"

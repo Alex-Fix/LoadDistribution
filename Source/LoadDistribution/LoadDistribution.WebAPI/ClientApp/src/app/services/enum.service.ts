@@ -11,12 +11,12 @@ export default class EnumService {
             .entries($enum)
             .filter(([key]) => !+key)
             .map(([key, value]) => ({
-                literal: this.formatKey(preffix, key), 
+                literal: this._formatKey(preffix, key), 
                 value: value as number
             }));
     }
 
-    private formatKey(preffix: string, key: string): string {
+    private _formatKey(preffix: string, key: string): string {
         return `${preffix}.${key}`;
     }
 }

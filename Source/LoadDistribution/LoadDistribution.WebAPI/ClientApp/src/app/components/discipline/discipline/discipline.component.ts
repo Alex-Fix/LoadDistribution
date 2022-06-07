@@ -160,7 +160,7 @@ export class DisciplineComponent extends CUComponent<DisciplineDTO> {
     this.calculationResult$ = this.form.valueChanges.pipe(
       map(v => {
         // computing student count
-        v.studentCount = v.comercialStudentCount > 0 && v.budgetStudentCount > 0 ? v.comercialStudentCount + v.budgetStudentCount : 0;
+        v.studentCount = v.comercialStudentCount >= 0 && v.budgetStudentCount >= 0 ? v.comercialStudentCount + v.budgetStudentCount : 0;
         this.form.patchValue({studentCount: v.studentCount}, {emitEvent: false});
   
         // calculating hours

@@ -1,5 +1,10 @@
 <mat-card>
-    <mat-card-title>{{ 'log.logs' | translate }}</mat-card-title>
+    <mat-card-title class="table-card-title">
+        <div>
+            {{ 'log.logs' | translate }}
+        </div>
+        <mat-spinner [diameter]="spinnerDiameter" *ngIf="dataSource.isLoading | async"></mat-spinner>
+    </mat-card-title>
     <mat-card-content>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-max">
              <!-- Id column -->

@@ -80,6 +80,14 @@ table {
         }
     }
 }
+
+mat-card-title {
+    &.table-card-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+} 
 // /table
 
 // mat drawer

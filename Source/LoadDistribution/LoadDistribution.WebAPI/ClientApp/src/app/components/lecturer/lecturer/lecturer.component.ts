@@ -101,6 +101,7 @@ export class LecturerComponent extends CUComponent<LecturerDTO> {
       lastName: new FormControl(null, [Validators.required]),
       firstName: new FormControl(null, [Validators.required]),
       middleName: new FormControl(null, [Validators.required]),
+      maxHourCount: new FormControl(600, [Validators.required, Validators.min(0)]),
       universityLecturerMaps: this.operationManager.formArray
     });
   }

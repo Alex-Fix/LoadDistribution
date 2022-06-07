@@ -14,6 +14,6 @@ export class LecturerListComponent extends TableComponent<LecturerDTO> {
     lecturerClient: LecturerClient,
     projectHanlder: ProjectHandler
   ) { 
-    super(lecturerClient, ['lastName', 'firstName', 'middleName'], projectHanlder);
+    super(lecturerClient, ['lastName', 'firstName', 'middleName', 'maxHourCount'], projectHanlder);
   }
 }

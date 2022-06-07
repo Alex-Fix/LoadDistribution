@@ -1,11 +1,12 @@
 <mat-card>
-    <mat-card-title>
+    <mat-card-title class="table-card-title">
         <div class="title-with-btn">
             <a mat-mini-fab color="primary" routerLink="/discipline" class="mr-2">
                 <mat-icon>add</mat-icon>
             </a>
             <span>{{ 'discipline.disciplines' | translate }}</span>
         </div>
+        <mat-spinner [diameter]="spinnerDiameter" *ngIf="dataSource.isLoading | async"></mat-spinner>
     </mat-card-title>
     <mat-card-content>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-max" multiTemplateDataRows>

@@ -7,7 +7,10 @@ import TableDataSource from "./tableDataSource.helper";
 
 @Component({ template: '' })
 export default abstract class TableComponent<TDTO extends BaseDTO> implements OnInit, AfterViewInit {
-    // table
+  // spinner
+  readonly spinnerDiameter: number = 30;
+
+  // table
   dataSource: TableDataSource<TDTO> = new TableDataSource<TDTO>(this._client);
   displayedColumns: string[] = ['id', 'created', 'updated', ...this._columns, 'actions'];
 

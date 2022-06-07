@@ -16,6 +16,9 @@ import { DialogComponent } from '../../common/dialog/dialog.component';
   styleUrls: ['./log-list.component.scss']
 })
 export class LogListComponent implements OnInit, AfterViewInit {
+  // spinner
+  readonly spinnerDiameter: number = 20;
+
   // table
   dataSource: TableDataSource<LogDTO> = new TableDataSource<LogDTO>(this._logClient);
   displayedColumns: string[] = ['id', 'created', 'message', 'type', 'exceptionType', 'details'];

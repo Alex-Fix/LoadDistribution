@@ -4,4 +4,5 @@ export default class LecturerDTO extends BaseProjectRelatedDTO {
     firstName: string;
     middleName: string;
     lastName: string;
+    maxHourCount: number;
 }

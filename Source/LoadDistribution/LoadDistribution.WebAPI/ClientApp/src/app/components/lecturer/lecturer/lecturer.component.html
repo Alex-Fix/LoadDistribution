@@ -12,9 +12,13 @@
                     <mat-label>{{ 'lecturer.firstName' | translate }}</mat-label>
                     <input matInput formControlName="firstName" required />
                 </mat-form-field>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="mr-3">
                     <mat-label>{{ 'lecturer.middleName' | translate }}</mat-label>
                     <input matInput formControlName="middleName" required />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'lecturer.maxHourCount' | translate }}</mat-label>
+                    <input matInput type="number" formControlName="maxHourCount" required />
                 </mat-form-field>
             </div>
             <div formArrayName="universityLecturerMaps">

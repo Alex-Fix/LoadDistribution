@@ -63,6 +63,7 @@
     "firstName": "Ім'я",
     "middleName": "По батькові",
     "lastName": "Прізвище",
+    "maxHourCount": "Максимальна кількість годин",
     "university": "Університет",
     "universities": "Університети"
   },
